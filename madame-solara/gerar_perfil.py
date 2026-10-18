@@ -6,7 +6,7 @@ import cairosvg
 from PIL import Image, ImageDraw
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-CREME = "#FCFDF5"
+CREME = "#F4EFE4"  # off-white mais quente que o creme do manual, para não parecer branco
 AZUL = "#5598B3"
 LADO = 1080
 
