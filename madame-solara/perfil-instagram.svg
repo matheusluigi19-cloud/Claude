@@ -571,7 +571,7 @@
 <symbol id="sol" viewBox="89 106 86 44"><use href="#logoBruto"/></symbol>
 <symbol id="ms" viewBox="71 113.5 123.5 105"><use href="#msBruto"/></symbol>
 </defs>
-<rect width="1080" height="1080" fill="#F4EFE4"/>
+<rect width="1080" height="1080" fill="#FCFDF5"/>
 <use href="#sol" x="285.0" y="162.2" width="510" height="260.9"/>
 <use href="#ms" x="255.0" y="449.2" width="570" height="484.6"/>
 </svg>
