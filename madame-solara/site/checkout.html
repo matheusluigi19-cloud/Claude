@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Finalizar compra · Madame Solara</title>
+  <link rel="icon" href="assets/monograma-dourado.svg">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body data-pagina="checkout">
+  <main id="conteudo" class="pagina">
+    <div class="pagina__titulo"><h1>Finalizar compra</h1></div>
+    <div class="checkout">
+      <form novalidate>
+        <p class="nota">Demonstração. Na loja publicada, esta etapa é o checkout da Nuvemshop.</p>
+        <fieldset>
+          <legend>Seus dados</legend>
+          <label>Nome completo<input type="text" name="nome" autocomplete="name" required></label>
+          <label>E-mail<input type="email" name="email" autocomplete="email" required></label>
+          <label>CEP<input type="text" name="cep" inputmode="numeric" autocomplete="postal-code" required></label>
+        </fieldset>
+        <fieldset>
+          <legend>Pagamento</legend>
+          <div class="pagamento">
+            <label><input type="radio" name="pag" value="pix" checked> Pix</label>
+            <label><input type="radio" name="pag" value="cartao"> Cartão de crédito</label>
+          </div>
+        </fieldset>
+        <button class="botao" type="submit">Confirmar pedido</button>
+      </form>
+      <aside class="resumo" aria-label="Resumo do pedido">
+        <h2>Resumo</h2>
+        <div class="resumo__itens"></div>
+        <div class="linha-total"><span>Subtotal</span><strong class="subtotal">R$ 0,00</strong></div>
+        <small>Frete calculado pelo CEP.</small>
+      </aside>
+    </div>
+  </main>
+  <script src="produtos.js"></script>
+  <script src="loja.js"></script>
+</body>
+</html>
