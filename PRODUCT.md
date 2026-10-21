@@ -26,7 +26,7 @@ Peças exclusivas e autorais, em produção própria, e uma linha resort (saída
 
 - Carrinho, pagamento, frete e estoque ficam com a Nuvemshop.
 - Tamanhos usados até agora: P, M e G (etiqueta da marca).
-- Contatos confirmados: Instagram @madamesolara_, e-mail solaramadame@gmail.com, telefone (71) 98703-6838.
+- Contatos confirmados para peças impressas: Instagram @madamesolara_ e e-mail solaramadame@gmail.com. O telefone não entra nas peças.
 - Indefinidos: plano da Nuvemshop, catálogo, preços, frete, políticas de troca, endereço e horários.
 
 ## Brand Commitments

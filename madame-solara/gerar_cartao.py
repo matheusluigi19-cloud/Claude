@@ -61,7 +61,6 @@ def texto(y, conteudo, tam, cor, fonte="Work Sans", peso=400, espaco=0, ancora="
 CONTATOS = [
     ("instagram", "@madamesolara_"),
     ("email", "solaramadame@gmail.com"),
-    ("telefone", "(71) 98703-6838"),
 ]
 
 ICONES = {
@@ -117,7 +116,7 @@ def verso():
     cuidado = ["Antes do primeiro uso, lave a peça à mão com", "sabão neutro e água fria, e seque na sombra."]
     for k, linha in enumerate(cuidado):
         s.append(texto(95 + k * 4.3, linha, 2.7, MARROM_SUAVE))
-    s.append(contatos(119))
+    s.append(contatos(122))
     s.append("</svg>")
     return "\n".join(s)
 
