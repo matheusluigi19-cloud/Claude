@@ -3,7 +3,9 @@ import os
 
 import cairosvg
 
-from gerar_etiqueta import qr, vetor
+from PIL import ImageFont
+
+from gerar_etiqueta import vetor
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 CREME = "#FCFDF5"
@@ -56,6 +58,38 @@ def texto(y, conteudo, tam, cor, fonte="Work Sans", peso=400, espaco=0, ancora="
             f'font-size="{tam}" letter-spacing="{espaco}" fill="{cor}">{conteudo}</text>')
 
 
+CONTATOS = [
+    ("instagram", "@madamesolara_"),
+    ("email", "solaramadame@gmail.com"),
+    ("telefone", "(71) 98703-6838"),
+]
+
+ICONES = {
+    "instagram": '<rect x="0.4" y="0.4" width="4.2" height="4.2" rx="1.2"/><circle cx="2.5" cy="2.5" r="1"/>'
+                 '<circle cx="3.65" cy="1.35" r="0.18" fill="{cor}" stroke="none"/>',
+    "email": '<rect x="0.3" y="0.9" width="4.4" height="3.2" rx="0.5"/><path d="M0.5 1.2 L2.5 2.8 L4.5 1.2"/>',
+    "telefone": '<path d="M1.2 0.5 L2 0.5 L2.4 1.7 L1.8 2.1 Q2.3 3.2 3 3.4 L3.4 2.8 L4.5 3.2 L4.5 4 Q4.4 4.6 3.7 4.6 '
+                'Q0.4 4.2 0.5 1.2 Q0.5 0.6 1.2 0.5 Z"/>',
+}
+
+
+def contatos(y0, tam=3.3, passo=6.2):
+    """Três linhas de contato com ícone, centradas como um bloco."""
+    fonte = ImageFont.truetype(os.path.expanduser("~/.fonts/WorkSans-Regular.ttf"), 1000)
+    largura = max(fonte.getlength(t) for _, t in CONTATOS) / 1000 * tam
+    icone, vao = 4.6, 2.6
+    x0 = CX - (icone + vao + largura) / 2
+    s = []
+    for k, (tipo, valor) in enumerate(CONTATOS):
+        y = y0 + k * passo
+        s.append(f'<g transform="translate({x0:.2f} {y - 3.6:.2f}) scale(0.92)" fill="none" stroke="#A57D2C" '
+                 f'stroke-width="0.35" stroke-linecap="round" stroke-linejoin="round">'
+                 f'{ICONES[tipo].replace("{cor}", "#A57D2C")}</g>')
+        s.append(f'<text x="{x0 + icone + vao:.2f}" y="{y}" font-family="Work Sans" font-size="{tam}" '
+                 f'fill="{MARROM}">{valor}</text>')
+    return "".join(s)
+
+
 def frente():
     s = base(AZUL, CREME, CREME, 0.5)
     lw = 62
@@ -80,12 +114,10 @@ def verso():
     for k, linha in enumerate(linhas):
         s.append(texto(58 + k * 5.2, linha, 3.5, MARROM))
     s.append(texto(85, "Você é o seu padrão!", 6.2, AZUL.replace("#64A6C9", "#4E8FB0"), "Italiana", espaco=0.2))
-    cuidado = ["Antes do primeiro uso, lave à mão com sabão", "neutro e água fria, e seque à sombra."]
+    cuidado = ["Antes do primeiro uso, lave a peça à mão com", "sabão neutro e água fria, e seque na sombra."]
     for k, linha in enumerate(cuidado):
         s.append(texto(95 + k * 4.3, linha, 2.7, MARROM_SUAVE))
-    q = 20
-    s.append(qr(CX - q / 2, 108, q, MARROM))
-    s.append(texto(108 + q + 5, "ESCANEIE E CONHEÇA A LOJA", 2.3, MARROM_SUAVE, espaco=0.5))
+    s.append(contatos(119))
     s.append("</svg>")
     return "\n".join(s)
 
