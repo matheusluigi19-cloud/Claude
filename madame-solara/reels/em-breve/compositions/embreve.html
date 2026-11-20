@@ -1,0 +1,173 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Italiana";
+      src: url("assets/fonts/Italiana-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Work Sans";
+      src: url("assets/fonts/WorkSans-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .c-onda {
+      position: absolute;
+      left: -160px;
+      top: 0;
+      width: 1400px;
+      height: 2400px;
+    }
+    #c-chao {
+      clip-path: path("M0,140 Q175,30 350,140 T700,140 T1050,140 T1400,140 L1400,2400 L0,2400 Z");
+      overflow: hidden;
+    }
+    #c-seda {
+      position: absolute;
+      left: -260px;
+      top: 0;
+      width: 1920px;
+      height: 2402px;
+    }
+    #c-titulo {
+      position: absolute;
+      left: 110px;
+      top: 318px;
+      width: 860px;
+      text-align: center;
+      font-family: "Italiana", serif;
+      font-size: 178px;
+      line-height: 200px;
+      letter-spacing: 0.01em;
+      color: #fcfdf5;
+      white-space: nowrap;
+    }
+    .c-letra {
+      display: inline-block;
+    }
+    #c-sub {
+      position: absolute;
+      left: 110px;
+      top: 548px;
+      width: 860px;
+      text-align: center;
+      font-family: "Work Sans", sans-serif;
+      font-size: 36px;
+      line-height: 44px;
+      letter-spacing: 0.24em;
+      text-indent: 0.24em;
+      text-transform: uppercase;
+      color: #fcfdf5;
+      white-space: nowrap;
+    }
+    #c-enfeite {
+      position: absolute;
+      left: 380px;
+      top: 654px;
+      width: 320px;
+      height: 30px;
+    }
+    #c-logo {
+      position: absolute;
+      left: 280px;
+      top: 742px;
+      width: 520px;
+      height: 468px;
+    }
+    #c-reflexo {
+      position: absolute;
+      left: -700px;
+      top: -200px;
+      width: 520px;
+      height: 2400px;
+      background: linear-gradient(90deg, rgba(252, 253, 245, 0), rgba(252, 253, 245, 0.16) 50%, rgba(252, 253, 245, 0));
+    }
+  </style>
+  <div id="root" data-composition-id="embreve" data-width="1080" data-height="1920">
+    <!-- A maré: duas ondas chapadas na frente e a seda azul logo atrás, todas com a crista ondulada. -->
+    <svg class="c-onda" id="c-onda-1" data-layout-allow-overflow viewBox="0 0 1400 2400">
+      <path d="M0,140 Q175,250 350,140 T700,140 T1050,140 T1400,140 L1400,2400 L0,2400 Z" fill="#8fc0d9" />
+      <path d="M0,140 Q175,250 350,140 T700,140 T1050,140 T1400,140" fill="none" stroke="#fcfdf5" stroke-width="5" />
+    </svg>
+    <svg class="c-onda" id="c-onda-2" data-layout-allow-overflow viewBox="0 0 1400 2400">
+      <path d="M0,140 Q117,40 233,140 T467,140 T700,140 T933,140 T1167,140 T1400,140 L1400,2400 L0,2400 Z" fill="#64a6c9" />
+      <path d="M0,140 Q117,40 233,140 T467,140 T700,140 T933,140 T1167,140 T1400,140" fill="none" stroke="#fcfdf5" stroke-width="4" />
+    </svg>
+    <div class="c-onda" id="c-mare" data-layout-allow-overflow>
+      <div class="c-onda" id="c-chao" style="left: 0">
+        <img id="c-seda" src="assets/seda-azul.jpg" alt="" />
+      </div>
+      <svg class="c-onda" id="c-espuma" style="left: 0" viewBox="0 0 1400 2400">
+        <path d="M0,140 Q175,30 350,140 T700,140 T1050,140 T1400,140" fill="none" stroke="#fcfdf5" stroke-width="4" />
+      </svg>
+    </div>
+
+    <div id="c-reflexo" data-layout-ignore></div>
+
+    <div id="c-titulo">
+      <span class="c-letra">E</span><span class="c-letra">m</span><span class="c-letra">&nbsp;</span><span class="c-letra">b</span><span class="c-letra">r</span><span class="c-letra">e</span><span class="c-letra">v</span><span class="c-letra">e</span>
+    </div>
+    <div id="c-sub">você vai conhecer tudo</div>
+
+    <svg id="c-enfeite" viewBox="0 0 320 30">
+      <rect id="c-fio-esq" x="0" y="14" width="130" height="2" fill="#f0dc9c" />
+      <rect id="c-fio-dir" x="190" y="14" width="130" height="2" fill="#f0dc9c" />
+      <path id="c-estrela" transform="translate(160 15)" d="M0,-14 C1.2,-4 4,-1.2 14,0 C4,1.2 1.2,4 0,14 C-1.2,4 -4,1.2 -14,0 C-4,-1.2 -1.2,-4 0,-14Z" fill="#f0dc9c" />
+    </svg>
+
+    <img id="c-logo" src="assets/logo-vertical-branco.svg" alt="Madame Solara, moda praia e resort" />
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      // A maré sobe e cobre a cena anterior.
+      tl.fromTo("#c-onda-1", { y: 1900, x: 150 }, { y: -330, x: -40, duration: 0.85, ease: "power2.inOut" }, 0);
+      tl.fromTo("#c-onda-2", { y: 1900, x: -150 }, { y: -300, x: 60, duration: 0.85, ease: "power2.inOut" }, 0.1);
+      tl.fromTo("#c-mare", { y: 1900, x: 120 }, { y: -260, x: 0, duration: 0.9, ease: "power2.inOut" }, 0.2);
+      // A seda segue se movendo devagar atrás do texto parado.
+      tl.fromTo("#c-seda", { y: 0, scale: 1.05 }, { y: -44, scale: 1, duration: 4.8, ease: "none" }, 0);
+
+      // "Em breve" chega letra por letra.
+      tl.fromTo(
+        ".c-letra",
+        { opacity: 0, filter: "blur(12px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "power3.out", stagger: 0.055 },
+        0.95,
+      );
+      tl.fromTo(
+        "#c-sub",
+        { opacity: 0, filter: "blur(8px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power3.out" },
+        1.6,
+      );
+
+      // Enfeite e assinatura da marca.
+      tl.fromTo(
+        "#c-estrela",
+        { opacity: 0, scale: 0, rotation: -90, transformOrigin: "50% 50%" },
+        { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.6)" },
+        1.95,
+      );
+      tl.fromTo("#c-fio-esq", { scaleX: 0, transformOrigin: "100% 50%" }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 2.05);
+      tl.fromTo("#c-fio-dir", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 2.05);
+      tl.fromTo(
+        "#c-logo",
+        { opacity: 0, scale: 1.07, filter: "blur(14px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "expo.out" },
+        2.2,
+      );
+
+      // Um reflexo de luz cruza a seda uma única vez.
+      tl.fromTo("#c-reflexo", { x: 0, rotation: 14 }, { x: 2300, rotation: 14, duration: 1.3, ease: "power1.inOut" }, 3.0);
+
+      window.__timelines["embreve"] = tl;
+    })();
+  </script>
+</template>

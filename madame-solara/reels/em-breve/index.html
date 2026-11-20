@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #17323f;
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+      }
+      #aurora {
+        z-index: 1;
+      }
+      #detalhe {
+        z-index: 2;
+      }
+      #embreve {
+        z-index: 3;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Teaser "Em breve" da Madame Solara para Reels: 1080x1920, 30 fps, 12 s.
+         Cena 1 (aurora): o sol do logo nasce e a luz toma a tela.
+         Cena 2 (detalhe): monograma dourado sobre seda creme.
+         Cena 3 (embreve): a maré azul sobe e fecha com o logo. -->
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="12"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div
+        id="aurora"
+        data-composition-id="aurora"
+        data-composition-src="compositions/aurora.html"
+        data-start="0"
+        data-duration="4.1"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+      <div
+        id="detalhe"
+        data-composition-id="detalhe"
+        data-composition-src="compositions/detalhe.html"
+        data-start="3.7"
+        data-duration="4.5"
+        data-track-index="2"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+      <div
+        id="embreve"
+        data-composition-id="embreve"
+        data-composition-src="compositions/embreve.html"
+        data-start="7.2"
+        data-duration="4.8"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Italiana";
+      src: url("assets/fonts/Italiana-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Work Sans";
+      src: url("assets/fonts/WorkSans-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    #b-fundo {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #fcfdf5;
+    }
+    #b-seda {
+      position: absolute;
+      left: -310px;
+      top: -102px;
+      width: 1700px;
+      height: 2125px;
+    }
+    #b-moldura {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+    #b-mono-caixa {
+      position: absolute;
+      left: 328px;
+      top: 392px;
+      width: 424px;
+      height: 361px;
+    }
+    #b-mono,
+    #b-reflexo {
+      position: absolute;
+      inset: 0;
+      width: 424px;
+      height: 361px;
+    }
+    #b-reflexo {
+      -webkit-mask: url("assets/monograma-dourado.svg") center / contain no-repeat;
+      mask: url("assets/monograma-dourado.svg") center / contain no-repeat;
+      background-image: linear-gradient(
+        108deg,
+        rgba(255, 251, 232, 0) 42%,
+        rgba(255, 251, 232, 0.95) 50%,
+        rgba(255, 251, 232, 0) 58%
+      );
+      background-size: 320% 100%;
+      background-repeat: no-repeat;
+    }
+    #b-titulo-janela {
+      position: absolute;
+      left: 140px;
+      top: 812px;
+      width: 800px;
+      height: 150px;
+      overflow: hidden;
+      text-align: center;
+    }
+    #b-titulo {
+      display: block;
+      font-family: "Italiana", serif;
+      font-size: 114px;
+      line-height: 150px;
+      letter-spacing: 0.01em;
+      color: #5e3416;
+      white-space: nowrap;
+    }
+    #b-filete {
+      position: absolute;
+      left: 470px;
+      top: 992px;
+      width: 140px;
+      height: 3px;
+      background: linear-gradient(90deg, #7a4e1c, #c9a132 50%, #7a4e1c);
+    }
+    #b-sub {
+      position: absolute;
+      left: 140px;
+      top: 1030px;
+      width: 800px;
+      text-align: center;
+      font-family: "Work Sans", sans-serif;
+      font-size: 36px;
+      line-height: 44px;
+      letter-spacing: 0.22em;
+      text-indent: 0.22em;
+      text-transform: uppercase;
+      color: #5e3416;
+      white-space: nowrap;
+    }
+  </style>
+  <div id="root" data-composition-id="detalhe" data-width="1080" data-height="1920">
+    <div id="b-fundo" data-layout-allow-overflow>
+      <img id="b-seda" src="assets/seda-creme.jpg" alt="" />
+    </div>
+
+    <!-- Moldura em filete dourado, desenhada como a de uma etiqueta. -->
+    <svg id="b-moldura" viewBox="0 0 1080 1920">
+      <defs>
+        <linearGradient id="b-ouro" gradientUnits="userSpaceOnUse" x1="150" y1="300" x2="930" y2="1190">
+          <stop offset="0" stop-color="#c9a132" />
+          <stop offset="0.5" stop-color="#7a4e1c" />
+          <stop offset="1" stop-color="#c9a132" />
+        </linearGradient>
+      </defs>
+      <rect id="b-moldura-fora" x="150" y="300" width="780" height="890" fill="none" stroke="url(#b-ouro)" stroke-width="3" pathLength="100" stroke-dasharray="100" />
+      <rect id="b-moldura-dentro" x="166" y="316" width="748" height="858" fill="none" stroke="url(#b-ouro)" stroke-width="1.5" pathLength="100" stroke-dasharray="100" />
+    </svg>
+
+    <div id="b-mono-caixa">
+      <img id="b-mono" src="assets/monograma-dourado.svg" alt="Monograma MS" />
+      <div id="b-reflexo"></div>
+    </div>
+
+    <div id="b-titulo-janela" data-layout-allow-overflow><span id="b-titulo">Cada detalhe</span></div>
+    <div id="b-filete"></div>
+    <div id="b-sub">está sendo preparado</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      // A seda aparece por baixo da luz que fechou a cena anterior e segue em movimento lento.
+      tl.fromTo("#b-fundo", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 0);
+      tl.fromTo("#b-seda", { scale: 1.09, y: 26 }, { scale: 1.0, y: -20, duration: 4.5, ease: "none" }, 0);
+
+      // A moldura é traçada, e o monograma entra em foco.
+      tl.fromTo(
+        "#b-moldura-fora",
+        { strokeDashoffset: 100 },
+        { strokeDashoffset: 0, duration: 1.3, ease: "power2.inOut" },
+        0.08,
+      );
+      tl.fromTo(
+        "#b-moldura-dentro",
+        { strokeDashoffset: -100 },
+        { strokeDashoffset: 0, duration: 1.3, ease: "power2.inOut" },
+        0.2,
+      );
+      tl.fromTo(
+        "#b-mono",
+        { opacity: 0, scale: 1.1, filter: "blur(16px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.75, ease: "expo.out" },
+        0.14,
+      );
+
+      // O título sobe de dentro da própria linha; depois filete e complemento.
+      tl.fromTo("#b-titulo", { yPercent: 104 }, { yPercent: 0, duration: 0.8, ease: "expo.out" }, 0.6);
+      tl.fromTo("#b-filete", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 1.0);
+      tl.fromTo(
+        "#b-sub",
+        { opacity: 0, filter: "blur(8px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.4, ease: "power3.out" },
+        1.15,
+      );
+
+      // Um único reflexo de luz atravessa o dourado.
+      tl.fromTo(
+        "#b-reflexo",
+        { backgroundPosition: "115% 0%" },
+        { backgroundPosition: "-15% 0%", duration: 1.0, ease: "power2.inOut" },
+        1.75,
+      );
+
+      window.__timelines["detalhe"] = tl;
+    })();
+  </script>
+</template>
