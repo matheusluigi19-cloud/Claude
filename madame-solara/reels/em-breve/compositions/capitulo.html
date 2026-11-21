@@ -118,20 +118,20 @@
         "#b-estrela-forma",
         { opacity: 0, scale: 0, rotation: -90, transformOrigin: "50% 50%" },
         { opacity: 1, scale: 1, rotation: 0, duration: 0.55, ease: "back.out(1.6)" },
-        0.2,
+        0.25,
       );
 
       // A primeira frase sobe de dentro da própria linha.
-      tl.fromTo("#b-titulo-1", { yPercent: 104 }, { yPercent: 0, duration: 0.8, ease: "expo.out" }, 0.33);
-      tl.fromTo("#b-titulo-2", { yPercent: 104 }, { yPercent: 0, duration: 0.8, ease: "expo.out" }, 0.47);
+      tl.fromTo("#b-titulo-1", { yPercent: 104 }, { yPercent: 0, duration: 0.8, ease: "expo.out" }, 0.75);
+      tl.fromTo("#b-titulo-2", { yPercent: 104 }, { yPercent: 0, duration: 0.8, ease: "expo.out" }, 0.9);
 
       // Filete e a segunda frase, que entra em foco.
-      tl.fromTo("#b-filete", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 1.35);
+      tl.fromTo("#b-filete", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 1.75);
       tl.fromTo(
         ".b-apoio",
         { opacity: 0, filter: "blur(10px)" },
-        { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out", stagger: 0.26 },
-        1.57,
+        { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out", stagger: 0.36 },
+        2.01,
       );
 
       window.__timelines["capitulo"] = tl;

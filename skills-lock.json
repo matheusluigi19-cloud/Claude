@@ -1,6 +1,11 @@
 {
   "version": 2,
   "skills": {
+    "earshot": {
+      "source": "../leonxlnx/earshot",
+      "sourceType": "local",
+      "computedHash": "4ce67786e15c6018bd50254c159494d6d70c6b051177fc4b4f9aadd5390872d7"
+    },
     "figma": {
       "source": "heygen-com/hyperframes",
       "commit": "9b7be276a90d997954ad4b70f5aeae8322aea7d6",
@@ -35,6 +40,11 @@
       "sourceType": "github",
       "skillPath": "skills/media-use/SKILL.md",
       "computedHash": "d7fd729d60cb4f3ae44aaa7e392d9c1aa59f5ceed9cb839e43bd852516cf18ff"
+    },
+    "real-sound": {
+      "source": "../leonxlnx/earshot",
+      "sourceType": "local",
+      "computedHash": "0caed483c0c11a7b3dcc7e449d2856a1845a9ea13251f2708ff0e9c4397045fb"
     },
     "remotion-best-practices": {
       "source": "remotion-dev/skills",

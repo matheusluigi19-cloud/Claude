@@ -1,0 +1,348 @@
+{
+  "ok": true,
+  "strict": false,
+  "browserSkipped": false,
+  "lint": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 4
+  },
+  "runtime": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "layout": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 4,
+    "findings": [
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 10,
+        "selector": "#b-titulo-1",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 132.14,
+          "top": 706,
+          "right": 947.84,
+          "bottom": 838,
+          "width": 815.7,
+          "height": 132
+        },
+        "containerSelector": "#c-seda",
+        "text": "A Madame Dress",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 1,
+        "dataAttributes": {},
+        "sourceFile": "compositions/capitulo.html",
+        "bbox": {
+          "x": 132.14,
+          "y": 706,
+          "width": 815.7,
+          "height": 132
+        },
+        "firstSeen": 10,
+        "lastSeen": 10,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          10
+        ]
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 10,
+        "selector": "#b-titulo-2",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 176.67,
+          "top": 838,
+          "right": 903.33,
+          "bottom": 970,
+          "width": 726.66,
+          "height": 132
+        },
+        "containerSelector": "#c-seda",
+        "text": "está crescendo",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 1,
+        "dataAttributes": {},
+        "sourceFile": "compositions/capitulo.html",
+        "bbox": {
+          "x": 176.67,
+          "y": 838,
+          "width": 726.66,
+          "height": 132
+        },
+        "firstSeen": 10,
+        "lastSeen": 10,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          10
+        ]
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 10,
+        "selector": "#b-apoio-1",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 190.72,
+          "top": 1058,
+          "right": 889.27,
+          "bottom": 1143,
+          "width": 698.55,
+          "height": 85
+        },
+        "containerSelector": "#c-seda",
+        "text": "e nossa história ganha",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 1,
+        "dataAttributes": {
+          "data-layout-allow-safe-zone": ""
+        },
+        "sourceFile": "compositions/capitulo.html",
+        "bbox": {
+          "x": 190.72,
+          "y": 1058,
+          "width": 698.55,
+          "height": 85
+        },
+        "firstSeen": 10,
+        "lastSeen": 10,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          10
+        ]
+      },
+      {
+        "code": "text_occluded",
+        "severity": "info",
+        "time": 10,
+        "selector": "#b-apoio-2",
+        "message": "Text is hidden beneath an opaque element.",
+        "rect": {
+          "left": 268.27,
+          "top": 1148,
+          "right": 811.73,
+          "bottom": 1233,
+          "width": 543.47,
+          "height": 85
+        },
+        "containerSelector": "#c-seda",
+        "text": "um novo capítulo.",
+        "fixHint": "Give the text its own zone, raise its stacking order above the covering element, or mark intentional layering with data-layout-allow-occlusion.",
+        "coveredFraction": 1,
+        "dataAttributes": {
+          "data-layout-allow-safe-zone": ""
+        },
+        "sourceFile": "compositions/capitulo.html",
+        "bbox": {
+          "x": 268.27,
+          "y": 1148,
+          "width": 543.47,
+          "height": 85
+        },
+        "firstSeen": 10,
+        "lastSeen": 10,
+        "occurrences": 1,
+        "heldMs": 0,
+        "times": [
+          10
+        ]
+      }
+    ],
+    "duration": 20,
+    "samples": [
+      1.111,
+      3.333,
+      5.556,
+      7.778,
+      10,
+      12.222,
+      14.444,
+      16.667,
+      18.889
+    ],
+    "transitionSamples": [],
+    "transitionSamplesDropped": 0,
+    "tolerance": 2,
+    "totalIssueCount": 4,
+    "truncated": false,
+    "faceCheck": {
+      "ran": true,
+      "candidates": 0,
+      "faces": 0
+    }
+  },
+  "motion": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": false,
+    "samples": 0
+  },
+  "contrast": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 4,
+    "infoCount": 0,
+    "findings": [
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 2.21:1; WCAG AA requires 3:1.",
+        "text": "A Madame Dress",
+        "fg": "rgb(94,52,22)",
+        "bg": "rgb(55,121,155)",
+        "ratio": 2.21,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(214,203,196)",
+        "large": true,
+        "selector": "#b-titulo-1",
+        "dataAttributes": {},
+        "sourceFile": "compositions/capitulo.html",
+        "bbox": {
+          "x": 100,
+          "y": 706,
+          "width": 880,
+          "height": 132
+        },
+        "time": 10,
+        "times": [
+          10
+        ]
+      },
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 2.24:1; WCAG AA requires 3:1.",
+        "text": "está crescendo",
+        "fg": "rgb(94,52,22)",
+        "bg": "rgb(55,122,156)",
+        "ratio": 2.24,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(215,204,197)",
+        "large": true,
+        "selector": "#b-titulo-2",
+        "dataAttributes": {},
+        "sourceFile": "compositions/capitulo.html",
+        "bbox": {
+          "x": 100,
+          "y": 838,
+          "width": 880,
+          "height": 132
+        },
+        "time": 10,
+        "times": [
+          10
+        ]
+      },
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 2.24:1; WCAG AA requires 3:1.",
+        "text": "e nossa história ganha",
+        "fg": "rgb(94,52,22)",
+        "bg": "rgb(56,122,156)",
+        "ratio": 2.24,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(215,204,197)",
+        "large": true,
+        "selector": "#b-apoio-1",
+        "dataAttributes": {
+          "data-layout-allow-safe-zone": ""
+        },
+        "sourceFile": "compositions/capitulo.html",
+        "bbox": {
+          "x": 100,
+          "y": 1056,
+          "width": 880,
+          "height": 90
+        },
+        "time": 10,
+        "times": [
+          10
+        ]
+      },
+      {
+        "code": "contrast_aa_failure",
+        "severity": "warning",
+        "message": "Contrast is 2.24:1; WCAG AA requires 3:1.",
+        "text": "um novo capítulo.",
+        "fg": "rgb(94,52,22)",
+        "bg": "rgb(56,122,156)",
+        "ratio": 2.24,
+        "requiredRatio": 3,
+        "suggestedColor": "rgb(215,204,197)",
+        "large": true,
+        "selector": "#b-apoio-2",
+        "dataAttributes": {
+          "data-layout-allow-safe-zone": ""
+        },
+        "sourceFile": "compositions/capitulo.html",
+        "bbox": {
+          "x": 100,
+          "y": 1146,
+          "width": 880,
+          "height": 90
+        },
+        "time": 10,
+        "times": [
+          10
+        ]
+      }
+    ],
+    "enabled": true,
+    "samples": [
+      1.111,
+      5.556,
+      10,
+      14.444,
+      18.889
+    ],
+    "checked": 23,
+    "passed": 19
+  },
+  "craft": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "enabled": true,
+    "step": 0.125,
+    "samples": 160
+  },
+  "audio": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": []
+  },
+  "hdr": {
+    "autoPromotion": null,
+    "inspection": "available"
+  },
+  "snapshots": {
+    "enabled": false,
+    "files": [],
+    "times": [],
+    "findingFiles": []
+  }
+}

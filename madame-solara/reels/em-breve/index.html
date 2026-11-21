@@ -83,9 +83,9 @@
         data-height="1920"
       ></div>
 
-      <!-- Trilha: "Majestic", de Diego Nava (Mixkit). O trecho começa 1,4 s dentro da faixa
-           para o grave entrar aos 9,6 s do vídeo, junto com a maré. Alternativa pronta em
-           assets/audio/one-more-dance.mp3 (ver assets/audio/CREDITOS.md). -->
+      <!-- Trilha: "Majestic", de Diego Nava (Mixkit). O trecho começa 1,64 s dentro da faixa
+           para o grave entrar aos 9,65 s do vídeo, quando a maré cruza o meio da tela.
+           A música abaixa um instante antes dessa entrada. Ver assets/audio/CREDITOS.md. -->
       <audio
         id="musica"
         class="clip"
@@ -97,25 +97,40 @@
         data-volume="0.9"
         data-fade-in="0.3"
         data-fade-out="1.6"
+        data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:1},{&quot;t&quot;:9.2,&quot;v&quot;:1},{&quot;t&quot;:9.45,&quot;v&quot;:0.5},{&quot;t&quot;:9.6,&quot;v&quot;:0.5},{&quot;t&quot;:9.66,&quot;v&quot;:1}]}]}"
       ></audio>
-      <!-- Efeitos: um sopro longo com o pico na luz que toma a tela, e um curto na subida da maré. -->
+      <!-- Efeitos feitos com o Earshot. Mar na abertura, com a onda maior quebrando quando a luz
+           toma a tela (4,4 s); outra onda com o pico na maré (9,65 s); batida grave no monograma. -->
       <audio
-        id="sfx-luz"
+        id="sfx-mar"
         class="clip"
-        src="assets/sfx/whoosh-cinematic.mp3"
-        data-start="1.42"
-        data-duration="5.5"
+        src="assets/sfx/mar.wav"
+        data-start="0"
+        data-duration="6.15"
         data-track-index="4"
-        data-volume="0.26"
+        data-volume="0.6"
+        data-fade-in="1.2"
+        data-fade-out="1.3"
       ></audio>
       <audio
-        id="sfx-mare"
+        id="sfx-onda"
         class="clip"
-        src="assets/sfx/whoosh.mp3"
-        data-start="9.5"
-        data-duration="0.57"
+        src="assets/sfx/onda.wav"
+        data-start="8.55"
+        data-duration="3.6"
         data-track-index="4"
-        data-volume="0.35"
+        data-volume="1.3"
+        data-fade-in="0.5"
+        data-fade-out="1.2"
+      ></audio>
+      <audio
+        id="sfx-marca"
+        class="clip"
+        src="assets/sfx/marca.wav"
+        data-start="16.91"
+        data-duration="0.5"
+        data-track-index="4"
+        data-volume="0.7"
       ></audio>
     </div>
     <script>
