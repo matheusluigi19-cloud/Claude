@@ -25,13 +25,13 @@
     #a-aurora {
       background:
         radial-gradient(
-          circle 620px at 548px 1231px,
+          circle 620px at 548px 1166px,
           rgba(255, 250, 232, 0.78) 0%,
           rgba(255, 246, 218, 0.4) 26%,
           rgba(255, 242, 206, 0.13) 58%,
           rgba(255, 242, 206, 0) 100%
         ),
-        linear-gradient(180deg, #1b3d4d 0%, #2f5d74 32%, #417996 58%, #4c89a7 64%, #3f7896 80%, #2f5d74 100%);
+        linear-gradient(180deg, #1b3d4d 0%, #2f5d74 32%, #417996 54%, #4c89a7 61%, #3f7896 76%, #2f5d74 100%);
     }
     .a-estrela {
       position: absolute;
@@ -42,7 +42,7 @@
     #a-texto {
       position: absolute;
       left: 120px;
-      top: 507px;
+      top: 573px;
       width: 840px;
       text-align: center;
       font-family: "Italiana", serif;
@@ -55,11 +55,14 @@
       display: block;
       white-space: nowrap;
     }
+    #a-linha-2 {
+      color: #f3dfa2;
+    }
     #a-sol-janela,
     #a-mar {
       position: absolute;
       left: 220px;
-      top: 1024px;
+      top: 959px;
       width: 640px;
       height: 328px;
     }
@@ -79,13 +82,13 @@
     }
     #a-halo {
       background: #f6e3ac;
-      -webkit-mask-image: radial-gradient(circle at 548px 1235px, #000 calc(var(--r) - 420px), transparent var(--r));
-      mask-image: radial-gradient(circle at 548px 1235px, #000 calc(var(--r) - 420px), transparent var(--r));
+      -webkit-mask-image: radial-gradient(circle at 548px 1170px, #000 calc(var(--r) - 420px), transparent var(--r));
+      mask-image: radial-gradient(circle at 548px 1170px, #000 calc(var(--r) - 420px), transparent var(--r));
     }
     #a-luz {
       background: #fcfdf5;
-      -webkit-mask-image: radial-gradient(circle at 548px 1235px, #000 calc(var(--r) - 90px), transparent var(--r));
-      mask-image: radial-gradient(circle at 548px 1235px, #000 calc(var(--r) - 90px), transparent var(--r));
+      -webkit-mask-image: radial-gradient(circle at 548px 1170px, #000 calc(var(--r) - 90px), transparent var(--r));
+      mask-image: radial-gradient(circle at 548px 1170px, #000 calc(var(--r) - 90px), transparent var(--r));
     }
   </style>
   <div id="root" data-composition-id="aurora" data-width="1080" data-height="1920">
@@ -106,9 +109,8 @@
     </svg>
 
     <div id="a-texto">
-      <span class="a-linha" id="a-linha-1">Uma nova</span>
-      <span class="a-linha" id="a-linha-2">história</span>
-      <span class="a-linha" id="a-linha-3">vai começar</span>
+      <span class="a-linha" id="a-linha-1">Uma nova fase.</span>
+      <span class="a-linha" id="a-linha-2">Um novo sol.</span>
     </div>
 
     <!-- O sol é o desenho original do logo, separado em arco, raios, ondas e pontos. -->
@@ -165,7 +167,7 @@
       const tl = gsap.timeline({ paused: true });
 
       // O céu clareia enquanto o sol sobe.
-      tl.fromTo("#a-aurora", { opacity: 0 }, { opacity: 1, duration: 2.9, ease: "power1.inOut" }, 0.15);
+      tl.fromTo("#a-aurora", { opacity: 0 }, { opacity: 1, duration: 3.2, ease: "power1.inOut" }, 0.15);
       tl.fromTo(
         ".a-estrela",
         { opacity: 0.9 },
@@ -182,12 +184,12 @@
         1.2,
       );
 
-      // A terceira linha chega depois do gancho, que já está na tela no quadro 0.
+      // "Um novo sol." chega quando os raios começam a abrir; a primeira linha já está na tela no quadro 0.
       tl.fromTo(
-        "#a-linha-3",
+        "#a-linha-2",
         { opacity: 0, filter: "blur(14px)" },
-        { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out" },
-        0.6,
+        { opacity: 1, filter: "blur(0px)", duration: 0.55, ease: "power3.out" },
+        1.15,
       );
 
       // Saída: o texto some e a luz do sol toma a tela inteira.
@@ -195,10 +197,10 @@
         "#a-texto",
         { opacity: 1, filter: "blur(0px)" },
         { opacity: 0, filter: "blur(10px)", duration: 0.26, ease: "power2.in" },
-        3.0,
+        3.75,
       );
-      tl.fromTo("#a-halo", { "--r": "0px" }, { "--r": "2100px", duration: 0.8, ease: "power2.in" }, 2.9);
-      tl.fromTo("#a-luz", { "--r": "0px" }, { "--r": "1560px", duration: 0.78, ease: "power2.in" }, 2.98);
+      tl.fromTo("#a-halo", { "--r": "0px" }, { "--r": "2100px", duration: 0.8, ease: "power2.in" }, 3.65);
+      tl.fromTo("#a-luz", { "--r": "0px" }, { "--r": "1560px", duration: 0.78, ease: "power2.in" }, 3.73);
 
       window.__timelines["aurora"] = tl;
     })();

@@ -1,0 +1,140 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Italiana";
+      src: url("assets/fonts/Italiana-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    #b-fundo {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #fcfdf5;
+    }
+    #b-seda {
+      position: absolute;
+      left: -310px;
+      top: -102px;
+      width: 1700px;
+      height: 2125px;
+    }
+    #b-estrela {
+      position: absolute;
+      left: 518px;
+      top: 622px;
+      width: 44px;
+      height: 44px;
+    }
+    .b-janela {
+      position: absolute;
+      left: 100px;
+      width: 880px;
+      height: 132px;
+      overflow: hidden;
+      text-align: center;
+    }
+    #b-janela-1 {
+      top: 706px;
+    }
+    #b-janela-2 {
+      top: 838px;
+    }
+    .b-titulo {
+      display: block;
+      font-family: "Italiana", serif;
+      font-size: 112px;
+      line-height: 132px;
+      letter-spacing: 0.01em;
+      color: #5e3416;
+      white-space: nowrap;
+    }
+    #b-filete {
+      position: absolute;
+      left: 470px;
+      top: 1012px;
+      width: 140px;
+      height: 3px;
+      background: linear-gradient(90deg, #7a4e1c, #c9a132 50%, #7a4e1c);
+    }
+    .b-apoio {
+      position: absolute;
+      left: 100px;
+      width: 880px;
+      text-align: center;
+      font-family: "Italiana", serif;
+      font-size: 72px;
+      line-height: 90px;
+      letter-spacing: 0.01em;
+      color: #5e3416;
+      white-space: nowrap;
+    }
+    #b-apoio-1 {
+      top: 1056px;
+    }
+    #b-apoio-2 {
+      top: 1146px;
+    }
+  </style>
+  <div id="root" data-composition-id="capitulo" data-width="1080" data-height="1920">
+    <div id="b-fundo" data-layout-allow-overflow>
+      <img id="b-seda" src="assets/seda-creme.jpg" alt="" />
+    </div>
+
+    <svg id="b-estrela" viewBox="-14 -14 28 28">
+      <defs>
+        <linearGradient id="b-ouro" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#c9a132" />
+          <stop offset="1" stop-color="#7a4e1c" />
+        </linearGradient>
+      </defs>
+      <path id="b-estrela-forma" fill="url(#b-ouro)" d="M0,-14 C1.2,-4 4,-1.2 14,0 C4,1.2 1.2,4 0,14 C-1.2,4 -4,1.2 -14,0 C-4,-1.2 -1.2,-4 0,-14Z" />
+    </svg>
+
+    <div class="b-janela" id="b-janela-1" data-layout-allow-overflow>
+      <span class="b-titulo" id="b-titulo-1">A Madame Dress</span>
+    </div>
+    <div class="b-janela" id="b-janela-2" data-layout-allow-overflow>
+      <span class="b-titulo" id="b-titulo-2">está crescendo</span>
+    </div>
+    <div id="b-filete"></div>
+    <div class="b-apoio" id="b-apoio-1" data-layout-allow-safe-zone>e nossa história ganha</div>
+    <div class="b-apoio" id="b-apoio-2" data-layout-allow-safe-zone>um novo capítulo.</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      // A seda aparece por baixo da luz que fechou a cena anterior e segue em movimento lento.
+      tl.fromTo("#b-fundo", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 0);
+      tl.fromTo("#b-seda", { scale: 1.09, y: 26 }, { scale: 1.0, y: -24, duration: 5.85, ease: "none" }, 0);
+
+      tl.fromTo(
+        "#b-estrela-forma",
+        { opacity: 0, scale: 0, rotation: -90, transformOrigin: "50% 50%" },
+        { opacity: 1, scale: 1, rotation: 0, duration: 0.55, ease: "back.out(1.6)" },
+        0.12,
+      );
+
+      // A primeira frase sobe de dentro da própria linha.
+      tl.fromTo("#b-titulo-1", { yPercent: 104 }, { yPercent: 0, duration: 0.8, ease: "expo.out" }, 0.22);
+      tl.fromTo("#b-titulo-2", { yPercent: 104 }, { yPercent: 0, duration: 0.8, ease: "expo.out" }, 0.36);
+
+      // Filete e a segunda frase, que entra em foco.
+      tl.fromTo("#b-filete", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 1.3);
+      tl.fromTo(
+        ".b-apoio",
+        { opacity: 0, filter: "blur(10px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out", stagger: 0.24 },
+        1.55,
+      );
+
+      window.__timelines["capitulo"] = tl;
+    })();
+  </script>
+</template>

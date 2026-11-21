@@ -1,0 +1,216 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Italiana";
+      src: url("assets/fonts/Italiana-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .c-onda {
+      position: absolute;
+      left: -160px;
+      top: 0;
+      width: 1400px;
+      height: 2400px;
+    }
+    #c-chao {
+      clip-path: path("M0,140 Q175,30 350,140 T700,140 T1050,140 T1400,140 L1400,2400 L0,2400 Z");
+      overflow: hidden;
+    }
+    #c-seda {
+      position: absolute;
+      left: -260px;
+      top: 0;
+      width: 1920px;
+      height: 2402px;
+    }
+    #c-reflexo {
+      position: absolute;
+      left: -700px;
+      top: -200px;
+      width: 520px;
+      height: 2400px;
+      background: linear-gradient(90deg, rgba(252, 253, 245, 0), rgba(252, 253, 245, 0.16) 50%, rgba(252, 253, 245, 0));
+    }
+    #c-universo,
+    #c-fim {
+      position: absolute;
+      inset: 0;
+    }
+    .c-intro,
+    .c-palavra,
+    #c-titulo {
+      position: absolute;
+      left: 80px;
+      width: 920px;
+      text-align: center;
+      font-family: "Italiana", serif;
+      letter-spacing: 0.01em;
+      color: #fcfdf5;
+      white-space: nowrap;
+    }
+    .c-intro {
+      font-size: 62px;
+      line-height: 78px;
+    }
+    #c-intro-1 {
+      top: 500px;
+    }
+    #c-intro-2 {
+      top: 578px;
+    }
+    #c-intro-3 {
+      top: 656px;
+    }
+    .c-palavra {
+      font-size: 134px;
+      line-height: 148px;
+    }
+    #c-palavra-1 {
+      top: 774px;
+    }
+    #c-palavra-2 {
+      top: 922px;
+    }
+    #c-palavra-3 {
+      top: 1070px;
+    }
+    #c-palavra-4 {
+      top: 1218px;
+    }
+    #c-titulo {
+      top: 640px;
+      font-size: 170px;
+      line-height: 190px;
+    }
+    .c-letra {
+      display: inline-block;
+    }
+    #c-enfeite {
+      position: absolute;
+      left: 380px;
+      top: 880px;
+      width: 320px;
+      height: 30px;
+    }
+    #c-mono {
+      position: absolute;
+      left: 390px;
+      top: 968px;
+      width: 300px;
+      height: 255px;
+    }
+  </style>
+  <div id="root" data-composition-id="mergulho" data-width="1080" data-height="1920">
+    <!-- A maré: duas ondas chapadas na frente e a seda azul logo atrás, todas com a crista ondulada. -->
+    <svg class="c-onda" id="c-onda-1" data-layout-allow-overflow viewBox="0 0 1400 2400">
+      <path d="M0,140 Q175,250 350,140 T700,140 T1050,140 T1400,140 L1400,2400 L0,2400 Z" fill="#8fc0d9" />
+      <path d="M0,140 Q175,250 350,140 T700,140 T1050,140 T1400,140" fill="none" stroke="#fcfdf5" stroke-width="5" />
+    </svg>
+    <svg class="c-onda" id="c-onda-2" data-layout-allow-overflow viewBox="0 0 1400 2400">
+      <path d="M0,140 Q117,40 233,140 T467,140 T700,140 T933,140 T1167,140 T1400,140 L1400,2400 L0,2400 Z" fill="#64a6c9" />
+      <path d="M0,140 Q117,40 233,140 T467,140 T700,140 T933,140 T1167,140 T1400,140" fill="none" stroke="#fcfdf5" stroke-width="4" />
+    </svg>
+    <div class="c-onda" id="c-mare" data-layout-allow-overflow>
+      <div class="c-onda" id="c-chao" style="left: 0">
+        <img id="c-seda" src="assets/seda-azul.jpg" alt="" />
+      </div>
+      <svg class="c-onda" id="c-espuma" style="left: 0" viewBox="0 0 1400 2400">
+        <path d="M0,140 Q175,30 350,140 T700,140 T1050,140 T1400,140" fill="none" stroke="#fcfdf5" stroke-width="4" />
+      </svg>
+    </div>
+
+    <div id="c-reflexo" data-layout-ignore></div>
+
+    <!-- Primeiro bloco: o mergulho no novo universo. -->
+    <div id="c-universo">
+      <div class="c-intro" id="c-intro-1">Agora, além da moda feminina,</div>
+      <div class="c-intro" id="c-intro-2">vamos mergulhar</div>
+      <div class="c-intro" id="c-intro-3">em um universo de</div>
+      <div class="c-palavra" id="c-palavra-1">sol,</div>
+      <div class="c-palavra" id="c-palavra-2">mar,</div>
+      <div class="c-palavra" id="c-palavra-3" data-layout-allow-safe-zone>liberdade</div>
+      <div class="c-palavra" id="c-palavra-4" data-layout-allow-safe-zone>e estilo.</div>
+    </div>
+
+    <!-- Segundo bloco: o fecho. Só o monograma, sem o nome da marca. -->
+    <div id="c-fim">
+      <div id="c-titulo">
+        <span class="c-letra">A</span><span class="c-letra">g</span><span class="c-letra">u</span><span class="c-letra">a</span><span class="c-letra">r</span><span class="c-letra">d</span><span class="c-letra">e</span><span class="c-letra">m</span><span class="c-letra">!</span>
+      </div>
+      <svg id="c-enfeite" viewBox="0 0 320 30">
+        <rect id="c-fio-esq" x="0" y="14" width="130" height="2" fill="#f0dc9c" />
+        <rect id="c-fio-dir" x="190" y="14" width="130" height="2" fill="#f0dc9c" />
+        <path id="c-estrela" transform="translate(160 15)" d="M0,-14 C1.2,-4 4,-1.2 14,0 C4,1.2 1.2,4 0,14 C-1.2,4 -4,1.2 -14,0 C-4,-1.2 -1.2,-4 0,-14Z" fill="#f0dc9c" />
+      </svg>
+      <img id="c-mono" src="assets/monograma-branco.svg" alt="Monograma MS" />
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      // A maré sobe e cobre a cena anterior.
+      tl.fromTo("#c-onda-1", { y: 1900, x: 150 }, { y: -330, x: -40, duration: 0.85, ease: "power2.inOut" }, 0);
+      tl.fromTo("#c-onda-2", { y: 1900, x: -150 }, { y: -300, x: 60, duration: 0.85, ease: "power2.inOut" }, 0.1);
+      tl.fromTo("#c-mare", { y: 1900, x: 120 }, { y: -260, x: 0, duration: 0.9, ease: "power2.inOut" }, 0.2);
+      // A seda segue se movendo devagar atrás do texto parado.
+      tl.fromTo("#c-seda", { y: 0, scale: 1.06 }, { y: -60, scale: 1, duration: 10.8, ease: "none" }, 0);
+
+      // As linhas de abertura entram em foco, uma depois da outra.
+      tl.fromTo(
+        ".c-intro",
+        { opacity: 0, filter: "blur(10px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.5, ease: "power3.out", stagger: 0.38 },
+        0.95,
+      );
+      // Sol, mar, liberdade e estilo: uma palavra por vez.
+      tl.fromTo(
+        ".c-palavra",
+        { opacity: 0, scale: 1.1, filter: "blur(14px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.55, ease: "expo.out", stagger: 0.5 },
+        2.6,
+      );
+
+      // O primeiro bloco sai em um movimento só.
+      tl.fromTo(
+        "#c-universo",
+        { opacity: 1, filter: "blur(0px)" },
+        { opacity: 0, filter: "blur(12px)", duration: 0.3, ease: "power2.in" },
+        6.35,
+      );
+
+      // "Aguardem!" chega letra por letra; depois enfeite e monograma.
+      tl.fromTo(
+        ".c-letra",
+        { opacity: 0, filter: "blur(12px)" },
+        { opacity: 1, filter: "blur(0px)", duration: 0.45, ease: "power3.out", stagger: 0.055 },
+        6.8,
+      );
+      tl.fromTo(
+        "#c-estrela",
+        { opacity: 0, scale: 0, rotation: -90, transformOrigin: "50% 50%" },
+        { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.6)" },
+        7.5,
+      );
+      tl.fromTo("#c-fio-esq", { scaleX: 0, transformOrigin: "100% 50%" }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 7.6);
+      tl.fromTo("#c-fio-dir", { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 7.6);
+      tl.fromTo(
+        "#c-mono",
+        { opacity: 0, scale: 1.07, filter: "blur(14px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "expo.out" },
+        7.8,
+      );
+
+      // Um reflexo de luz cruza a seda uma única vez.
+      tl.fromTo("#c-reflexo", { x: 0, rotation: 14 }, { x: 2300, rotation: 14, duration: 1.3, ease: "power1.inOut" }, 8.7);
+
+      window.__timelines["mergulho"] = tl;
+    })();
+  </script>
+</template>
