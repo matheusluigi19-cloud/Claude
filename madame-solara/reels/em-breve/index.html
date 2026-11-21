@@ -82,6 +82,41 @@
         data-width="1080"
         data-height="1920"
       ></div>
+
+      <!-- Trilha: "Majestic", de Diego Nava (Mixkit). O trecho começa 1,4 s dentro da faixa
+           para o grave entrar aos 9,6 s do vídeo, junto com a maré. Alternativa pronta em
+           assets/audio/one-more-dance.mp3 (ver assets/audio/CREDITOS.md). -->
+      <audio
+        id="musica"
+        class="clip"
+        data-timeline-role="music"
+        src="assets/audio/majestic.mp3"
+        data-start="0"
+        data-duration="20"
+        data-track-index="3"
+        data-volume="0.9"
+        data-fade-in="0.3"
+        data-fade-out="1.6"
+      ></audio>
+      <!-- Efeitos: um sopro longo com o pico na luz que toma a tela, e um curto na subida da maré. -->
+      <audio
+        id="sfx-luz"
+        class="clip"
+        src="assets/sfx/whoosh-cinematic.mp3"
+        data-start="1.42"
+        data-duration="5.5"
+        data-track-index="4"
+        data-volume="0.26"
+      ></audio>
+      <audio
+        id="sfx-mare"
+        class="clip"
+        src="assets/sfx/whoosh.mp3"
+        data-start="9.5"
+        data-duration="0.57"
+        data-track-index="4"
+        data-volume="0.35"
+      ></audio>
     </div>
     <script>
       window.__timelines = window.__timelines || {};

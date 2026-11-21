@@ -1,6 +1,9 @@
 # Revisão: teaser de suspense (Reels)
 
-Arquivo final: `renders/madame-solara-em-breve.mp4` (1080x1920, 30 fps, 20 s, H.264, sem áudio).
+Arquivos finais (1080x1920, 30 fps, 20 s, H.264 com áudio AAC):
+
+- `renders/madame-solara-em-breve.mp4`: trilha "Majestic", de Diego Nava. É a versão do projeto.
+- `renders/madame-solara-em-breve-trilha-b.mp4`: mesma imagem com a trilha "One More Dance", de Arulo.
 
 ## O que foi decidido
 
@@ -16,7 +19,16 @@ Arquivo final: `renders/madame-solara-em-breve.mp4` (1080x1920, 30 fps, 20 s, H.
 - `hyperframes check --safe-zone reels`: 0 erros. Os 4 avisos de contraste e de texto encoberto são do instante 10 s, quando a maré está cobrindo o texto da cena 2 de propósito.
 - Linhas que passam do limite de 1248 px que a Meta recomenda deixar livre, aceitas de propósito por causa da centralização: "um novo capítulo." (até 1236 px, dentro), "liberdade" e "e estilo." (até 1366 px). Uma legenda longa aberta no Reels pode encostar nelas.
 - Quadros extraídos do MP4 final foram conferidos visualmente.
-- O arquivo não tem trilha. Nada de som foi avaliado. A ferramenta avisa que um vídeo de 20 s pede música.
+
+## Som
+
+- Trilhas do Mixkit, sob a Mixkit Stock Music Free License (uso comercial, redes sociais e anúncios online permitidos). Efeitos da biblioteca da skill media-use, sob a Pixabay Content License. Detalhes em `assets/audio/CREDITOS.md`.
+- Ninguém ouviu o resultado: as faixas foram escolhidas pelo gênero e pelo clima informados no Mixkit e por medição (andamento, timbre e curva de energia). Vale a escuta de quem publica.
+- "Majestic" (lounge, 113 bpm): o trecho começa 1,4 s dentro da faixa. A introdução acompanha o sol, uma camada nova entra perto da virada para a seda creme, e o grave entra aos 9,9 s, com a maré já cobrindo a tela. As linhas e as quatro palavras da cena 3 entram na grade da batida (0,529 s).
+- "One More Dance" (pop suave, 110 bpm): começa 0,1 s depois do início e o grave entra aos 9,7 s. Só o deslocamento foi ajustado; as entradas de texto seguem a grade da outra faixa.
+- Dois efeitos: um sopro longo com o pico aos 4,3 s, na luz que toma a tela, e um curto aos 9,65 s, na subida da maré.
+- Medido no arquivo final: versão principal em -16,4 LUFS com pico de -1,0 dBFS; alternativa em -15,9 LUFS com pico de -1,0 dBFS.
+- Para trocar a trilha do projeto, mude o `src` do `<audio id="musica">` em `index.html` para `assets/audio/one-more-dance.mp3`, com `data-start="0.1"` e `data-duration="19.9"`.
 
 ## Ponto mais fraco
 
@@ -25,5 +37,5 @@ Arquivo final: `renders/madame-solara-em-breve.mp4` (1080x1920, 30 fps, 20 s, H.
 
 ## Pendências
 
-- Trilha sonora: escolher a música no Instagram ao publicar, ou enviar um arquivo de áudio para entrar na composição.
+- Escolher entre as duas trilhas ouvindo, ou indicar outro clima para buscar outra faixa.
 - Confirmar se o monograma MS pode aparecer no fecho ou se o suspense pede tirar também.
