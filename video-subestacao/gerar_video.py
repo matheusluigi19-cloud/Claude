@@ -23,10 +23,10 @@ FUNC_BARRA = "proteção 87B"
 DISCENTES = "Stephanie Angele · Murilo Lima · Rian David"
 
 NARRACAO = [
-    (1.0, 9.6, "Planta petroquímica operando normalmente. Agora vamos ver o que acontece quando surge um curto no alimentador do reator."),
-    (17.6, 29.4, "Sem seletividade, a proteção da entrada atua junto e derruba tudo, até as cargas que não tinham relação com a falha."),
-    (39.2, 52.0, "Agora só o 52-A abre, em milissegundos. O resto da planta continua funcionando e as cargas críticas não sentem o afundamento de tensão."),
-    (62.0, 72.5, "Mesma falha, consequências totalmente diferentes. É isso que um bom projeto de proteção faz."),
+    (1.1, 8.8, "Planta petroquímica operando normalmente. Agora vamos ver o que acontece quando surge um curto no alimentador do reator."),
+    (17.7, 25.6, "Sem seletividade, a proteção da entrada atua junto e derruba tudo, até as cargas que não tinham relação com a falha."),
+    (39.2, 49.8, "Agora só o 52-A abre, em milissegundos. O resto da planta continua funcionando e as cargas críticas não sentem o afundamento de tensão."),
+    (62.4, 69.3, "Mesma falha, consequências totalmente diferentes. É isso que um bom projeto de proteção faz."),
 ]
 
 # ---------------------------------------------------------------- cores
