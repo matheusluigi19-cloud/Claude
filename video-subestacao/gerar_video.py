@@ -17,6 +17,7 @@ CARGAS = {
 }
 CRITICAS = {"C"}
 DISJ = {"in": "52-1", "A": "52-A", "B": "52-B", "C": "52-C"}
+DISCENTES = "Stephanie Angele · Murilo Lima · Rian David"
 
 NARRACAO = [
     (1.0, 9.6, "Planta petroquímica operando normalmente. Agora vamos ver o que acontece quando surge um curto no alimentador do reator."),
@@ -575,12 +576,16 @@ def quadro(ctx, t, com_legenda):
         legenda_disj(ctx, ease(ramp(t, 4.5, 5.5)))
         tag(ctx, "Planta petroquímica · operação normal", VIVO, ease(ramp(t, 1.2, 2.2)))
         # título de abertura
-        a = fade(t, 0.2, 1.0, 3.0, 3.8)
+        a = fade(t, 0.2, 1.0, 3.6, 4.4)
         if a > 0.01:
             ctx.set_source_rgba(BG[0], BG[1], BG[2], 0.85 * a)
             ctx.paint()
             text(ctx, "Antes e depois da proteção", W / 2, H / 2 - 10, 78, TXT, bold=True, alpha=a)
             text(ctx, "a mesma falha, duas vezes", W / 2, H / 2 + 56, 34, TXT2, alpha=a)
+            ctx.set_source_rgba(VIVO[0], VIVO[1], VIVO[2], a)
+            ctx.rectangle(W / 2 - 60, H / 2 + 104, 120, 3)
+            ctx.fill()
+            text(ctx, DISCENTES, W / 2, H / 2 + 160, 30, TXT, alpha=a)
         callout(ctx, FX["A"] - 90, FAULT_Y, "alimentador do reator", FALHA, fade(t, 6.2, 6.8, 9.3, 9.9), lado="left")
 
     elif t < 30.0:
@@ -624,6 +629,7 @@ def quadro(ctx, t, com_legenda):
         painel(ctx, sa, x0, 250, s, "Antes", "planta parada", FALHA, ease(ramp(t, 60.2, 61.0)))
         painel(ctx, sd, x0 + 1920 * s + 100, 250, s, "Depois", "só o reator isolado", ABERTO, ease(ramp(t, 60.8, 61.6)))
         text(ctx, "Mesma falha, consequências diferentes", W / 2, 160, 48, TXT, bold=True, alpha=a)
+        text(ctx, "Discentes: " + DISCENTES, W / 2, 780, 30, TXT2, alpha=ease(ramp(t, 62.0, 63.0)))
         preto(ctx, ease(ramp(t, 73.6, 75.0)))
 
     vinheta(ctx)
