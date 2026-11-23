@@ -11,12 +11,15 @@ DUR = 75.0
 
 # ---------------------------------------------------------------- textos
 CARGAS = {
-    "A": ("Reator", "carga do processo"),
-    "B": ("Bombas e compressores", "carga do processo"),
-    "C": ("Sala de controle", "carga crítica"),
+    "A": ("Reator VG-principal", "linha com a falta"),
+    "B": ("Outras cargas", "sem relação com a falta"),
+    "C": ("Cargas críticas", "não podem parar"),
 }
 CRITICAS = {"C"}
 DISJ = {"in": "52-1", "A": "52-A", "B": "52-B", "C": "52-C"}
+# funções de proteção do esquema proposto (slide 2): só aparecem na parte "Depois"
+FUNC = {"in": "entrada · 51 com atraso de 0,3 s", "A": "50/51, 50N/51N, 79", "B": "", "C": "27 + UPS"}
+FUNC_BARRA = "proteção 87B"
 DISCENTES = "Stephanie Angele · Murilo Lima · Rian David"
 
 NARRACAO = [
@@ -134,6 +137,7 @@ def estado_normal():
         "ups": 0.0,
         "reveal": 1.0,
         "t": 0.0,
+        "func": 0.0,
     }
 
 def seg_color(v, dip=0.0):
@@ -158,7 +162,7 @@ def glow_line(ctx, pts, color, w, v):
         line(ctx, pts, g, w + 14)
     line(ctx, pts, color, w)
 
-def breaker(ctx, x, y, aberto, flash, nome, alpha=1.0):
+def breaker(ctx, x, y, aberto, flash, nome, alpha=1.0, func="", func_a=0.0):
     s = 62
     # flash de atuação
     if flash > 0:
@@ -191,6 +195,8 @@ def breaker(ctx, x, y, aberto, flash, nome, alpha=1.0):
     ctx.stroke()
     ctx.restore()
     text(ctx, nome, x + s / 2 + 16, y + 9, 26, TXT, bold=True, align="left", alpha=alpha)
+    if func and func_a > 0.01:
+        text(ctx, func, x + s / 2 + 16, y + 38, 20, VIVO, align="left", alpha=alpha * func_a)
 
 def lamp(ctx, x, y, on, alpha=1.0):
     if on > 0.02:
@@ -229,7 +235,9 @@ def load_box(ctx, k, on, ups, alpha=1.0, reator_falha=0.0):
     for ln in linhas:
         text(ctx, ln, x + 104, yy, 30, mix(TXT2, TXT, on), bold=True, align="left", alpha=alpha)
         yy += 36
-    text(ctx, sub, x + 104, yy, 22, TXT2, align="left", alpha=alpha)
+    for ln in wrap(ctx, sub, 22, LOAD_W - 120):
+        text(ctx, ln, x + 104, yy, 22, TXT2, align="left", alpha=alpha)
+        yy += 27
     estado = "operando" if on > 0.5 else "desligada"
     cor_est = mix(hx("6B7681"), VIVO, on)
     text(ctx, estado.upper(), x + 104, y + LOAD_H - 22, 20, cor_est, bold=True, align="left", alpha=alpha)
@@ -321,8 +329,8 @@ def fonte(ctx, alpha, v):
         else:
             ctx.line_to(xx, yy)
     ctx.stroke()
-    text(ctx, "Concessionária", x + 62, y - 4, 26, TXT, bold=True, align="left", alpha=alpha)
-    text(ctx, "entrada da planta", x + 62, y + 26, 22, TXT2, align="left", alpha=alpha)
+    text(ctx, "Rede da concessionária", x + 62, y - 4, 26, TXT, bold=True, align="left", alpha=alpha)
+    text(ctx, "via transformador", x + 62, y + 26, 22, TXT2, align="left", alpha=alpha)
 
 def diagrama(ctx, st):
     t = st["t"]
@@ -344,7 +352,9 @@ def diagrama(ctx, st):
     # barramento
     glow_line(ctx, [(BUS_X[0], BUS_Y), (BUS_X[1], BUS_Y)], cl(seg["main"], a_bus, dip), 12, seg["main"] * a_bus)
     if a_bus > 0.05:
-        text(ctx, "Barramento principal", BUS_X[1] + 22, BUS_Y + 9, 22, TXT2, align="left", alpha=a_bus)
+        text(ctx, "Barra de média tensão", BUS_X[1] + 22, BUS_Y + 9, 22, TXT2, align="left", alpha=a_bus)
+        if st["func"] > 0.01:
+            text(ctx, FUNC_BARRA, BUS_X[1] + 22, BUS_Y + 38, 20, VIVO, align="left", alpha=a_bus * st["func"])
 
     for k in "ABC":
         x = FX[k]
@@ -362,9 +372,9 @@ def diagrama(ctx, st):
         fluxo(ctx, caminho, st["fault_flow"], t)
 
     # disjuntores
-    breaker(ctx, B1[0], B1[1], st["brk"]["in"], st["brk_flash"]["in"], DISJ["in"], a_bus)
+    breaker(ctx, B1[0], B1[1], st["brk"]["in"], st["brk_flash"]["in"], DISJ["in"], a_bus, FUNC["in"], st["func"])
     for k in "ABC":
-        breaker(ctx, FX[k], BR_Y, st["brk"][k], st["brk_flash"][k], DISJ[k], a_feed[k])
+        breaker(ctx, FX[k], BR_Y, st["brk"][k], st["brk_flash"][k], DISJ[k], a_feed[k], FUNC[k], st["func"])
 
     fonte(ctx, a_src, seg["in"])
 
@@ -441,6 +451,7 @@ def cena_depois(t):
     if tf < t < tt + 0.35:
         st["load"]["B"] = 0.65 + 0.2 * math.sin(t * 40)
     st["ups"] = ease_out(ramp(t, tf + 0.05, tf + 0.5))
+    st["func"] = ease(ramp(t, 35.6, 36.6))
     return st
 
 # ---------------------------------------------------------------- overlays
@@ -586,14 +597,14 @@ def quadro(ctx, t, com_legenda):
             ctx.rectangle(W / 2 - 60, H / 2 + 104, 120, 3)
             ctx.fill()
             text(ctx, DISCENTES, W / 2, H / 2 + 160, 30, TXT, alpha=a)
-        callout(ctx, FX["A"] - 90, FAULT_Y, "alimentador do reator", FALHA, fade(t, 6.2, 6.8, 9.3, 9.9), lado="left")
+        callout(ctx, FX["A"] - 90, FAULT_Y, "linha do reator VG-principal", FALHA, fade(t, 6.2, 6.8, 9.3, 9.9), lado="left")
 
     elif t < 30.0:
         st = cena_antes(t)
         diagrama(ctx, st)
         legenda_disj(ctx, 1.0)
         tag(ctx, "ANTES · proteção sem seletividade", FALHA, ease(ramp(t, 10.0, 10.8)))
-        callout(ctx, FX["A"] - 90, FAULT_Y, "curto-circuito", FALHA, fade(t, 12.8, 13.3, 16.6, 17.2), lado="left")
+        callout(ctx, FX["A"] - 90, FAULT_Y, "FALTA (curto recorrente)", FALHA, fade(t, 12.8, 13.3, 16.6, 17.2), lado="left")
         callout(ctx, B1[0] - 70, B1[1], "52-1 abre: entrada desligada", FALHA, fade(t, 16.7, 17.2, 29.0, 29.6), lado="left")
         faixa(ctx, "Planta inteira parada", "as três cargas desligadas por uma falha em um só alimentador", FALHA,
               ease_out(ramp(t, 18.4, 19.2)) * (1 - ease(ramp(t, 29.2, 29.8))), y=800)
@@ -613,7 +624,7 @@ def quadro(ctx, t, com_legenda):
         diagrama(ctx, st)
         legenda_disj(ctx, 1.0)
         tag(ctx, "DEPOIS · proteção seletiva", ABERTO, ease(ramp(t, 35.2, 36.0)))
-        callout(ctx, FX["A"] - 90, FAULT_Y, "mesmo curto-circuito", FALHA, fade(t, 37.0, 37.5, 38.6, 39.0), lado="left")
+        callout(ctx, FX["A"] - 90, FAULT_Y, "mesma falta", FALHA, fade(t, 37.0, 37.5, 38.6, 39.0), lado="left")
         callout(ctx, FX["A"], BR_Y, "52-A abre em milissegundos", ABERTO, fade(t, 38.8, 39.3, 59.0, 59.6), lado="left")
         faixa(ctx, "Só o reator isolado", "o resto da planta continua operando", ABERTO,
               ease_out(ramp(t, 41.0, 41.8)) * (1 - ease(ramp(t, 59.2, 59.8))), y=800)
