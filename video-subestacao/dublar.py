@@ -5,19 +5,20 @@ Gera audio/narracao_N.wav, audio/trilha.wav e os vídeos *-dublado.mp4.
 """
 import json, os, subprocess, sys, wave
 import numpy as np
+import linha_do_tempo as L
 
 SR = 48000
-DUR = 75.0
+DUR = L.DUR
 AQUI = os.path.dirname(os.path.abspath(__file__))
 AUD = os.path.join(AQUI, "audio")
 os.makedirs(AUD, exist_ok=True)
 
 # texto falado (números por extenso para a voz ler certo) e instante de início (s)
 FALAS = [
-    (1.2, "Planta petroquímica operando normalmente. Agora, vamos ver o que acontece quando surge um curto no alimentador do reator."),
-    (17.8, "Sem seletividade, a proteção da entrada atua junto, e derruba tudo. Até as cargas que não tinham relação com a falha."),
-    (39.3, "Agora, só o cinquenta e dois A abre, em milissegundos. O resto da planta continua funcionando, e as cargas críticas não sentem o afundamento de tensão."),
-    (62.5, "Mesma falha, consequências totalmente diferentes. É isso que um bom projeto de proteção faz."),
+    (L.N1, "Planta petroquímica operando normalmente. Agora, vamos ver o que acontece quando surge um curto no alimentador do reator."),
+    (L.N2, "Sem seletividade, a proteção da entrada atua junto, e derruba tudo. Até as cargas que não tinham relação com a falha."),
+    (L.N3, "Agora, só o cinquenta e dois A abre, em milissegundos. O resto da planta continua funcionando, e as cargas críticas não sentem o afundamento de tensão."),
+    (L.N4, "Mesma falha, consequências totalmente diferentes. É isso que um bom projeto de proteção faz."),
 ]
 LENGTH_SCALE = "1.08"
 
@@ -121,20 +122,20 @@ def main(modelo):
         tempos.append((t0, round(t0 + len(x) / SR, 2)))
 
     # zumbido de fundo enquanto a planta está energizada
-    for a, b in [(3.4, 16.45), (35.0, 60.0)]:
+    for a, b in [(2.3, L.TRIP_A + 0.05), (L.DEPOIS, L.FIM_D)]:
         z, g = faixa_zumbido(a, b, 0.018)
         por(sfx, z, a, g)
-    # ANTES: curto em 12,6 s, corrente de falta até o 52-1 abrir em 16,4 s
-    por(sfx, estouro(), 12.6, 0.55)
-    por(sfx, arco(16.4 - 12.6), 12.6, 0.10)
-    por(sfx, disjuntor(), 16.4, 0.7)
-    por(sfx, desliga(), 16.45, 0.12)
+    # ANTES: curto, corrente de falta até o 52-1 abrir
+    por(sfx, estouro(), L.FALHA_A, 0.55)
+    por(sfx, arco(L.TRIP_A - L.FALHA_A), L.FALHA_A, 0.10)
+    por(sfx, disjuntor(), L.TRIP_A, 0.7)
+    por(sfx, desliga(), L.TRIP_A + 0.05, 0.12)
     # transição
-    por(sfx, tom_transicao(), 30.7, 0.10)
-    # DEPOIS: curto em 38,0 s, 52-A abre em 38,3 s
-    por(sfx, estouro(), 38.0, 0.55)
-    por(sfx, arco(0.3), 38.0, 0.10)
-    por(sfx, disjuntor(), 38.3, 0.7)
+    por(sfx, tom_transicao(), L.TRANS + 0.4, 0.10)
+    # DEPOIS: mesmo curto, 52-A abre logo
+    por(sfx, estouro(), L.FALHA_D, 0.55)
+    por(sfx, arco(L.TRIP_D - L.FALHA_D), L.FALHA_D, 0.10)
+    por(sfx, disjuntor(), L.TRIP_D, 0.7)
 
     # abaixa os efeitos de fundo quando a voz fala (ducking simples)
     janela = int(0.15 * SR)

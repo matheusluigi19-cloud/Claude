@@ -3,11 +3,12 @@
 Uso: python3 gerar_video.py            -> gera as duas versões (com e sem legenda)
 Os rótulos das cargas e disjuntores ficam em CARGAS / DISJ para ajustar ao slide 2.
 """
-import math, subprocess, sys
+import json, math, os, subprocess, sys
 import cairo
+import linha_do_tempo as L
 
 W, H, FPS = 1920, 1080, 30
-DUR = 75.0
+DUR = L.DUR
 
 # ---------------------------------------------------------------- textos
 CARGAS = {
@@ -22,12 +23,18 @@ FUNC = {"in": "entrada · 51 com atraso de 0,3 s", "A": "50/51, 50N/51N, 79", "B
 FUNC_BARRA = "proteção 87B"
 DISCENTES = "Stephanie Angele · Murilo Lima · Rian David"
 
-NARRACAO = [
-    (1.1, 8.8, "Planta petroquímica operando normalmente. Agora vamos ver o que acontece quando surge um curto no alimentador do reator."),
-    (17.7, 25.6, "Sem seletividade, a proteção da entrada atua junto e derruba tudo, até as cargas que não tinham relação com a falha."),
-    (39.2, 49.8, "Agora só o 52-A abre, em milissegundos. O resto da planta continua funcionando e as cargas críticas não sentem o afundamento de tensão."),
-    (62.4, 69.3, "Mesma falha, consequências totalmente diferentes. É isso que um bom projeto de proteção faz."),
+_TEXTOS = [
+    "Planta petroquímica operando normalmente. Agora vamos ver o que acontece quando surge um curto no alimentador do reator.",
+    "Sem seletividade, a proteção da entrada atua junto e derruba tudo, até as cargas que não tinham relação com a falha.",
+    "Agora só o 52-A abre, em milissegundos. O resto da planta continua funcionando e as cargas críticas não sentem o afundamento de tensão.",
+    "Mesma falha, consequências totalmente diferentes. É isso que um bom projeto de proteção faz.",
 ]
+try:  # fim de cada fala medido pelo dublar.py
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "audio", "tempos.json")) as _f:
+        _FIM = [b for _, b in json.load(_f)]
+except OSError:
+    _FIM = [t0 + 7.5 for t0 in L.FALAS_INICIO]
+NARRACAO = [(t0 - 0.1, fim + 0.3, txt) for t0, fim, txt in zip(L.FALAS_INICIO, _FIM, _TEXTOS)]
 
 # ---------------------------------------------------------------- cores
 def hx(s, a=1.0):
@@ -402,22 +409,20 @@ def legenda_disj(ctx, alpha):
 def cena_abertura(t):
     st = estado_normal()
     st["t"] = t
-    st["reveal"] = ease(ramp(t, 0.6, 4.2))
-    acende = {k: ease(ramp(t, 3.6 + 0.35 * i, 4.3 + 0.35 * i)) for i, k in enumerate("ABC")}
-    eng = ease(ramp(t, 3.2, 4.0))
+    st["reveal"] = ease(ramp(t, 0.6, 2.6))
+    acende = {k: ease(ramp(t, 2.6 + 0.25 * i, 3.1 + 0.25 * i)) for i, k in enumerate("ABC")}
+    eng = ease(ramp(t, 2.3, 2.9))
     st["seg"] = {k: eng for k in st["seg"]}
     st["load"] = acende
     return st
 
 def cena_antes(t):
-    """t global, 10..30"""
     st = estado_normal()
     st["t"] = t
-    tf = 12.6          # curto
-    tt = 16.4          # 52-1 abre (proteção lenta, sem seletividade)
+    tf = L.FALHA_A     # curto
+    tt = L.TRIP_A      # 52-1 abre (proteção lenta, sem seletividade)
     st["fault"] = ease(ramp(t, tf, tf + 0.25)) * (1 - ease(ramp(t, tt + 0.6, tt + 1.6)))
-    st["fault_flow"] = ease(ramp(t, tf + 0.2, tf + 0.8)) * (1 - ease(ramp(t, tt, tt + 0.25)))
-    # afundamento geral enquanto o curto persiste
+    st["fault_flow"] = ease(ramp(t, tf + 0.2, tf + 0.6)) * (1 - ease(ramp(t, tt, tt + 0.25)))
     st["dip"] = 0.75 * ease(ramp(t, tf, tf + 0.3)) * (1 - ease(ramp(t, tt, tt + 0.2)))
     ab = ease_out(ramp(t, tt, tt + 0.35))
     st["brk"]["in"] = ab
@@ -426,32 +431,28 @@ def cena_antes(t):
     st["seg"] = {"in": 1.0, "main": off, "A": off, "Abot": off, "B": off, "C": off}
     for i, k in enumerate("ABC"):
         base = 1 - ease(ramp(t, tt + 0.15 + 0.25 * i, tt + 0.55 + 0.25 * i))
-        # cargas piscam durante o afundamento
         if tf < t < tt:
             base *= 0.72 + 0.22 * math.sin(t * 17 + i)
         st["load"][k] = base
     return st
 
 def cena_depois(t):
-    """t global, 35..60"""
     st = estado_normal()
     st["t"] = t
-    tf = 38.0
-    tt = 38.3          # 52-A abre em milissegundos (acelerado no vídeo para ser visível)
+    tf = L.FALHA_D
+    tt = L.TRIP_D      # 52-A abre em milissegundos (acelerado no vídeo para ser visível)
     st["fault"] = ease(ramp(t, tf, tf + 0.2)) * (1 - ease(ramp(t, tt + 0.6, tt + 1.6)))
     st["fault_flow"] = ease(ramp(t, tf, tf + 0.12)) * (1 - ease(ramp(t, tt, tt + 0.12)))
-    st["flow_from_bus"] = False
     st["dip"] = 0.75 * ease(ramp(t, tf, tf + 0.08)) * (1 - ease(ramp(t, tt, tt + 0.35)))
     ab = ease_out(ramp(t, tt, tt + 0.25))
     st["brk"]["A"] = ab
     st["brk_flash"]["A"] = (1 - ramp(t, tt, tt + 0.7)) if t >= tt else 0.0
     st["seg"]["Abot"] = 1 - ease(ramp(t, tt + 0.02, tt + 0.4))
     st["load"]["A"] = 1 - ease(ramp(t, tt + 0.1, tt + 0.6))
-    # carga não crítica sente o afundamento por um instante; a crítica não
     if tf < t < tt + 0.35:
         st["load"]["B"] = 0.65 + 0.2 * math.sin(t * 40)
     st["ups"] = ease_out(ramp(t, tf + 0.05, tf + 0.5))
-    st["func"] = ease(ramp(t, 35.6, 36.6))
+    st["func"] = ease(ramp(t, L.DEPOIS + 0.2, L.DEPOIS + 0.8))
     return st
 
 # ---------------------------------------------------------------- overlays
@@ -581,13 +582,13 @@ def painel(ctx, st, x, y, s, titulo, sub, cor, alpha):
 def quadro(ctx, t, com_legenda):
     fundo(ctx)
 
-    if t < 10.0:
+    if t < L.ANTES:
         st = cena_abertura(t)
         diagrama(ctx, st)
-        legenda_disj(ctx, ease(ramp(t, 4.5, 5.5)))
-        tag(ctx, "Planta petroquímica · operação normal", VIVO, ease(ramp(t, 1.2, 2.2)))
-        # título de abertura
-        a = fade(t, 0.2, 1.0, 3.6, 4.4)
+        legenda_disj(ctx, ease(ramp(t, 2.8, 3.4)))
+        tag(ctx, "Planta petroquímica · operação normal", VIVO, ease(ramp(t, 1.6, 2.3)))
+        # título de abertura (já visível no primeiro quadro)
+        a = 1 - ease(ramp(t, 1.4, 2.1))
         if a > 0.01:
             ctx.set_source_rgba(BG[0], BG[1], BG[2], 0.85 * a)
             ctx.paint()
@@ -597,51 +598,57 @@ def quadro(ctx, t, com_legenda):
             ctx.rectangle(W / 2 - 60, H / 2 + 104, 120, 3)
             ctx.fill()
             text(ctx, DISCENTES, W / 2, H / 2 + 160, 30, TXT, alpha=a)
-        callout(ctx, FX["A"] - 90, FAULT_Y, "linha do reator VG-principal", FALHA, fade(t, 6.2, 6.8, 9.3, 9.9), lado="left")
+        callout(ctx, FX["A"] - 90, FAULT_Y, "linha do reator VG-principal", FALHA,
+                fade(t, 5.0, 5.4, L.ANTES - 0.1, L.ANTES + 0.2), lado="left")
 
-    elif t < 30.0:
+    elif t < L.TRANS + 0.45:
         st = cena_antes(t)
         diagrama(ctx, st)
         legenda_disj(ctx, 1.0)
-        tag(ctx, "ANTES · proteção sem seletividade", FALHA, ease(ramp(t, 10.0, 10.8)))
-        callout(ctx, FX["A"] - 90, FAULT_Y, "FALTA (curto recorrente)", FALHA, fade(t, 12.8, 13.3, 16.6, 17.2), lado="left")
-        callout(ctx, B1[0] - 70, B1[1], "52-1 abre: entrada desligada", FALHA, fade(t, 16.7, 17.2, 29.0, 29.6), lado="left")
+        tag(ctx, "ANTES · proteção sem seletividade", FALHA, ease(ramp(t, L.ANTES, L.ANTES + 0.4)))
+        callout(ctx, FX["A"] - 90, FAULT_Y, "FALTA (curto recorrente)", FALHA,
+                fade(t, L.FALHA_A + 0.1, L.FALHA_A + 0.4, L.TRIP_A + 0.2, L.TRIP_A + 0.6), lado="left")
+        callout(ctx, B1[0] - 70, B1[1], "52-1 abre: entrada desligada", FALHA,
+                fade(t, L.TRIP_A + 0.2, L.TRIP_A + 0.6, L.TRANS, L.TRANS + 0.4), lado="left")
         faixa(ctx, "Planta inteira parada", "as três cargas desligadas por uma falha em um só alimentador", FALHA,
-              ease_out(ramp(t, 18.4, 19.2)) * (1 - ease(ramp(t, 29.2, 29.8))), y=800)
-        preto(ctx, ease(ramp(t, 29.4, 30.0)))
+              ease_out(ramp(t, L.FAIXA_A, L.FAIXA_A + 0.6)), y=800)
+        preto(ctx, ease(ramp(t, L.TRANS, L.TRANS + 0.4)))
 
-    elif t < 35.0:
+    elif t < L.DEPOIS:
         preto(ctx, 1.0)
-        a = fade(t, 30.6, 31.4, 33.8, 34.5)
+        a = fade(t, L.TRANS + 0.4, L.TRANS + 0.8, L.DEPOIS - 0.45, L.DEPOIS - 0.05)
         text(ctx, "Com o esquema proposto", W / 2, H / 2 + 14, 72, TXT, bold=True, alpha=a)
         ctx.set_source_rgba(ABERTO[0], ABERTO[1], ABERTO[2], a)
-        w = 220 * ease_out(ramp(t, 31.0, 32.0))
+        w = 220 * ease_out(ramp(t, L.TRANS + 0.5, L.TRANS + 1.2))
         ctx.rectangle(W / 2 - w / 2, H / 2 + 52, w, 5)
         ctx.fill()
 
-    elif t < 60.0:
+    elif t < L.FIM_D:
         st = cena_depois(t)
         diagrama(ctx, st)
         legenda_disj(ctx, 1.0)
-        tag(ctx, "DEPOIS · proteção seletiva", ABERTO, ease(ramp(t, 35.2, 36.0)))
-        callout(ctx, FX["A"] - 90, FAULT_Y, "mesma falta", FALHA, fade(t, 37.0, 37.5, 38.6, 39.0), lado="left")
-        callout(ctx, FX["A"], BR_Y, "52-A abre em milissegundos", ABERTO, fade(t, 38.8, 39.3, 59.0, 59.6), lado="left")
+        tag(ctx, "DEPOIS · proteção seletiva", ABERTO, ease(ramp(t, L.DEPOIS, L.DEPOIS + 0.5)))
+        callout(ctx, FX["A"] - 90, FAULT_Y, "mesma falta", FALHA,
+                fade(t, L.FALHA_D - 0.3, L.FALHA_D, L.TRIP_D + 0.2, L.TRIP_D + 0.5), lado="left")
+        callout(ctx, FX["A"], BR_Y, "52-A abre em milissegundos", ABERTO,
+                fade(t, L.TRIP_D + 0.4, L.TRIP_D + 0.8, L.FIM_D - 0.6, L.FIM_D - 0.3), lado="left")
         faixa(ctx, "Só o reator isolado", "o resto da planta continua operando", ABERTO,
-              ease_out(ramp(t, 41.0, 41.8)) * (1 - ease(ramp(t, 59.2, 59.8))), y=800)
-        preto(ctx, 1 - ease(ramp(t, 35.0, 35.7)))
-        preto(ctx, ease(ramp(t, 59.5, 60.0)))
+              ease_out(ramp(t, L.FAIXA_D, L.FAIXA_D + 0.6)) * (1 - ease(ramp(t, L.FIM_D - 0.6, L.FIM_D - 0.3))), y=800)
+        preto(ctx, 1 - ease(ramp(t, L.DEPOIS, L.DEPOIS + 0.4)))
+        preto(ctx, ease(ramp(t, L.FIM_D - 0.4, L.FIM_D)))
 
     else:
-        a = ease(ramp(t, 60.2, 61.2))
+        f0 = L.FIM_D
+        a = ease(ramp(t, f0, f0 + 0.6))
         s = 0.42
-        sa = cena_antes(29.0)
-        sd = cena_depois(59.0)
+        sa = cena_antes(L.TRANS - 0.5)
+        sd = cena_depois(L.FIM_D - 1.0)
         x0 = (W - (2 * (1920 * s + 40) + 60)) / 2 + 20
-        painel(ctx, sa, x0, 250, s, "Antes", "planta parada", FALHA, ease(ramp(t, 60.2, 61.0)))
-        painel(ctx, sd, x0 + 1920 * s + 100, 250, s, "Depois", "só o reator isolado", ABERTO, ease(ramp(t, 60.8, 61.6)))
+        painel(ctx, sa, x0, 250, s, "Antes", "planta parada", FALHA, ease(ramp(t, f0, f0 + 0.5)))
+        painel(ctx, sd, x0 + 1920 * s + 100, 250, s, "Depois", "só o reator isolado", ABERTO, ease(ramp(t, f0 + 0.3, f0 + 0.8)))
         text(ctx, "Mesma falha, consequências diferentes", W / 2, 160, 48, TXT, bold=True, alpha=a)
-        text(ctx, "Discentes: " + DISCENTES, W / 2, 780, 30, TXT2, alpha=ease(ramp(t, 62.0, 63.0)))
-        preto(ctx, ease(ramp(t, 73.6, 75.0)))
+        text(ctx, "Discentes: " + DISCENTES, W / 2, 780, 30, TXT2, alpha=ease(ramp(t, f0 + 0.8, f0 + 1.4)))
+        preto(ctx, ease(ramp(t, L.DUR - 0.8, L.DUR)))
 
     vinheta(ctx)
     if com_legenda:
