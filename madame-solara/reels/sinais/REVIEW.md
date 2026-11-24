@@ -1,23 +1,21 @@
 # Revisão: "Não ignore os sinais" (foto e Reels)
 
-Segunda rodada, depois do retorno da cliente: outra tipografia, só as iniciais no lugar do logo completo, com detalhes dourados, e o vídeo com tudo na tela desde o início e o biquíni se movendo como nuvem.
+Terceira rodada. A cliente recusou as três opções de tipografia da rodada anterior e pediu a fonte da primeira foto (Italiana) com o logo colorido completo: sol dourado, nome em azul e assinatura em marrom.
 
-- Foto, três opções em 2160x2880 (3:4 do feed): `foto/opcao-1.jpg`, `foto/opcao-2.jpg` e `foto/opcao-3.jpg`. Comparativo em `foto/opcoes.jpg`. Fonte editável em `foto/foto.html` (`?op=2` mostra a opção 2).
-- Vídeo: `renders/madame-solara-sinais.mp4` (1080x1920, 30 fps, 8 s, H.264 com áudio AAC).
+- Foto: `foto/nao-ignore-os-sinais.jpg` (2160x2880, proporção 3:4 do feed). Fonte editável em `foto/foto.html`.
+- Vídeo: `renders/madame-solara-sinais.mp4` (1080x1920, 30 fps, 8 s, H.264 com áudio AAC). Não mudou nesta rodada: segue com Montserrat e o monograma MS com anel dourado.
 
 ## O que foi decidido
 
 - A base é a imagem de referência enviada pela cliente. As nuvens foram recortadas do céu em quatro camadas transparentes, em `assets/nuvens/`, e o texto original saiu no recorte. O céu é um degradê refeito, um pouco menos saturado que o da referência.
-- Opções da foto:
-  1. Montserrat Bold em caixa alta, o desenho mais próximo da referência. Monograma creme com a estrela dourada.
-  2. Playfair Display em caixa alta, serifa com peso. Monograma todo dourado.
-  3. "Não ignore" pequeno em Montserrat e "os sinais" grande em Playfair itálico. Monograma creme com estrela e anel dourados.
-- Vídeo: um quadro só, com frase, biquíni e monograma juntos do começo ao fim, na tipografia da opção 1 e com o monograma da opção 3. O biquíni é levado pelo vento e passa por dois campos de ruído que deslizam e deformam as bordas aos poucos, como nuvem; cada peça também respira e balança por conta própria. As nuvens do fundo e do rodapé andam em velocidades diferentes. Um reflexo corre pelo anel dourado aos 2,9 s e a estrela pisca aos 5,7 s.
+- Foto: frase em Italiana no alto e biquíni no centro. O logo colorido tem letras azuis, que somem sobre o céu, então o quadro termina em creme: perto do rodapé o azul vira névoa e depois o creme da marca, com os topos das nuvens se desfazendo na passagem, e o logo vertical colorido fica sobre o creme.
+- As nuvens do rodapé estão sem saturação na foto, porque sobre o creme a sombra azulada delas puxava para o rosa.
+- Vídeo: um quadro só, com frase, biquíni e monograma juntos do começo ao fim. O biquíni é levado pelo vento e passa por dois campos de ruído que deslizam e deformam as bordas aos poucos, como nuvem; cada peça também respira e balança por conta própria. As nuvens do fundo e do rodapé andam em velocidades diferentes. Um reflexo corre pelo anel dourado aos 2,9 s e a estrela pisca aos 5,7 s.
 
 ## O que foi medido e o que só foi visto
 
 - `hyperframes check --safe-zone reels`: 0 erros e 0 avisos. A frase fica dentro da área livre do Reels. O monograma vai até cerca de 1425 px, abaixo do limite de 1248 px que a Meta recomenda deixar livre, para manter a mesma ordem da foto; uma legenda longa aberta pode encostar nele.
-- Quadros do vídeo e as três fotos foram conferidos visualmente.
+- Quadros do vídeo e a foto final foram conferidos visualmente.
 
 ## Som do vídeo
 
@@ -30,5 +28,5 @@ Segunda rodada, depois do retorno da cliente: outra tipografia, só as iniciais 
 ## Pontos de atenção
 
 - Direito de uso: as nuvens saem da imagem de referência. Se ela veio de outra marca ou de banco de imagens, confirmar que pode ser usada antes de publicar.
-- Resolução: a referência tem 1024x1536 px, então nas fotos de 2160 px as nuvens ficam mais suaves que o texto e o monograma.
-- O dourado sobre azul tem contraste baixo. Na opção 1 a estrela dourada é pequena e quase não se nota; o dourado aparece de verdade nas opções 2 e 3.
+- Resolução: a referência tem 1024x1536 px, então na foto de 2160 px as nuvens ficam mais suaves que o texto e o logo.
+- Foto e vídeo estão com tipografia e marca diferentes. Levar o logo colorido para o vídeo pede uma base clara dentro da área livre do Reels, o que muda a composição.

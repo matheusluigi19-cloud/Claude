@@ -21,4 +21,4 @@ Gerados com o Earshot 1.0.0 (https://github.com/Leonxlnx/earshot, licença MIT),
 
 ## Fontes
 
-Montserrat e Playfair Display, ambas sob a SIL Open Font License 1.1, baixadas do pacote Fontsource.
+Italiana (foto) e Montserrat (vídeo), ambas sob a SIL Open Font License 1.1. A Montserrat veio do pacote Fontsource.
