@@ -3,24 +3,33 @@
   "x": 134,
   "y": 331,
   "w": 722,
-  "h": 514
+  "h": 514,
+  "px_w": 1523,
+  "px_h": 1084
  },
  "biquini-baixo": {
   "x": 159,
   "y": 860,
   "w": 694,
-  "h": 380
+  "h": 380,
+  "px_w": 1464,
+  "px_h": 802
  },
  "nuvens-base": {
   "x": 0,
   "y": 862,
   "w": 1024,
-  "h": 674
+  "h": 674,
+  "px_w": 2160,
+  "px_h": 1422
  },
  "nuvens-finas": {
   "x": 0,
   "y": 0,
   "w": 1024,
-  "h": 1503
- }
+  "h": 1503,
+  "px_w": 2160,
+  "px_h": 3170
+ },
+ "_nota": "x, y, w e h estão na escala da imagem original (1024 px de largura); os arquivos têm 2,109 vezes isso."
 }

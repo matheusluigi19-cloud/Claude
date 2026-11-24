@@ -32,7 +32,7 @@
         position: absolute;
         display: block;
       }
-      /* As camadas vêm de uma imagem de 1024 px de largura; 1,0547 leva a 1080. */
+      /* As camadas de nuvem têm 2160 px de largura: em 1080 px com densidade 2 ficam ponto a ponto. */
       #finas {
         left: 0;
         top: -70px;
@@ -43,41 +43,51 @@
         left: 0;
         top: 904px;
         width: 1080px;
-        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 27%, transparent 73%, #000 88%, #000 100%);
-        mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 27%, transparent 73%, #000 88%, #000 100%);
+        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 26%, transparent 74%, #000 88%, #000 100%);
+        mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 26%, transparent 74%, #000 88%, #000 100%);
       }
       #cima {
-        left: 237px;
-        top: 262px;
-        width: 606px;
+        left: 198px;
+        top: 318px;
+        width: 683px;
       }
       #baixo {
-        left: 258px;
-        top: 706px;
-        width: 583px;
+        left: 222px;
+        top: 818px;
+        width: 657px;
       }
       #frase {
         position: absolute;
         left: 0;
-        top: 118px;
+        top: 74px;
         width: 1080px;
         text-align: center;
-        white-space: nowrap;
-        /* Uma linha só, pequena e bem espaçada: a marca é minimalista. */
         font-family: "Italiana", serif;
-        font-size: 46px;
-        line-height: 1.2;
-        letter-spacing: 0.26em;
-        text-indent: 0.26em;
+        font-size: 108px;
+        line-height: 1.04;
+        letter-spacing: 0.05em;
+        text-indent: 0.05em;
         text-transform: uppercase;
         color: #fcfdf5;
-        text-shadow: 0 1px 12px rgba(0, 52, 120, 0.35);
+        text-shadow: 0 2px 22px rgba(0, 52, 120, 0.45);
       }
-      /* Logo vertical com o sol dourado e o nome em branco, para se ler sobre o céu. */
-      #logo {
-        left: 435px;
-        top: 1172px;
-        width: 210px;
+      /* Logo com o sol dourado e o nome em branco. Padrão: vertical. foto.html?logo=horizontal troca. */
+      #logo-vertical {
+        left: 436px;
+        top: 1218px;
+        width: 208px;
+      }
+      #logo-horizontal {
+        left: 305px;
+        top: 1222px;
+        width: 470px;
+        display: none !important;
+      }
+      body.horizontal #logo-vertical {
+        display: none !important;
+      }
+      body.horizontal #logo-horizontal {
+        display: block !important;
       }
     </style>
   </head>
@@ -87,8 +97,12 @@
       <img id="base" src="../assets/nuvens/nuvens-base.png" alt="" />
       <img id="cima" src="../assets/nuvens/biquini-cima.png" alt="" />
       <img id="baixo" src="../assets/nuvens/biquini-baixo.png" alt="" />
-      <div id="frase">Não ignore os sinais</div>
-      <img id="logo" src="../assets/logo-vertical-ceu.svg" alt="Madame Solara, moda praia e resort" />
+      <div id="frase">Não ignore<br />os sinais</div>
+      <img id="logo-vertical" src="../assets/logo-vertical-ceu.svg" alt="Madame Solara, moda praia e resort" />
+      <img id="logo-horizontal" src="../assets/logo-horizontal-ceu.svg" alt="Madame Solara, moda praia e resort" />
     </div>
+    <script>
+      if (new URLSearchParams(location.search).get("logo") === "horizontal") document.body.className = "horizontal";
+    </script>
   </body>
 </html>

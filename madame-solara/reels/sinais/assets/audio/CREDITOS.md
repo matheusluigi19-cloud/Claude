@@ -22,3 +22,7 @@ Gerados com o Earshot 1.0.0 (https://github.com/Leonxlnx/earshot, licença MIT),
 ## Fontes
 
 Italiana (foto) e Montserrat (vídeo), ambas sob a SIL Open Font License 1.1. A Montserrat veio do pacote Fontsource.
+
+## Super-resolução
+
+As camadas de nuvem foram recortadas de uma ampliação de 4 vezes da imagem de referência, feita com o Real-ESRGAN (pesos `RealESRGAN_x4.pth` do repositório `ai-forever/Real-ESRGAN` no Hugging Face; o Real-ESRGAN é distribuído sob licença BSD de 3 cláusulas).
