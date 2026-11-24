@@ -1,6 +1,6 @@
 # Revisão: "Não ignore os sinais" (foto e Reels)
 
-Quarta rodada. A cliente pediu a fonte da primeira foto (Italiana) com o logo no visual colorido, achou feio o rodapé creme que isso exigia e pediu o nome "Madame Solara" em branco.
+Quinta rodada. A cliente pediu a fonte da primeira foto (Italiana), o logo com o sol dourado e o nome em branco, e depois apontou que o dourado estava com baixa qualidade e que a frase e o logo estavam grandes demais para uma marca minimalista.
 
 - Foto: `foto/nao-ignore-os-sinais.jpg` (2160x2880, proporção 3:4 do feed). Fonte editável em `foto/foto.html`.
 - Vídeo: `renders/madame-solara-sinais.mp4` (1080x1920, 30 fps, 8 s, H.264 com áudio AAC). Não mudou nesta rodada: segue com Montserrat e o monograma MS com anel dourado.
@@ -8,8 +8,9 @@ Quarta rodada. A cliente pediu a fonte da primeira foto (Italiana) com o logo no
 ## O que foi decidido
 
 - A base é a imagem de referência enviada pela cliente. As nuvens foram recortadas do céu em quatro camadas transparentes, em `assets/nuvens/`, e o texto original saiu no recorte. O céu é um degradê refeito, um pouco menos saturado que o da referência.
-- Foto: céu inteiro, com a frase em Italiana no alto, o biquíni no centro e o logo vertical embaixo. As nuvens do rodapé se abrem no centro para o logo ficar sobre o azul.
-- Logo da foto (`assets/logo-vertical-ceu.svg`): feito a partir do logo vertical colorido do manual, com o nome e a assinatura em branco. O sol continua dourado, mas com o degradê clareado em 42%, porque os trechos marrons do dourado original ficavam apagados sobre o céu. O desenho não foi alterado.
+- Foto: céu inteiro e o biquíni como protagonista. A frase vai em uma linha só, pequena e bem espaçada (Italiana, 46 px em 1080), e o logo vertical fica pequeno embaixo (210 px de largura). As nuvens do rodapé se abrem no centro para o logo ficar sobre o azul.
+- Logo da foto (`assets/logo-vertical-ceu.svg`): os traços do logo vertical branco do manual, com o nome e a assinatura em branco e o sol preenchido por um degradê dourado claro. É vetor puro, sem recorte nem sombra.
+- Qualidade do dourado: a versão anterior saía em JPEG com subamostragem de cor 4:2:0, que borra linhas finas e saturadas, e usava o sol do logo colorido, que é um degradê recortado. Agora o sol é traço vetorial e a foto é exportada em JPEG 4:4:4 com qualidade 96.
 - Vídeo: um quadro só, com frase, biquíni e monograma juntos do começo ao fim. O biquíni é levado pelo vento e passa por dois campos de ruído que deslizam e deformam as bordas aos poucos, como nuvem; cada peça também respira e balança por conta própria. As nuvens do fundo e do rodapé andam em velocidades diferentes. Um reflexo corre pelo anel dourado aos 2,9 s e a estrela pisca aos 5,7 s.
 
 ## O que foi medido e o que só foi visto
