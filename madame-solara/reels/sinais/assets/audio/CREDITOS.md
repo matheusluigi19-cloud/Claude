@@ -7,7 +7,7 @@ Texto da licença: https://mixkit.co/license/#musicFree
 
 | Arquivo | Faixa | Artista | Origem | Trecho usado |
 | --- | --- | --- | --- | --- |
-| `majestic.mp3` | Majestic | Diego Nava | https://assets.mixkit.co/music/475/475.mp3 | de 7,89 s a 18,49 s do original |
+| `majestic.mp3` | Majestic | Diego Nava | https://assets.mixkit.co/music/475/475.mp3 | de 11,2 s a 19,8 s do original |
 
 A faixa foi só cortada, sem alteração de conteúdo.
 
@@ -17,6 +17,8 @@ Gerados com o Earshot 1.0.0 (https://github.com/Leonxlnx/earshot, licença MIT),
 
 | Arquivo | Som do Earshot | Uso no vídeo |
 | --- | --- | --- |
-| `brisa.wav` | `wind/open` | vento ao fundo nos primeiros 5 s |
-| `sopro.wav` | `whoosh/soft` | sopro quando as nuvens se juntam |
-| `marca.wav` | `logo/bag` | batida grave na entrada do logo |
+| `brisa.wav` | `wind/open` | vento bem baixo ao fundo nos primeiros 5 s |
+
+## Fontes
+
+Montserrat e Playfair Display, ambas sob a SIL Open Font License 1.1, baixadas do pacote Fontsource.
