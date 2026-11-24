@@ -18,29 +18,19 @@
         width: 1080px;
         height: 1440px;
         overflow: hidden;
-        background: #fcfdf5;
+        background: #0b5aa6;
       }
-      /* O quadro termina em creme: o logo colorido tem letras azuis e só se lê sobre fundo claro. */
+      /* Céu da imagem de referência, um pouco menos saturado para chegar perto do azul da marca. */
       #quadro {
         position: relative;
         width: 1080px;
         height: 1440px;
         overflow: hidden;
-        background: #fcfdf5;
+        background: linear-gradient(180deg, #0b5aa6 0%, #1570be 25%, #2584cf 50%, #3792d6 75%, #58a7df 100%);
       }
       #quadro img {
         position: absolute;
         display: block;
-      }
-      /* Céu da imagem de referência, um pouco menos saturado para chegar perto do azul da marca. */
-      #ceu {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 1080px;
-        height: 1110px;
-        overflow: hidden;
-        background: linear-gradient(180deg, #0b5aa6 0%, #1570be 28%, #2584cf 56%, #3d97d9 82%, #62aee2 100%);
       }
       /* As camadas vêm de uma imagem de 1024 px de largura; 1,0547 leva a 1080. */
       #finas {
@@ -48,34 +38,23 @@
         top: -70px;
         width: 1080px;
       }
-      /* Perto do horizonte o azul vira névoa e depois o creme da marca. */
-      #nevoa {
-        position: absolute;
-        left: 0;
-        top: 930px;
-        width: 1080px;
-        height: 180px;
-        background: linear-gradient(180deg, rgba(252, 253, 245, 0) 0%, rgba(252, 253, 245, 0.55) 45%, #fcfdf5 100%);
-      }
-      /* Das nuvens do rodapé só aparecem os topos, que se desfazem no creme. */
+      /* As nuvens do rodapé se abrem no centro para o logo ficar sobre o azul. */
       #base {
         left: 0;
-        top: 868px;
+        top: 904px;
         width: 1080px;
-        /* Sem saturação: sobre o creme, a sombra azulada das nuvens puxava para o rosa. */
-        filter: saturate(0.12) brightness(1.03);
-        -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 31%, transparent 47%);
-        mask-image: linear-gradient(180deg, #000 0%, #000 31%, transparent 47%);
+        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 27%, transparent 73%, #000 88%, #000 100%);
+        mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 27%, transparent 73%, #000 88%, #000 100%);
       }
       #cima {
-        left: 273px;
-        top: 292px;
-        width: 534px;
+        left: 251px;
+        top: 286px;
+        width: 578px;
       }
       #baixo {
-        left: 291px;
-        top: 683px;
-        width: 514px;
+        left: 271px;
+        top: 709px;
+        width: 555px;
       }
       #frase {
         position: absolute;
@@ -92,24 +71,23 @@
         color: #fcfdf5;
         text-shadow: 0 2px 22px rgba(0, 52, 120, 0.45);
       }
+      /* Logo vertical com o sol dourado e o nome em branco, para se ler sobre o céu. */
       #logo {
-        left: 379px;
-        top: 1122px;
-        width: 322px;
+        left: 370px;
+        top: 1086px;
+        width: 340px;
+        filter: drop-shadow(0 2px 14px rgba(0, 40, 100, 0.45));
       }
     </style>
   </head>
   <body>
     <div id="quadro">
-      <div id="ceu">
-        <img id="finas" src="../assets/nuvens/nuvens-finas.png" alt="" />
-      </div>
-      <div id="nevoa"></div>
+      <img id="finas" src="../assets/nuvens/nuvens-finas.png" alt="" />
       <img id="base" src="../assets/nuvens/nuvens-base.png" alt="" />
       <img id="cima" src="../assets/nuvens/biquini-cima.png" alt="" />
       <img id="baixo" src="../assets/nuvens/biquini-baixo.png" alt="" />
       <div id="frase">Não ignore<br />os sinais</div>
-      <img id="logo" src="../assets/logo-vertical-colorido.svg" alt="Madame Solara, moda praia e resort" />
+      <img id="logo" src="../assets/logo-vertical-ceu.svg" alt="Madame Solara, moda praia e resort" />
     </div>
   </body>
 </html>

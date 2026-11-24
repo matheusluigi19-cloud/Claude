@@ -1,6 +1,6 @@
 # Revisão: "Não ignore os sinais" (foto e Reels)
 
-Terceira rodada. A cliente recusou as três opções de tipografia da rodada anterior e pediu a fonte da primeira foto (Italiana) com o logo colorido completo: sol dourado, nome em azul e assinatura em marrom.
+Quarta rodada. A cliente pediu a fonte da primeira foto (Italiana) com o logo no visual colorido, achou feio o rodapé creme que isso exigia e pediu o nome "Madame Solara" em branco.
 
 - Foto: `foto/nao-ignore-os-sinais.jpg` (2160x2880, proporção 3:4 do feed). Fonte editável em `foto/foto.html`.
 - Vídeo: `renders/madame-solara-sinais.mp4` (1080x1920, 30 fps, 8 s, H.264 com áudio AAC). Não mudou nesta rodada: segue com Montserrat e o monograma MS com anel dourado.
@@ -8,8 +8,8 @@ Terceira rodada. A cliente recusou as três opções de tipografia da rodada ant
 ## O que foi decidido
 
 - A base é a imagem de referência enviada pela cliente. As nuvens foram recortadas do céu em quatro camadas transparentes, em `assets/nuvens/`, e o texto original saiu no recorte. O céu é um degradê refeito, um pouco menos saturado que o da referência.
-- Foto: frase em Italiana no alto e biquíni no centro. O logo colorido tem letras azuis, que somem sobre o céu, então o quadro termina em creme: perto do rodapé o azul vira névoa e depois o creme da marca, com os topos das nuvens se desfazendo na passagem, e o logo vertical colorido fica sobre o creme.
-- As nuvens do rodapé estão sem saturação na foto, porque sobre o creme a sombra azulada delas puxava para o rosa.
+- Foto: céu inteiro, com a frase em Italiana no alto, o biquíni no centro e o logo vertical embaixo. As nuvens do rodapé se abrem no centro para o logo ficar sobre o azul.
+- Logo da foto (`assets/logo-vertical-ceu.svg`): feito a partir do logo vertical colorido do manual, com o nome e a assinatura em branco. O sol continua dourado, mas com o degradê clareado em 42%, porque os trechos marrons do dourado original ficavam apagados sobre o céu. O desenho não foi alterado.
 - Vídeo: um quadro só, com frase, biquíni e monograma juntos do começo ao fim. O biquíni é levado pelo vento e passa por dois campos de ruído que deslizam e deformam as bordas aos poucos, como nuvem; cada peça também respira e balança por conta própria. As nuvens do fundo e do rodapé andam em velocidades diferentes. Um reflexo corre pelo anel dourado aos 2,9 s e a estrela pisca aos 5,7 s.
 
 ## O que foi medido e o que só foi visto
