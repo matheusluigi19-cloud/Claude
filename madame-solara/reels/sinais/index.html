@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #0b5aa6;
+      }
+      #root {
+        position: relative;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- "Não ignore os sinais", Madame Solara. Reels 1080x1920, 30 fps, 10 s.
+         Um plano só: a frase no céu, as nuvens se juntam num biquíni, o logo assina.
+         As nuvens são camadas recortadas da imagem de referência enviada pela cliente. -->
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="10"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div
+        id="ceu"
+        data-composition-id="ceu"
+        data-composition-src="compositions/ceu.html"
+        data-start="0"
+        data-duration="10"
+        data-track-index="1"
+        data-track-kind="graphics"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <!-- Trilha: "Majestic", de Diego Nava (Mixkit), a mesma do teaser anterior. O trecho começa
+           7,89 s dentro da faixa para o grave entrar aos 3,4 s, quando o biquíni se forma, e para
+           uma batida forte cair aos 6,23 s, na entrada do logo. Ver assets/audio/CREDITOS.md. -->
+      <audio
+        id="musica"
+        class="clip"
+        data-timeline-role="music"
+        src="assets/audio/majestic.mp3"
+        data-start="0"
+        data-duration="10"
+        data-track-index="3"
+        data-volume="0.9"
+        data-fade-in="0.25"
+        data-fade-out="1.5"
+        data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:1},{&quot;t&quot;:2.95,&quot;v&quot;:1},{&quot;t&quot;:3.2,&quot;v&quot;:0.5},{&quot;t&quot;:3.35,&quot;v&quot;:0.5},{&quot;t&quot;:3.41,&quot;v&quot;:1}]}]}"
+      ></audio>
+      <!-- Efeitos feitos com o Earshot: brisa no começo, um sopro quando as nuvens se juntam e uma
+           batida grave no logo. -->
+      <audio
+        id="sfx-brisa"
+        class="clip"
+        src="assets/sfx/brisa.wav"
+        data-start="0"
+        data-duration="5"
+        data-track-index="4"
+        data-volume="0.55"
+        data-fade-in="0.8"
+        data-fade-out="1.4"
+      ></audio>
+      <audio
+        id="sfx-sopro"
+        class="clip"
+        src="assets/sfx/sopro.wav"
+        data-start="3.03"
+        data-duration="0.39"
+        data-track-index="5"
+        data-volume="0.55"
+      ></audio>
+      <audio
+        id="sfx-marca"
+        class="clip"
+        src="assets/sfx/marca.wav"
+        data-start="5.89"
+        data-duration="0.5"
+        data-track-index="4"
+        data-volume="0.6"
+      ></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

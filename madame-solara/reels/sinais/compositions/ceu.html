@@ -1,0 +1,153 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Italiana";
+      src: url("assets/fonts/Italiana-Regular.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0b5aa6 0%, #1570be 25%, #2584cf 50%, #3792d6 75%, #58a7df 100%);
+    }
+    /* As camadas vêm de uma imagem de 1024 px de largura; 1280 px cobre o quadro com folga para o vento. */
+    #s-finas {
+      position: absolute;
+      left: -100px;
+      top: -30px;
+      width: 1280px;
+      height: 1879px;
+    }
+    #s-base {
+      position: absolute;
+      left: -100px;
+      top: 1128px;
+      width: 1280px;
+      height: 843px;
+    }
+    /* O biquíni fica num grupo próprio, nas medidas da imagem original. */
+    #s-biquini {
+      position: absolute;
+      left: 179px;
+      top: 316px;
+      width: 722px;
+      height: 909px;
+    }
+    #s-cima {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 722px;
+      height: 514px;
+    }
+    #s-baixo {
+      position: absolute;
+      left: 25px;
+      top: 529px;
+      width: 694px;
+      height: 380px;
+    }
+    #s-frase {
+      position: absolute;
+      left: 60px;
+      top: 632px;
+      width: 960px;
+      text-align: center;
+      font-family: "Italiana", serif;
+      font-size: 118px;
+      line-height: 1.06;
+      letter-spacing: 0.05em;
+      text-indent: 0.05em;
+      text-transform: uppercase;
+      color: #fcfdf5;
+      text-shadow: 0 2px 24px rgba(0, 52, 120, 0.45);
+    }
+    .s-linha {
+      display: block;
+      white-space: nowrap;
+    }
+    #s-logo-caixa {
+      position: absolute;
+      left: 270px;
+      top: 1000px;
+      width: 540px;
+      height: 191px;
+      filter: drop-shadow(0 2px 16px rgba(0, 52, 120, 0.45));
+    }
+    #s-logo {
+      display: block;
+      width: 540px;
+      height: 191px;
+    }
+  </style>
+  <div id="root" data-composition-id="ceu" data-width="1080" data-height="1920">
+    <div data-layout-allow-overflow>
+      <img id="s-finas" src="assets/nuvens/nuvens-finas.png" alt="" />
+      <img id="s-base" src="assets/nuvens/nuvens-base.png" alt="" />
+    </div>
+
+    <div id="s-biquini">
+      <img id="s-cima" src="assets/nuvens/biquini-cima.png" alt="" />
+      <img id="s-baixo" src="assets/nuvens/biquini-baixo.png" alt="" />
+    </div>
+
+    <div id="s-frase">
+      <span class="s-linha" id="s-linha-1">Não ignore</span>
+      <span class="s-linha" id="s-linha-2">os sinais</span>
+    </div>
+
+    <div id="s-logo-caixa">
+      <img id="s-logo" src="assets/logo-horizontal-branco.svg" alt="Madame Solara, moda praia e resort" />
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+
+      // Vento: as nuvens de trás andam devagar, as da frente mais rápido, do início ao fim.
+      tl.fromTo("#s-finas", { x: -34, y: 0 }, { x: 34, y: 14, duration: 10, ease: "none" }, 0);
+      tl.fromTo("#s-base", { x: -64, y: 0 }, { x: 64, y: 34, duration: 10, ease: "none" }, 0);
+
+      // A frase já está na tela no quadro 0 e sai num movimento só antes do sinal aparecer.
+      tl.fromTo(
+        "#s-frase",
+        { opacity: 1, y: 0, filter: "blur(0px)" },
+        { opacity: 0, y: -46, filter: "blur(12px)", duration: 0.4, ease: "power2.in" },
+        2.5,
+      );
+
+      // O sinal: as nuvens se juntam e viram o biquíni, a parte de cima e depois a de baixo.
+      tl.set("#s-biquini", { scale: 1.02, transformOrigin: "50% 50%" }, 0);
+      tl.fromTo(
+        "#s-cima",
+        { opacity: 0, scale: 0.84, filter: "blur(30px)", transformOrigin: "50% 60%" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.0, ease: "power2.out" },
+        2.75,
+      );
+      tl.fromTo(
+        "#s-baixo",
+        { opacity: 0, scale: 0.84, filter: "blur(30px)", transformOrigin: "50% 40%" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.0, ease: "power2.out" },
+        2.98,
+      );
+
+      // O biquíni sobe e encolhe para dar lugar ao logo.
+      tl.fromTo(
+        "#s-biquini",
+        { scale: 1.02, y: 0 },
+        { scale: 0.72, y: -144, duration: 0.95, ease: "power3.inOut", immediateRender: false },
+        5.7,
+      );
+      tl.fromTo(
+        "#s-logo",
+        { opacity: 0, scale: 1.07, filter: "blur(14px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.8, ease: "expo.out" },
+        6.23,
+      );
+
+      window.__timelines["ceu"] = tl;
+    })();
+  </script>
+</template>

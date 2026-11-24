@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Não ignore os sinais</title>
+    <style>
+      @font-face {
+        font-family: "Italiana";
+        src: url("../assets/fonts/Italiana-Regular.ttf") format("truetype");
+      }
+      :root {
+        /* Céu da imagem de referência, um pouco menos saturado para chegar perto do azul da marca. */
+        --ceu: linear-gradient(180deg, #0b5aa6 0%, #1570be 25%, #2584cf 50%, #3792d6 75%, #58a7df 100%);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1440px;
+        overflow: hidden;
+        background: #0052b1;
+      }
+      #quadro {
+        position: relative;
+        width: 1080px;
+        height: 1440px;
+        overflow: hidden;
+        background: var(--ceu);
+      }
+      #quadro img {
+        position: absolute;
+        display: block;
+      }
+      /* As camadas vêm de uma imagem de 1024 px de largura; 1,0547 leva a 1080. */
+      #finas {
+        left: 0;
+        top: -70px;
+        width: 1080px;
+      }
+      /* As nuvens do rodapé se abrem no centro para o logo ficar sobre o azul. */
+      #base {
+        left: 0;
+        top: 904px;
+        width: 1080px;
+        -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 26%, transparent 74%, #000 88%, #000 100%);
+        mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 26%, transparent 74%, #000 88%, #000 100%);
+      }
+      #cima {
+        left: 198px;
+        top: 318px;
+        width: 683px;
+      }
+      #baixo {
+        left: 222px;
+        top: 818px;
+        width: 657px;
+      }
+      #frase {
+        position: absolute;
+        left: 0;
+        top: 74px;
+        width: 1080px;
+        text-align: center;
+        font-family: "Italiana", serif;
+        font-size: 108px;
+        line-height: 1.04;
+        letter-spacing: 0.05em;
+        text-indent: 0.05em;
+        text-transform: uppercase;
+        color: #fcfdf5;
+        text-shadow: 0 2px 22px rgba(0, 52, 120, 0.45);
+      }
+      #logo {
+        left: 305px;
+        top: 1222px;
+        width: 470px;
+        filter: drop-shadow(0 2px 14px rgba(0, 52, 120, 0.4));
+      }
+    </style>
+  </head>
+  <body>
+    <div id="quadro">
+      <img id="finas" src="../assets/nuvens/nuvens-finas.png" alt="" />
+      <img id="base" src="../assets/nuvens/nuvens-base.png" alt="" />
+      <img id="cima" src="../assets/nuvens/biquini-cima.png" alt="" />
+      <img id="baixo" src="../assets/nuvens/biquini-baixo.png" alt="" />
+      <div id="frase">Não ignore<br />os sinais</div>
+      <img id="logo" src="../assets/logo-horizontal-branco.svg" alt="Madame Solara, moda praia e resort" />
+    </div>
+  </body>
+</html>
