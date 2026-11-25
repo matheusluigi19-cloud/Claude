@@ -1,0 +1,6 @@
+{"fps": 30, "events": [
+ {"f": 0.6, "kind": "key", "id": "texto:primeira-tecla"},
+ {"f": 63.6, "kind": "drop", "id": "texto:data"},
+ {"f": 185.4, "kind": "hit", "id": "texto:logo"},
+ {"f": 270.3, "kind": "key", "id": "texto:ultima-letra"}
+]}
