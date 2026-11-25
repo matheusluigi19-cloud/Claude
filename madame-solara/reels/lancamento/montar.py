@@ -1,8 +1,8 @@
 """Monta o vídeo de lançamento da Madame Solara.
 
 O visual segue o vídeo modelo enviado pela cliente: um título compacto no centro, com uma
-etiqueta pequena sem serifa, uma palavra grande em letra cursiva e uma linha em serifa
-forte, em maiúsculas, digitada letra a letra.
+etiqueta pequena sem serifa, uma palavra grande em letra cursiva e uma ou duas linhas
+digitadas letra a letra, na mesma fonte da etiqueta.
 
 Gera, a partir dos textos e tempos abaixo:
   - compositions/texto.html  (cada letra digitada é um <span> com o instante em que aparece)
@@ -21,20 +21,25 @@ import numpy as np
 import soundfile as sf
 
 AQUI = Path(__file__).parent
-DURACAO = 16.8          # segundos
+DURACAO = 17.0          # segundos
 SR = 48000
 
 # ----- Textos e tempos (é aqui que se troca a data) -------------------------
-# As trocas de tela caem em tempos da música (105 bpm; o trecho começa em 0,30 s).
+# Cada tela tem uma etiqueta, uma palavra cursiva e linhas digitadas: (texto, início, segundos por letra).
 TELAS = [
-    {"id": "t1", "inicio": 0.0, "fim": 4.87,
-     "etiqueta": "anota aí:", "cursiva": "Sábado", "digitado": "28 de novembro", "t_digitado": 1.0},
-    {"id": "t2", "inicio": 4.87, "fim": 10.58,
-     "etiqueta": "é dia de:", "cursiva": "Lançamento", "digitado": "oficial da marca", "t_digitado": 6.0},
+    {"id": "t1", "inicio": 0.0, "fim": 3.8,
+     "etiqueta": "anota aí:", "cursiva": "Sábado",
+     "digitado": [("28 de novembro", 1.0, 0.09)]},
+    {"id": "t2", "inicio": 3.8, "fim": 9.2,
+     "etiqueta": "é dia de:", "cursiva": "Lançamento",
+     "digitado": [("oficial da marca", 4.8, 0.085), ("na loja da Madame Dress", 6.35, 0.072)]},
+    {"id": "t3", "inicio": 9.2, "fim": 12.3,
+     "etiqueta": "com", "cursiva": "Promoções",
+     "digitado": [("imperdíveis", 10.2, 0.085)]},
 ]
-T_LOGO = 10.58
-RESUMO = {"texto": "sábado · 28.11", "inicio": 11.7, "fim": 12.87}
-ASSINATURA = {"texto": "você é o seu padrão!", "inicio": 13.9, "fim": 15.44}
+T_LOGO = 12.3
+RESUMO = {"texto": "sábado · 28.11", "inicio": 13.2, "fim": 14.2}
+ASSINATURA = {"texto": "você é o seu padrão!", "inicio": 14.7, "fim": 15.9}
 PASSO = 0.09            # segundos por letra, em média
 TROCA = 0.35            # duração da passagem entre telas
 
@@ -64,10 +69,12 @@ eventos = []          # (instante, força em dB, é espaço) para a faixa de tec
 blocos, animacoes = [], []
 for tela in TELAS:
     i = tela["id"]
-    ts = tempos(tela["digitado"], tela["t_digitado"], PASSO)
-    t_fim_digitado = ts[-1]
-    for ch, t in zip(tela["digitado"], ts):
-        eventos.append((t, -13.0, ch == " "))
+    linhas = []
+    for n_linha, (texto, t0, passo) in enumerate(tela["digitado"], start=1):
+        ts = tempos(texto, t0, passo)
+        for ch, t in zip(texto, ts):
+            eventos.append((t, -13.0, ch == " "))
+        linhas.append((f"{i}-digitado{n_linha}", texto, ts))
     eventos.append((tela["inicio"] + 0.02, -12.0, False))                       # a etiqueta entra com uma tecla
     n = len(tela["cursiva"])
     for k in range(n):                                                           # a cursiva: teclas rápidas e baixas
@@ -77,7 +84,7 @@ for tela in TELAS:
       <div class="caixa" id="{i}-caixa">
         <div class="etiqueta" id="{i}-etiqueta">{html.escape(tela["etiqueta"])}</div>
         <div class="cursiva-janela" id="{i}-janela"><span class="cursiva" id="{i}-cursiva">{html.escape(tela["cursiva"])}</span></div>
-        <div class="digitado" id="{i}-digitado" data-layout-allow-overflow>{letras(tela["digitado"], ts)}</div>
+        <div class="digitado" data-layout-allow-overflow>{"".join(f'<div id="{lid}">{letras(texto, ts)}</div>' for lid, texto, ts in linhas)}</div>
       </div>
     </div>""")
     entrada = tela["inicio"]
@@ -86,7 +93,7 @@ for tela in TELAS:
       tl.fromTo("#{i}", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.01 }}, {entrada});
       tl.fromTo("#{i}-etiqueta", {{ opacity: 0, scale: 0.7 }}, {{ opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }}, {entrada});
       tl.fromTo("#{i}-janela", {{ clipPath: "inset(-30% 100% -30% -12%)" }}, {{ clipPath: "inset(-30% -12% -30% -12%)", duration: 0.8, ease: "power2.out" }}, {round(entrada + 0.08, 3)});
-      digitar("{i}-digitado");
+      {" ".join(f'digitar("{lid}");' for lid, _, _ in linhas)}
       tl.fromTo("#{i}-caixa", {{ opacity: 1, filter: "blur(0px)" }}, {{ opacity: 0, filter: "blur(10px)", duration: {TROCA}, ease: "power2.in" }}, {round(tela["fim"] - TROCA, 3)});
       tl.set("#{i}", {{ opacity: 0 }}, {tela["fim"]});""")
 

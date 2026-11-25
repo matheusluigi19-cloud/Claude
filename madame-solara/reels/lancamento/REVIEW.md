@@ -1,6 +1,6 @@
 # Revisão: vídeo de lançamento (Reels)
 
-Arquivo final: `renders/madame-solara-lancamento.mp4` (1080x1920, 30 fps, 16,8 s, H.264 com áudio AAC).
+Arquivo final: `renders/madame-solara-lancamento.mp4` (1080x1920, 30 fps, 17 s, H.264 com áudio AAC).
 
 ## O que foi pedido e o que foi decidido
 
@@ -8,19 +8,20 @@ Arquivo final: `renders/madame-solara-lancamento.mp4` (1080x1920, 30 fps, 16,8 s
 - Primeira versão: feita sem ver o modelo, porque o TikTok está fora da rede liberada. Era só texto digitado em fonte de máquina. Foi substituída.
 - Segunda versão: a cliente enviou o arquivo do vídeo modelo e o vídeo foi refeito como título compacto (etiqueta pequena, palavra cursiva grande e linha digitada). Tinha 10,8 s. O arquivo do modelo não está no repositório.
 - Terceira versão (a atual), a partir dos comentários da cliente sobre a segunda:
-  - Estava curto e rápido demais para ler. Passou de 10,8 s para 18,6 s e depois foi fechado em 16,8 s, porque a cliente pediu no máximo 17 s. Cada tela fica cerca de 5 s e a digitação caiu para uma letra a cada 0,09 s.
+  - Estava curto e rápido demais para ler. Passou de 10,8 s para 18,6 s e depois foi fechado em 17 s, o máximo que a cliente pediu.
   - O texto estava alto no quadro. O conjunto agora fica no meio da tela.
   - As linhas digitadas ("28 de novembro", "oficial da marca", "sábado · 28.11") saíram do itálico fino. Uma tentativa em Playfair Display 800 maiúscula foi recusada; a cliente pediu a mesma fonte de "anota aí" e da assinatura, então elas estão em Montserrat 700, em minúsculas, e a data da primeira tela ficou menor (42 px).
   - A fileira de estrelinhas foi removida.
   - A trilha estava batida demais. Entrou um instrumental de violão com percussão leve ("Ocean of Love").
 - Data: o pedido original dizia "sábado, 29/11". Em 2026 o dia 29/11 cai em um domingo. A cliente confirmou sábado, 28/11.
 - Fundo: o vídeo enviado pela cliente, com as peças embaladas e as etiquetas da marca, desacelerado para cerca de 50% da velocidade, desfocado e escurecido.
-- Três telas:
+- Quatro telas (a cliente pediu para testar as frases "lançamento oficial da marca na loja da Madame Dress" e "com promoções imperdíveis"):
   1. "anota aí:" / "Sábado" / "28 de novembro"
-  2. "é dia de:" / "Lançamento" / "oficial da marca"
-  3. o logo, "sábado · 28.11" digitado e a assinatura "você é o seu padrão!"
+  2. "é dia de:" / "Lançamento" / "oficial da marca" / "na loja da Madame Dress"
+  3. "com" / "Promoções" / "imperdíveis"
+  4. o logo, "sábado · 28.11" digitado e a assinatura "você é o seu padrão!"
 - Fontes: Imperial Script na palavra cursiva, Montserrat 700 nas etiquetas, nas linhas digitadas e na assinatura. As cores são as da marca (creme e dourado claro); o modelo usa rosa.
-- Nenhuma informação além da data foi inventada (sem horário, endereço ou promoção).
+- Data, local e promoções vêm da cliente. Nada além disso foi inventado (sem horário, endereço ou valores).
 - Som: uma tecla por letra digitada, no instante em que ela aparece, mais teclas rápidas e baixas quando a palavra cursiva entra, sobre a trilha.
 
 ## Como a trilha foi escolhida
@@ -36,8 +37,8 @@ Os textos e os tempos ficam no começo de `montar.py`. Ele gera `compositions/te
 ## O que foi medido e o que só foi visto
 
 - `hyperframes check --safe-zone reels`: 0 erros e 0 avisos. Todo o texto e o logo ficam dentro da área livre do Reels.
-- Quadros do arquivo final foram conferidos visualmente nas três telas.
-- Medido no arquivo final: -16,9 LUFS, pico real de -1,1 dBTP.
+- Quadros foram conferidos visualmente nas quatro telas.
+- Medido no arquivo final: -16,8 LUFS, pico real de -1,0 dBTP.
 - Teclado: picos em torno de -13 dBFS sobre uma música com média perto de -19 dBFS, ou seja, dá para notar, mas fica ao fundo.
 - Ninguém ouviu o resultado. A escuta final é de quem publica.
 
