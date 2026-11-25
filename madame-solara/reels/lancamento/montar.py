@@ -10,7 +10,7 @@ Gera, a partir dos textos e tempos abaixo:
 
 Há uma variante por trilha, porque as trocas de tela caem nas batidas de cada música.
 Para trocar a data ou uma frase, edite os textos e rode de novo com o nome da variante:
-  python montar.py every-24th-of-august
+  python montar.py youre-like-caviar
 Ele também aponta o index.html para a trilha da variante.
 Precisa de numpy e soundfile.
 """
@@ -25,20 +25,17 @@ import numpy as np
 import soundfile as sf
 
 AQUI = Path(__file__).parent
-DURACAO = 16.8          # segundos
+DURACAO = 15.6          # segundos
 SR = 48000
 
 # ----- Variantes: os instantes vêm das batidas medidas em cada trecho de música -----
 # corte1 e corte2 são as trocas de tela; os demais são o início de cada linha digitada.
 VARIANTES = {
-    # "Every 24th of August", 112 bpm, trecho a partir de 76,34 s da faixa.
-    "every-24th-of-august": {"corte1": 4.415, "corte2": 10.963, "data": 1.141, "oficial": 5.507,
-                             "resumo": 12.055, "assinatura": 13.703},
-    # "Oh Barcelona", 123 bpm, trecho a partir de 111,06 s da faixa.
-    "oh-barcelona": {"corte1": 5.019, "corte2": 10.963, "data": 1.048, "oficial": 5.994,
-                     "resumo": 11.962, "assinatura": 13.936},
+    # "You're like Caviar", trecho a partir de 100,07 s da faixa; uma batida a cada 0,67 s.
+    "youre-like-caviar": {"corte1": 4.555, "corte2": 9.988, "data": 1.257, "oficial": 5.646,
+                          "resumo": 11.126, "assinatura": 12.751},
 }
-NOME = sys.argv[1] if len(sys.argv) > 1 else "every-24th-of-august"
+NOME = sys.argv[1] if len(sys.argv) > 1 else "youre-like-caviar"
 V = VARIANTES[NOME]
 
 # ----- Textos (é aqui que se troca a data) ----------------------------------
@@ -50,7 +47,7 @@ TELAS = [
      "digitado": [("28 de novembro", V["data"], 0.09)]},
     {"id": "t2", "inicio": V["corte1"], "fim": V["corte2"],
      "etiqueta": "é dia de:", "etiqueta_no_centro": True, "cursiva": "Lançamento",
-     "digitado": [("oficial da marca", V["oficial"], 0.085), ("na loja da Madame Dress", None, 0.072)]},
+     "digitado": [("oficial da marca", V["oficial"], 0.085)]},
 ]
 T_LOGO = V["corte2"]
 RESUMO = {"texto": "sábado · 28.11", "inicio": V["resumo"], "fim": round(V["resumo"] + 1.0, 3)}
@@ -232,8 +229,8 @@ TEXTO_HTML = f"""<template>
       top: 1160px;
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
-      font-size: 36px;
-      line-height: 48px;
+      font-size: 42px;
+      line-height: 56px;
       letter-spacing: 0.04em;
       color: #f3dfa2;
     }}
