@@ -46,12 +46,12 @@
     </style>
   </head>
   <body>
-    <!-- Lançamento da Madame Solara, Reels 1080x1920, 30 fps, 18,6 s.
+    <!-- Lançamento da Madame Solara, Reels 1080x1920, 30 fps, 16,8 s.
          Fundo: vídeo das peças embaladas, enviado pela cliente, já desfocado e escurecido por preparar-fundo.sh.
          Por cima: títulos no estilo do vídeo modelo (etiqueta, palavra cursiva e linha digitada),
          com som de teclado, e o logo no fim.
          O texto e a faixa de teclado são gerados por montar.py. -->
-    <div data-hf-id="hf-oon1" id="root" data-composition-id="main" data-start="0" data-duration="18.6" data-width="1080" data-height="1920">
+    <div data-hf-id="hf-oon1" id="root" data-composition-id="main" data-start="0" data-duration="16.8" data-width="1080" data-height="1920">
       <div data-hf-id="hf-lpl4" id="fundo-caixa">
         <video
           id="fundo"
@@ -60,12 +60,12 @@
           muted
           playsinline
           data-start="0"
-          data-duration="18.6"
+          data-duration="16.8"
           data-track-index="0"
         ></video>
       </div>
 
-      <div data-hf-id="hf-f63y" id="texto" data-composition-id="texto" data-composition-src="compositions/texto.html" data-start="0" data-duration="18.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div data-hf-id="hf-f63y" id="texto" data-composition-id="texto" data-composition-src="compositions/texto.html" data-start="0" data-duration="16.8" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
 
       <!-- Trilha: "Ocean of Love", de Michael Ramir C. (Mixkit): violão com percussão leve.
            O trecho começa 3,66 s dentro da faixa. Ver assets/CREDITOS.md. -->
@@ -75,7 +75,7 @@
         data-timeline-role="music"
         src="assets/audio/ocean-of-love.mp3"
         data-start="0"
-        data-duration="18.6"
+        data-duration="16.8"
         data-track-index="3"
         data-volume="0.9"
         data-fade-in="0.5"
@@ -87,7 +87,7 @@
         class="clip"
         src="assets/sfx/digitacao.wav"
         data-start="0"
-        data-duration="18.6"
+        data-duration="16.8"
         data-track-index="4"
         data-volume="0.9"
       ></audio>
@@ -96,7 +96,7 @@
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
       // O fundo só aproxima devagar, do início ao fim.
-      tl.fromTo("#fundo-caixa", { scale: 1.02 }, { scale: 1.12, duration: 18.6, ease: "none" }, 0);
+      tl.fromTo("#fundo-caixa", { scale: 1.02 }, { scale: 1.12, duration: 16.8, ease: "none" }, 0);
       window.__timelines["main"] = tl;
     </script>
   </body>

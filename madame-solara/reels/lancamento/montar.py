@@ -21,7 +21,7 @@ import numpy as np
 import soundfile as sf
 
 AQUI = Path(__file__).parent
-DURACAO = 18.6          # segundos
+DURACAO = 16.8          # segundos
 SR = 48000
 
 # ----- Textos e tempos (é aqui que se troca a data) -------------------------

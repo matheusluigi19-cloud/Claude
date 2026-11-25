@@ -1,6 +1,6 @@
 # Revisão: vídeo de lançamento (Reels)
 
-Arquivo final: `renders/madame-solara-lancamento.mp4` (1080x1920, 30 fps, 18,6 s, H.264 com áudio AAC).
+Arquivo final: `renders/madame-solara-lancamento.mp4` (1080x1920, 30 fps, 16,8 s, H.264 com áudio AAC).
 
 ## O que foi pedido e o que foi decidido
 
@@ -8,13 +8,13 @@ Arquivo final: `renders/madame-solara-lancamento.mp4` (1080x1920, 30 fps, 18,6 s
 - Primeira versão: feita sem ver o modelo, porque o TikTok está fora da rede liberada. Era só texto digitado em fonte de máquina. Foi substituída.
 - Segunda versão: a cliente enviou o arquivo do vídeo modelo e o vídeo foi refeito como título compacto (etiqueta pequena, palavra cursiva grande e linha digitada). Tinha 10,8 s. O arquivo do modelo não está no repositório.
 - Terceira versão (a atual), a partir dos comentários da cliente sobre a segunda:
-  - Estava curto e rápido demais para ler. Passou de 10,8 s para 18,6 s. Cada tela fica cerca de 5 s e a digitação caiu para uma letra a cada 0,09 s.
+  - Estava curto e rápido demais para ler. Passou de 10,8 s para 18,6 s e depois foi fechado em 16,8 s, porque a cliente pediu no máximo 17 s. Cada tela fica cerca de 5 s e a digitação caiu para uma letra a cada 0,09 s.
   - O texto estava alto no quadro. O conjunto agora fica no meio da tela.
   - As linhas digitadas ("28 de novembro", "oficial da marca", "sábado · 28.11") saíram do itálico fino. Uma tentativa em Playfair Display 800 maiúscula foi recusada; a cliente pediu a mesma fonte de "anota aí" e da assinatura, então elas estão em Montserrat 700, em minúsculas, e a data da primeira tela ficou menor (42 px).
   - A fileira de estrelinhas foi removida.
   - A trilha estava batida demais. Entrou um instrumental de violão com percussão leve ("Ocean of Love").
 - Data: o pedido original dizia "sábado, 29/11". Em 2026 o dia 29/11 cai em um domingo. A cliente confirmou sábado, 28/11.
-- Fundo: o vídeo enviado pela cliente, com as peças embaladas e as etiquetas da marca, desacelerado para cerca de 46% da velocidade, desfocado e escurecido.
+- Fundo: o vídeo enviado pela cliente, com as peças embaladas e as etiquetas da marca, desacelerado para cerca de 50% da velocidade, desfocado e escurecido.
 - Três telas:
   1. "anota aí:" / "Sábado" / "28 de novembro"
   2. "é dia de:" / "Lançamento" / "oficial da marca"
@@ -26,6 +26,8 @@ Arquivo final: `renders/madame-solara-lancamento.mp4` (1080x1920, 30 fps, 18,6 s
 ## Como a trilha foi escolhida
 
 Candidatas instrumentais do Mixkit foram baixadas e ordenadas pelo Earshot, que compara o áudio com descrições em texto. "Ocean of Love" ficou na frente para bossa nova, violão, samba e dedilhado, e não bateu com a descrição de batida pesada. É uma faixa de banco de música com cara de bossa e praia, e não uma gravação de MPB de artista conhecido.
+
+A cliente não gostou dessa trilha. Quatro opções mais animadas foram enviadas para ela escolher ("Every 24th of August", "Spanish Heart", "Cherry on Top" e "Wherever You Are", todas de Michael Ramir C., no Mixkit). Até a escolha, o arquivo final continua com "Ocean of Love".
 
 ## Como editar
 
