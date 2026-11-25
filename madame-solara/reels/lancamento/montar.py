@@ -49,7 +49,7 @@ TELAS = [
      "etiqueta": "anota aí:", "cursiva": "Sábado",
      "digitado": [("28 de novembro", V["data"], 0.09)]},
     {"id": "t2", "inicio": V["corte1"], "fim": V["corte2"],
-     "etiqueta": "é dia de:", "cursiva": "Lançamento",
+     "etiqueta": "é dia de:", "etiqueta_no_centro": True, "cursiva": "Lançamento",
      "digitado": [("oficial da marca", V["oficial"], 0.085), ("na loja da Madame Dress", None, 0.072)]},
 ]
 T_LOGO = V["corte2"]
@@ -99,7 +99,7 @@ for tela in TELAS:
     blocos.append(f"""
     <div class="titulo" id="{i}">
       <div class="caixa" id="{i}-caixa">
-        <div class="etiqueta" id="{i}-etiqueta">{html.escape(tela["etiqueta"])}</div>
+        <div class="etiqueta{" no-centro" if tela.get("etiqueta_no_centro") else ""}" id="{i}-etiqueta">{html.escape(tela["etiqueta"])}</div>
         <div class="cursiva-janela" id="{i}-janela"><span class="cursiva" id="{i}-cursiva">{html.escape(tela["cursiva"])}</span></div>
         <div class="digitado" data-layout-allow-overflow>{"".join(f'<div id="{lid}">{letras(texto, ts)}</div>' for lid, texto, ts in linhas)}</div>
       </div>
@@ -179,6 +179,11 @@ TEXTO_HTML = f"""<template>
       white-space: nowrap;
       color: #f3dfa2;
       text-shadow: 0 2px 12px rgba(10, 20, 30, 0.55);
+    }}
+    .etiqueta.no-centro {{
+      left: 0;
+      right: 0;
+      text-align: center;
     }}
     /* Linhas digitadas: a mesma Montserrat da etiqueta e da assinatura. */
     .digitado,
