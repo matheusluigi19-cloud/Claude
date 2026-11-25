@@ -22,4 +22,4 @@ Gerados com o Earshot 1.0.0 (https://github.com/Leonxlnx/earshot, licença MIT),
 
 ## Fontes
 
-Imperial Script, Montserrat (700) e Playfair Display (800), todas sob a SIL Open Font License 1.1, baixadas do pacote Fontsource.
+Imperial Script e Montserrat (700), as duas sob a SIL Open Font License 1.1, baixadas do pacote Fontsource.

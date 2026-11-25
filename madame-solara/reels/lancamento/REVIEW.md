@@ -10,7 +10,7 @@ Arquivo final: `renders/madame-solara-lancamento.mp4` (1080x1920, 30 fps, 18,6 s
 - Terceira versão (a atual), a partir dos comentários da cliente sobre a segunda:
   - Estava curto e rápido demais para ler. Passou de 10,8 s para 18,6 s. Cada tela fica cerca de 5 s e a digitação caiu para uma letra a cada 0,09 s.
   - O texto estava alto no quadro. O conjunto agora fica no meio da tela.
-  - As linhas digitadas ("28 de novembro", "oficial da marca", "sábado · 28.11") saíram do itálico fino e foram para Playfair Display 800 em maiúsculas, maior, seguindo as serifas fortes das imagens de referência que ela mandou.
+  - As linhas digitadas ("28 de novembro", "oficial da marca", "sábado · 28.11") saíram do itálico fino. Uma tentativa em Playfair Display 800 maiúscula foi recusada; a cliente pediu a mesma fonte de "anota aí" e da assinatura, então elas estão em Montserrat 700, em minúsculas, e a data da primeira tela ficou menor (42 px).
   - A fileira de estrelinhas foi removida.
   - A trilha estava batida demais. Entrou um instrumental de violão com percussão leve ("Ocean of Love").
 - Data: o pedido original dizia "sábado, 29/11". Em 2026 o dia 29/11 cai em um domingo. A cliente confirmou sábado, 28/11.
@@ -19,7 +19,7 @@ Arquivo final: `renders/madame-solara-lancamento.mp4` (1080x1920, 30 fps, 18,6 s
   1. "anota aí:" / "Sábado" / "28 de novembro"
   2. "é dia de:" / "Lançamento" / "oficial da marca"
   3. o logo, "sábado · 28.11" digitado e a assinatura "você é o seu padrão!"
-- Fontes: Imperial Script na palavra cursiva, Montserrat nas etiquetas e na assinatura, Playfair Display 800 nas linhas digitadas. As cores são as da marca (creme e dourado claro); o modelo usa rosa.
+- Fontes: Imperial Script na palavra cursiva, Montserrat 700 nas etiquetas, nas linhas digitadas e na assinatura. As cores são as da marca (creme e dourado claro); o modelo usa rosa.
 - Nenhuma informação além da data foi inventada (sem horário, endereço ou promoção).
 - Som: uma tecla por letra digitada, no instante em que ela aparece, mais teclas rápidas e baixas quando a palavra cursiva entra, sobre a trilha.
 
