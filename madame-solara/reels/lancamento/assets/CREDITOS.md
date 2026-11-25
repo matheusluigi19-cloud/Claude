@@ -6,9 +6,9 @@
 
 ## Trilha
 
-"Majestic", de Diego Nava, baixada do Mixkit (https://assets.mixkit.co/music/475/475.mp3) e usada sob a Mixkit Stock Music Free License, que permite uso gratuito em projetos comerciais, em posts de vídeo em redes sociais e em anúncios online. Não permite CD, DVD, jogos, TV ou rádio, nem remixar a faixa ou registrá-la como própria. Texto da licença: https://mixkit.co/license/#musicFree
+"Ocean of Love", de Michael Ramir C., baixada do Mixkit (https://assets.mixkit.co/music/1113/1113.mp3) e usada sob a Mixkit Stock Music Free License, que permite uso gratuito em projetos comerciais, em posts de vídeo em redes sociais e em anúncios online. Não permite CD, DVD, jogos, TV ou rádio, nem remixar a faixa ou registrá-la como própria. Texto da licença: https://mixkit.co/license/#musicFree
 
-`audio/majestic.mp3` é o trecho de 9,19 s a 20,59 s do original, só cortado.
+`audio/ocean-of-love.mp3` é um trecho do original a partir de 3,66 s, só cortado.
 
 ## Efeitos sonoros
 
@@ -19,8 +19,7 @@ Gerados com o Earshot 1.0.0 (https://github.com/Leonxlnx/earshot, licença MIT),
 | `sfx/teclas/tecla_1.wav` a `tecla_8.wav` | `keyboard/mechanical`, uma tecla por arquivo | matéria-prima da digitação |
 | `sfx/teclas/espaco_1.wav` e `espaco_3.wav` | `keyboard/space` | barra de espaço |
 | `sfx/digitacao.wav` | montado por `montar.py` a partir das teclas acima | uma tecla por letra do vídeo |
-| `sfx/marca.wav` | `logo/bag` | batida grave na entrada do logo |
 
 ## Fontes
 
-Imperial Script, Montserrat e Playfair Display, todas sob a SIL Open Font License 1.1, baixadas do pacote Fontsource.
+Imperial Script, Montserrat (700) e Playfair Display (800), todas sob a SIL Open Font License 1.1, baixadas do pacote Fontsource.

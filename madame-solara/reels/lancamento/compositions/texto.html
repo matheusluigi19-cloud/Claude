@@ -14,20 +14,21 @@
     }
     @font-face {
       font-family: "Playfair Display";
-      src: url("assets/fonts/playfair-display-latin-500-italic.woff2") format("woff2");
-      font-weight: 500;
-      font-style: italic;
+      src: url("assets/fonts/playfair-display-latin-800-normal.woff2") format("woff2");
+      font-weight: 800;
+      font-style: normal;
     }
     #root {
       position: absolute;
       inset: 0;
       overflow: hidden;
     }
-    /* Título no estilo do modelo: etiqueta pequena, palavra cursiva grande, linha digitada e brilhos. */
+    /* Título no estilo do modelo: etiqueta pequena, palavra cursiva grande e linha digitada.
+       O conjunto fica no meio do quadro. */
     .titulo {
       position: absolute;
       left: 0;
-      top: 540px;
+      top: 800px;
       width: 1080px;
       display: flex;
       justify-content: center;
@@ -63,28 +64,26 @@
       color: #f3dfa2;
       text-shadow: 0 2px 12px rgba(10, 20, 30, 0.55);
     }
+    /* Linhas digitadas: serifa forte em maiúsculas, para ler bem em tela pequena. */
     .digitado,
     .linha {
       font-family: "Playfair Display", serif;
-      font-weight: 500;
-      font-style: italic;
+      font-weight: 800;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       white-space: nowrap;
       color: #fcfdf5;
-      text-shadow: 0 2px 14px rgba(10, 20, 30, 0.55);
+      text-shadow: 0 2px 14px rgba(10, 20, 30, 0.6);
     }
     .digitado {
       position: absolute;
-      right: 14px;
-      top: 232px;
-      font-size: 52px;
-      line-height: 64px;
-    }
-    .brilhos {
-      position: absolute;
-      left: calc(50% - 108px);
-      top: 316px;
-      overflow: visible;
-      fill: #fcfdf5;
+      left: -300px;
+      right: -300px;
+      top: 250px;
+      text-align: center;
+      font-size: 58px;
+      line-height: 72px;
     }
     /* Cada letra digitada ocupa seu lugar desde o início e só aparece quando a tecla bate. */
     .k {
@@ -93,10 +92,10 @@
     }
     #t-logo {
       position: absolute;
-      left: 310px;
-      top: 420px;
-      width: 460px;
-      height: 414px;
+      left: 330px;
+      top: 660px;
+      width: 420px;
+      height: 378px;
     }
     .linha {
       position: absolute;
@@ -105,48 +104,41 @@
       text-align: center;
     }
     #t-resumo {
-      top: 872px;
+      top: 1070px;
       font-size: 60px;
-      line-height: 76px;
-    }
-    #t-fim-brilhos {
-      left: 432px;
-      top: 968px;
+      line-height: 78px;
     }
     #t-assinatura {
-      top: 1024px;
+      top: 1176px;
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
-      font-style: normal;
-      font-size: 34px;
-      line-height: 46px;
+      text-transform: none;
+      font-size: 40px;
+      line-height: 54px;
       letter-spacing: 0.04em;
       color: #f3dfa2;
     }
   </style>
   <div id="root" data-composition-id="texto" data-width="1080" data-height="1920">
     <div class="titulo" id="t1">
-      <div class="caixa">
+      <div class="caixa" id="t1-caixa">
         <div class="etiqueta" id="t1-etiqueta">anota aí:</div>
         <div class="cursiva-janela" id="t1-janela"><span class="cursiva" id="t1-cursiva">Sábado</span></div>
-        <div class="digitado" id="t1-digitado"><span class="k" data-t="0.62">2</span><span class="k" data-t="0.672">8</span><span class="k" data-t="0.73">&nbsp;</span><span class="k" data-t="0.842">d</span><span class="k" data-t="0.894">e</span><span class="k" data-t="0.975">&nbsp;</span><span class="k" data-t="1.075">n</span><span class="k" data-t="1.129">o</span><span class="k" data-t="1.197">v</span><span class="k" data-t="1.262">e</span><span class="k" data-t="1.319">m</span><span class="k" data-t="1.397">b</span><span class="k" data-t="1.454">r</span><span class="k" data-t="1.511">o</span></div>
-        <svg class="brilhos" id="t1-brilhos" viewBox="0 0 216 28" width="216" height="28"><circle class="b" cx="8" cy="14" r="2.6" /><g class="b"><circle cx="28" cy="8" r="2.2" /><circle cx="28" cy="20" r="2.2" /></g><circle class="b" cx="48" cy="14" r="2.6" /><path class="b" transform="translate(74 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="102" cy="14" r="2.6" /><g class="b"><circle cx="122" cy="8" r="2.2" /><circle cx="122" cy="20" r="2.2" /></g><circle class="b" cx="142" cy="14" r="2.6" /><path class="b" transform="translate(168 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="196" cy="14" r="2.6" /></svg>
+        <div class="digitado" id="t1-digitado" data-layout-allow-overflow><span class="k" data-t="1.0">2</span><span class="k" data-t="1.071">8</span><span class="k" data-t="1.151">&nbsp;</span><span class="k" data-t="1.302">d</span><span class="k" data-t="1.374">e</span><span class="k" data-t="1.484">&nbsp;</span><span class="k" data-t="1.62">n</span><span class="k" data-t="1.694">o</span><span class="k" data-t="1.787">v</span><span class="k" data-t="1.875">e</span><span class="k" data-t="1.953">m</span><span class="k" data-t="2.059">b</span><span class="k" data-t="2.137">r</span><span class="k" data-t="2.215">o</span></div>
       </div>
     </div>
     <div class="titulo" id="t2">
-      <div class="caixa">
+      <div class="caixa" id="t2-caixa">
         <div class="etiqueta" id="t2-etiqueta">é dia de:</div>
         <div class="cursiva-janela" id="t2-janela"><span class="cursiva" id="t2-cursiva">Lançamento</span></div>
-        <div class="digitado" id="t2-digitado"><span class="k" data-t="2.95">o</span><span class="k" data-t="3.007">f</span><span class="k" data-t="3.059">i</span><span class="k" data-t="3.111">c</span><span class="k" data-t="3.183">i</span><span class="k" data-t="3.256">a</span><span class="k" data-t="3.322">l</span><span class="k" data-t="3.393">&nbsp;</span><span class="k" data-t="3.475">d</span><span class="k" data-t="3.552">a</span><span class="k" data-t="3.631">&nbsp;</span><span class="k" data-t="3.721">m</span><span class="k" data-t="3.793">a</span><span class="k" data-t="3.853">r</span><span class="k" data-t="3.925">c</span><span class="k" data-t="4.002">a</span></div>
-        <svg class="brilhos" id="t2-brilhos" viewBox="0 0 216 28" width="216" height="28"><circle class="b" cx="8" cy="14" r="2.6" /><g class="b"><circle cx="28" cy="8" r="2.2" /><circle cx="28" cy="20" r="2.2" /></g><circle class="b" cx="48" cy="14" r="2.6" /><path class="b" transform="translate(74 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="102" cy="14" r="2.6" /><g class="b"><circle cx="122" cy="8" r="2.2" /><circle cx="122" cy="20" r="2.2" /></g><circle class="b" cx="142" cy="14" r="2.6" /><path class="b" transform="translate(168 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="196" cy="14" r="2.6" /></svg>
+        <div class="digitado" id="t2-digitado" data-layout-allow-overflow><span class="k" data-t="6.0">o</span><span class="k" data-t="6.078">f</span><span class="k" data-t="6.149">i</span><span class="k" data-t="6.22">c</span><span class="k" data-t="6.318">i</span><span class="k" data-t="6.418">a</span><span class="k" data-t="6.507">l</span><span class="k" data-t="6.604">&nbsp;</span><span class="k" data-t="6.716">d</span><span class="k" data-t="6.821">a</span><span class="k" data-t="6.929">&nbsp;</span><span class="k" data-t="7.051">m</span><span class="k" data-t="7.15">a</span><span class="k" data-t="7.231">r</span><span class="k" data-t="7.329">c</span><span class="k" data-t="7.435">a</span></div>
       </div>
     </div>
 
     <!-- Tela final: o logo, a data digitada e a assinatura da marca. -->
     <img id="t-logo" src="assets/logo-vertical-ceu.svg" alt="Madame Solara, moda praia e resort" />
-    <div class="linha" id="t-resumo"><span class="k" data-t="5.42">s</span><span class="k" data-t="5.469">á</span><span class="k" data-t="5.521">b</span><span class="k" data-t="5.577">a</span><span class="k" data-t="5.62">d</span><span class="k" data-t="5.665">o</span><span class="k" data-t="5.708">&nbsp;</span><span class="k" data-t="5.802">·</span><span class="k" data-t="5.864">&nbsp;</span><span class="k" data-t="5.929">2</span><span class="k" data-t="5.984">8</span><span class="k" data-t="6.048">.</span><span class="k" data-t="6.102">1</span><span class="k" data-t="6.16">1</span></div>
-    <svg class="brilhos" id="t-fim-brilhos" viewBox="0 0 216 28" width="216" height="28"><circle class="b" cx="8" cy="14" r="2.6" /><g class="b"><circle cx="28" cy="8" r="2.2" /><circle cx="28" cy="20" r="2.2" /></g><circle class="b" cx="48" cy="14" r="2.6" /><path class="b" transform="translate(74 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="102" cy="14" r="2.6" /><g class="b"><circle cx="122" cy="8" r="2.2" /><circle cx="122" cy="20" r="2.2" /></g><circle class="b" cx="142" cy="14" r="2.6" /><path class="b" transform="translate(168 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="196" cy="14" r="2.6" /></svg>
-    <div class="linha" id="t-assinatura"><span class="k" data-t="7.75">v</span><span class="k" data-t="7.818">o</span><span class="k" data-t="7.887">c</span><span class="k" data-t="7.942">ê</span><span class="k" data-t="7.987">&nbsp;</span><span class="k" data-t="8.081">é</span><span class="k" data-t="8.144">&nbsp;</span><span class="k" data-t="8.214">o</span><span class="k" data-t="8.273">&nbsp;</span><span class="k" data-t="8.373">s</span><span class="k" data-t="8.425">e</span><span class="k" data-t="8.483">u</span><span class="k" data-t="8.551">&nbsp;</span><span class="k" data-t="8.654">p</span><span class="k" data-t="8.715">a</span><span class="k" data-t="8.777">d</span><span class="k" data-t="8.84">r</span><span class="k" data-t="8.884">ã</span><span class="k" data-t="8.937">o</span><span class="k" data-t="8.99">!</span></div>
+    <div class="linha" id="t-resumo"><span class="k" data-t="11.7">s</span><span class="k" data-t="11.778">á</span><span class="k" data-t="11.86">b</span><span class="k" data-t="11.948">a</span><span class="k" data-t="12.016">d</span><span class="k" data-t="12.087">o</span><span class="k" data-t="12.155">&nbsp;</span><span class="k" data-t="12.305">·</span><span class="k" data-t="12.402">&nbsp;</span><span class="k" data-t="12.505">2</span><span class="k" data-t="12.592">8</span><span class="k" data-t="12.694">.</span><span class="k" data-t="12.778">1</span><span class="k" data-t="12.87">1</span></div>
+    <div class="linha" id="t-assinatura"><span class="k" data-t="13.9">v</span><span class="k" data-t="13.985">o</span><span class="k" data-t="14.07">c</span><span class="k" data-t="14.138">ê</span><span class="k" data-t="14.194">&nbsp;</span><span class="k" data-t="14.311">é</span><span class="k" data-t="14.389">&nbsp;</span><span class="k" data-t="14.476">o</span><span class="k" data-t="14.55">&nbsp;</span><span class="k" data-t="14.674">s</span><span class="k" data-t="14.739">e</span><span class="k" data-t="14.81">u</span><span class="k" data-t="14.895">&nbsp;</span><span class="k" data-t="15.022">p</span><span class="k" data-t="15.098">a</span><span class="k" data-t="15.176">d</span><span class="k" data-t="15.254">r</span><span class="k" data-t="15.308">ã</span><span class="k" data-t="15.375">o</span><span class="k" data-t="15.44">!</span></div>
   </div>
   <script>
     (function () {
@@ -165,30 +157,29 @@
         });
       }
 
-      // Tela "Sábado": entra em 0.0 s e sai no corte de 2.1 s.
-      tl.set("#t1", { opacity: 1 }, 0.0);
-      tl.fromTo("#t1-etiqueta", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2)" }, 0.0);
-      tl.fromTo("#t1-janela", { clipPath: "inset(-30% 100% -30% -12%)" }, { clipPath: "inset(-30% -12% -30% -12%)", duration: 0.55, ease: "power2.out" }, 0.04);
+      // Tela "Sábado": entra em 0.0 s e sai numa passagem suave até 4.87 s.
+      tl.fromTo("#t1", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 0.0);
+      tl.fromTo("#t1-etiqueta", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 0.0);
+      tl.fromTo("#t1-janela", { clipPath: "inset(-30% 100% -30% -12%)" }, { clipPath: "inset(-30% -12% -30% -12%)", duration: 0.8, ease: "power2.out" }, 0.08);
       digitar("t1-digitado");
-      tl.fromTo("#t1-brilhos .b", { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)", stagger: 0.035 }, 1.611);
-      tl.set("#t1", { opacity: 0 }, 2.1);
-      // Tela "Lançamento": entra em 2.1 s e sai no corte de 4.93 s.
-      tl.set("#t2", { opacity: 1 }, 2.1);
-      tl.fromTo("#t2-etiqueta", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2)" }, 2.1);
-      tl.fromTo("#t2-janela", { clipPath: "inset(-30% 100% -30% -12%)" }, { clipPath: "inset(-30% -12% -30% -12%)", duration: 0.55, ease: "power2.out" }, 2.14);
+      tl.fromTo("#t1-caixa", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(10px)", duration: 0.35, ease: "power2.in" }, 4.52);
+      tl.set("#t1", { opacity: 0 }, 4.87);
+      // Tela "Lançamento": entra em 4.87 s e sai numa passagem suave até 10.58 s.
+      tl.fromTo("#t2", { opacity: 0 }, { opacity: 1, duration: 0.01 }, 4.87);
+      tl.fromTo("#t2-etiqueta", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 4.87);
+      tl.fromTo("#t2-janela", { clipPath: "inset(-30% 100% -30% -12%)" }, { clipPath: "inset(-30% -12% -30% -12%)", duration: 0.8, ease: "power2.out" }, 4.95);
       digitar("t2-digitado");
-      tl.fromTo("#t2-brilhos .b", { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)", stagger: 0.035 }, 4.102);
-      tl.set("#t2", { opacity: 0 }, 4.93);
+      tl.fromTo("#t2-caixa", { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(10px)", duration: 0.35, ease: "power2.in" }, 10.23);
+      tl.set("#t2", { opacity: 0 }, 10.58);
 
-      // Tela final: o logo entra na batida, depois a data e a assinatura são digitadas.
+      // Tela final: o logo entra, depois a data e a assinatura são digitadas.
       tl.fromTo(
         "#t-logo",
-        { opacity: 0, scale: 1.16, filter: "blur(16px)" },
-        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "expo.out" },
-        4.93,
+        { opacity: 0, scale: 1.1, filter: "blur(14px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.9, ease: "expo.out" },
+        10.58,
       );
       digitar("t-resumo");
-      tl.fromTo("#t-fim-brilhos .b", { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)", stagger: 0.035 }, 6.28);
       digitar("t-assinatura");
 
       window.__timelines["texto"] = tl;

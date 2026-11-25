@@ -1,8 +1,8 @@
 """Monta o vídeo de lançamento da Madame Solara.
 
 O visual segue o vídeo modelo enviado pela cliente: um título compacto no centro, com uma
-etiqueta pequena sem serifa, uma palavra grande em letra cursiva, uma linha em itálico
-digitada letra a letra e uma fileira de brilhos.
+etiqueta pequena sem serifa, uma palavra grande em letra cursiva e uma linha em serifa
+forte, em maiúsculas, digitada letra a letra.
 
 Gera, a partir dos textos e tempos abaixo:
   - compositions/texto.html  (cada letra digitada é um <span> com o instante em que aparece)
@@ -21,20 +21,22 @@ import numpy as np
 import soundfile as sf
 
 AQUI = Path(__file__).parent
-DURACAO = 10.8          # segundos
+DURACAO = 18.6          # segundos
 SR = 48000
 
 # ----- Textos e tempos (é aqui que se troca a data) -------------------------
-# A música tem batidas fortes em 2,10 / 4,93 / 6,16 / 7,75 / 8,99 s: as telas trocam nelas.
+# As trocas de tela caem em tempos da música (105 bpm; o trecho começa em 0,30 s).
 TELAS = [
-    {"id": "t1", "inicio": 0.0, "fim": 2.10,
-     "etiqueta": "anota aí:", "cursiva": "Sábado", "digitado": "28 de novembro", "t_digitado": 0.62},
-    {"id": "t2", "inicio": 2.10, "fim": 4.93,
-     "etiqueta": "é dia de:", "cursiva": "Lançamento", "digitado": "oficial da marca", "t_digitado": 2.95},
+    {"id": "t1", "inicio": 0.0, "fim": 4.87,
+     "etiqueta": "anota aí:", "cursiva": "Sábado", "digitado": "28 de novembro", "t_digitado": 1.0},
+    {"id": "t2", "inicio": 4.87, "fim": 10.58,
+     "etiqueta": "é dia de:", "cursiva": "Lançamento", "digitado": "oficial da marca", "t_digitado": 6.0},
 ]
-T_LOGO = 4.93
-RESUMO = {"texto": "sábado · 28.11", "inicio": 5.42, "fim": 6.16}          # a última letra cai na batida
-ASSINATURA = {"texto": "você é o seu padrão!", "inicio": 7.75, "fim": 8.99}
+T_LOGO = 10.58
+RESUMO = {"texto": "sábado · 28.11", "inicio": 11.7, "fim": 12.87}
+ASSINATURA = {"texto": "você é o seu padrão!", "inicio": 13.9, "fim": 15.44}
+PASSO = 0.09            # segundos por letra, em média
+TROCA = 0.35            # duração da passagem entre telas
 
 rng = random.Random(28_11)
 
@@ -58,62 +60,41 @@ def letras(texto, ts):
     )
 
 
-ESTRELA = "M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z"
-
-
-def brilhos(ident):
-    """A fileira de pontos e estrelas que fecha o título, como no modelo."""
-    partes, x = [], 8
-    for tipo in [".", ":", ".", "*", ".", ":", ".", "*", "."]:
-        if tipo == ".":
-            partes.append(f'<circle class="b" cx="{x}" cy="14" r="2.6" />')
-            x += 20
-        elif tipo == ":":
-            partes.append(f'<g class="b"><circle cx="{x}" cy="8" r="2.2" /><circle cx="{x}" cy="20" r="2.2" /></g>')
-            x += 20
-        else:
-            partes.append(f'<path class="b" transform="translate({x + 6} 14)" d="{ESTRELA}" />')
-            x += 34
-    return f'<svg class="brilhos" id="{ident}" viewBox="0 0 {x} 28" width="{x}" height="28">{"".join(partes)}</svg>', x
-
-
 eventos = []          # (instante, força em dB, é espaço) para a faixa de teclado
 blocos, animacoes = [], []
 for tela in TELAS:
     i = tela["id"]
-    ts = tempos(tela["digitado"], tela["t_digitado"], 0.066)
+    ts = tempos(tela["digitado"], tela["t_digitado"], PASSO)
     t_fim_digitado = ts[-1]
     for ch, t in zip(tela["digitado"], ts):
         eventos.append((t, -13.0, ch == " "))
     eventos.append((tela["inicio"] + 0.02, -12.0, False))                       # a etiqueta entra com uma tecla
     n = len(tela["cursiva"])
     for k in range(n):                                                           # a cursiva: teclas rápidas e baixas
-        eventos.append((tela["inicio"] + 0.06 + k * 0.5 / n, -18.0, False))
-    svg, _ = brilhos(i + "-brilhos")
+        eventos.append((tela["inicio"] + 0.1 + k * 0.6 / n, -18.0, False))
     blocos.append(f"""
     <div class="titulo" id="{i}">
-      <div class="caixa">
+      <div class="caixa" id="{i}-caixa">
         <div class="etiqueta" id="{i}-etiqueta">{html.escape(tela["etiqueta"])}</div>
         <div class="cursiva-janela" id="{i}-janela"><span class="cursiva" id="{i}-cursiva">{html.escape(tela["cursiva"])}</span></div>
-        <div class="digitado" id="{i}-digitado">{letras(tela["digitado"], ts)}</div>
-        {svg}
+        <div class="digitado" id="{i}-digitado" data-layout-allow-overflow>{letras(tela["digitado"], ts)}</div>
       </div>
     </div>""")
+    entrada = tela["inicio"]
     animacoes.append(f"""
-      // Tela "{tela["cursiva"]}": entra em {tela["inicio"]} s e sai no corte de {tela["fim"]} s.
-      tl.set("#{i}", {{ opacity: 1 }}, {tela["inicio"]});
-      tl.fromTo("#{i}-etiqueta", {{ opacity: 0, scale: 0.7 }}, {{ opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2)" }}, {tela["inicio"]});
-      tl.fromTo("#{i}-janela", {{ clipPath: "inset(-30% 100% -30% -12%)" }}, {{ clipPath: "inset(-30% -12% -30% -12%)", duration: 0.55, ease: "power2.out" }}, {round(tela["inicio"] + 0.04, 3)});
+      // Tela "{tela["cursiva"]}": entra em {entrada} s e sai numa passagem suave até {tela["fim"]} s.
+      tl.fromTo("#{i}", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.01 }}, {entrada});
+      tl.fromTo("#{i}-etiqueta", {{ opacity: 0, scale: 0.7 }}, {{ opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }}, {entrada});
+      tl.fromTo("#{i}-janela", {{ clipPath: "inset(-30% 100% -30% -12%)" }}, {{ clipPath: "inset(-30% -12% -30% -12%)", duration: 0.8, ease: "power2.out" }}, {round(entrada + 0.08, 3)});
       digitar("{i}-digitado");
-      tl.fromTo("#{i}-brilhos .b", {{ opacity: 0, scale: 0, transformOrigin: "50% 50%" }}, {{ opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)", stagger: 0.035 }}, {round(t_fim_digitado + 0.1, 3)});
+      tl.fromTo("#{i}-caixa", {{ opacity: 1, filter: "blur(0px)" }}, {{ opacity: 0, filter: "blur(10px)", duration: {TROCA}, ease: "power2.in" }}, {round(tela["fim"] - TROCA, 3)});
       tl.set("#{i}", {{ opacity: 0 }}, {tela["fim"]});""")
 
-ts_resumo = tempos(RESUMO["texto"], RESUMO["inicio"], 0.06, fim=RESUMO["fim"])
-ts_assin = tempos(ASSINATURA["texto"], ASSINATURA["inicio"], 0.06, fim=ASSINATURA["fim"])
+ts_resumo = tempos(RESUMO["texto"], RESUMO["inicio"], PASSO, fim=RESUMO["fim"])
+ts_assin = tempos(ASSINATURA["texto"], ASSINATURA["inicio"], PASSO, fim=ASSINATURA["fim"])
 for texto, ts in ((RESUMO["texto"], ts_resumo), (ASSINATURA["texto"], ts_assin)):
     for ch, t in zip(texto, ts):
         eventos.append((t, -13.0, ch == " "))
-svg_fim, largura_fim = brilhos("t-fim-brilhos")
 
 TEXTO_HTML = f"""<template>
   <style>
@@ -131,20 +112,21 @@ TEXTO_HTML = f"""<template>
     }}
     @font-face {{
       font-family: "Playfair Display";
-      src: url("assets/fonts/playfair-display-latin-500-italic.woff2") format("woff2");
-      font-weight: 500;
-      font-style: italic;
+      src: url("assets/fonts/playfair-display-latin-800-normal.woff2") format("woff2");
+      font-weight: 800;
+      font-style: normal;
     }}
     #root {{
       position: absolute;
       inset: 0;
       overflow: hidden;
     }}
-    /* Título no estilo do modelo: etiqueta pequena, palavra cursiva grande, linha digitada e brilhos. */
+    /* Título no estilo do modelo: etiqueta pequena, palavra cursiva grande e linha digitada.
+       O conjunto fica no meio do quadro. */
     .titulo {{
       position: absolute;
       left: 0;
-      top: 540px;
+      top: 800px;
       width: 1080px;
       display: flex;
       justify-content: center;
@@ -180,28 +162,26 @@ TEXTO_HTML = f"""<template>
       color: #f3dfa2;
       text-shadow: 0 2px 12px rgba(10, 20, 30, 0.55);
     }}
+    /* Linhas digitadas: serifa forte em maiúsculas, para ler bem em tela pequena. */
     .digitado,
     .linha {{
       font-family: "Playfair Display", serif;
-      font-weight: 500;
-      font-style: italic;
+      font-weight: 800;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       white-space: nowrap;
       color: #fcfdf5;
-      text-shadow: 0 2px 14px rgba(10, 20, 30, 0.55);
+      text-shadow: 0 2px 14px rgba(10, 20, 30, 0.6);
     }}
     .digitado {{
       position: absolute;
-      right: 14px;
-      top: 232px;
-      font-size: 52px;
-      line-height: 64px;
-    }}
-    .brilhos {{
-      position: absolute;
-      left: calc(50% - {largura_fim // 2}px);
-      top: 316px;
-      overflow: visible;
-      fill: #fcfdf5;
+      left: -300px;
+      right: -300px;
+      top: 250px;
+      text-align: center;
+      font-size: 58px;
+      line-height: 72px;
     }}
     /* Cada letra digitada ocupa seu lugar desde o início e só aparece quando a tecla bate. */
     .k {{
@@ -210,10 +190,10 @@ TEXTO_HTML = f"""<template>
     }}
     #t-logo {{
       position: absolute;
-      left: 310px;
-      top: 420px;
-      width: 460px;
-      height: 414px;
+      left: 330px;
+      top: 660px;
+      width: 420px;
+      height: 378px;
     }}
     .linha {{
       position: absolute;
@@ -222,21 +202,17 @@ TEXTO_HTML = f"""<template>
       text-align: center;
     }}
     #t-resumo {{
-      top: 872px;
+      top: 1070px;
       font-size: 60px;
-      line-height: 76px;
-    }}
-    #t-fim-brilhos {{
-      left: {round((1080 - largura_fim) / 2)}px;
-      top: 968px;
+      line-height: 78px;
     }}
     #t-assinatura {{
-      top: 1024px;
+      top: 1176px;
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
-      font-style: normal;
-      font-size: 34px;
-      line-height: 46px;
+      text-transform: none;
+      font-size: 40px;
+      line-height: 54px;
       letter-spacing: 0.04em;
       color: #f3dfa2;
     }}
@@ -246,7 +222,6 @@ TEXTO_HTML = f"""<template>
     <!-- Tela final: o logo, a data digitada e a assinatura da marca. -->
     <img id="t-logo" src="assets/logo-vertical-ceu.svg" alt="Madame Solara, moda praia e resort" />
     <div class="linha" id="t-resumo">{letras(RESUMO["texto"], ts_resumo)}</div>
-    {svg_fim}
     <div class="linha" id="t-assinatura">{letras(ASSINATURA["texto"], ts_assin)}</div>
   </div>
   <script>
@@ -267,15 +242,14 @@ TEXTO_HTML = f"""<template>
       }}
 {"".join(animacoes)}
 
-      // Tela final: o logo entra na batida, depois a data e a assinatura são digitadas.
+      // Tela final: o logo entra, depois a data e a assinatura são digitadas.
       tl.fromTo(
         "#t-logo",
-        {{ opacity: 0, scale: 1.16, filter: "blur(16px)" }},
-        {{ opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "expo.out" }},
+        {{ opacity: 0, scale: 1.1, filter: "blur(14px)" }},
+        {{ opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.9, ease: "expo.out" }},
         {T_LOGO},
       );
       digitar("t-resumo");
-      tl.fromTo("#t-fim-brilhos .b", {{ opacity: 0, scale: 0, transformOrigin: "50% 50%" }}, {{ opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)", stagger: 0.035 }}, {round(RESUMO["fim"] + 0.12, 3)});
       digitar("t-assinatura");
 
       window.__timelines["texto"] = tl;
