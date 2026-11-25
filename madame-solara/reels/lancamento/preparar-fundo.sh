@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Prepara o vídeo de fundo a partir do original da cliente (IMG_4938.mov, 1080x1920, 59,94 fps):
-# desacelera para 49,8% (17 s), desfoca, escurece e fecha as bordas, e grava em 30 fps.
+# desacelera para 49,8% (17 s; o vídeo usa 16,8 s), desfoca, escurece e fecha as bordas, e grava em 30 fps.
 # O desfoque fica gravado no arquivo porque aplicado na hora deixava a renderização lenta demais.
 # Uso: ./preparar-fundo.sh caminho/do/original.mov
 set -euo pipefail

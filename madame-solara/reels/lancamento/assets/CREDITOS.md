@@ -4,11 +4,16 @@
 
 `video/pecas-fundo.mp4` vem do vídeo enviado pela cliente (IMG_4938.mov), com as peças embaladas e as etiquetas da marca. Foi desacelerado, desfocado e escurecido por `preparar-fundo.sh`. O original não está no repositório.
 
-## Trilha
+## Trilhas
 
-"Ocean of Love", de Michael Ramir C., baixada do Mixkit (https://assets.mixkit.co/music/1113/1113.mp3) e usada sob a Mixkit Stock Music Free License, que permite uso gratuito em projetos comerciais, em posts de vídeo em redes sociais e em anúncios online. Não permite CD, DVD, jogos, TV ou rádio, nem remixar a faixa ou registrá-la como própria. Texto da licença: https://mixkit.co/license/#musicFree
+As duas são de Michael Ramir C., baixadas do Mixkit e usadas sob a Mixkit Stock Music Free License, que permite uso gratuito em projetos comerciais, em posts de vídeo em redes sociais e em anúncios online. Não permite CD, DVD, jogos, TV ou rádio, nem remixar a faixa ou registrá-la como própria. Texto da licença: https://mixkit.co/license/#musicFree
 
-`audio/ocean-of-love.mp3` é um trecho do original a partir de 3,66 s, só cortado.
+| Arquivo | Faixa | Origem | Trecho |
+| --- | --- | --- | --- |
+| `audio/every-24th-of-august.mp3` | "Every 24th of August" | https://assets.mixkit.co/music/992/992.mp3 | a partir de 76,34 s |
+| `audio/oh-barcelona.mp3` | "Oh Barcelona" | https://assets.mixkit.co/music/778/778.mp3 | a partir de 111,06 s |
+
+Os trechos foram só cortados e tiveram o volume igualado.
 
 ## Efeitos sonoros
 

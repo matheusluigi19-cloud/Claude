@@ -23,17 +23,17 @@
     "warningCount": 0,
     "infoCount": 0,
     "findings": [],
-    "duration": 17,
+    "duration": 16.8,
     "samples": [
-      0.944,
-      2.833,
-      4.722,
-      6.611,
-      8.5,
-      10.389,
-      12.278,
-      14.167,
-      16.056
+      0.933,
+      2.8,
+      4.667,
+      6.533,
+      8.4,
+      10.267,
+      12.133,
+      14,
+      15.867
     ],
     "transitionSamples": [],
     "transitionSamplesDropped": 0,
@@ -62,14 +62,14 @@
     "findings": [],
     "enabled": true,
     "samples": [
-      0.944,
-      4.722,
-      8.5,
-      12.278,
-      16.056
+      0.933,
+      4.667,
+      8.4,
+      12.133,
+      15.867
     ],
-    "checked": 77,
-    "passed": 77
+    "checked": 69,
+    "passed": 69
   },
   "craft": {
     "ok": true,
@@ -78,8 +78,8 @@
     "infoCount": 0,
     "findings": [],
     "enabled": true,
-    "step": 0.125,
-    "samples": 136
+    "step": 0.12400000000000055,
+    "samples": 135
   },
   "audio": {
     "ok": true,

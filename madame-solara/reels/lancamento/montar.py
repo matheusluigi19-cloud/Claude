@@ -8,38 +8,53 @@ Gera, a partir dos textos e tempos abaixo:
   - compositions/texto.html  (cada letra digitada é um <span> com o instante em que aparece)
   - assets/sfx/digitacao.wav (uma tecla por letra, no mesmo instante)
 
-Para trocar a data ou uma frase, edite TELAS e rode de novo:
-  python montar.py
+Há uma variante por trilha, porque as trocas de tela caem nas batidas de cada música.
+Para trocar a data ou uma frase, edite os textos e rode de novo com o nome da variante:
+  python montar.py every-24th-of-august
+Ele também aponta o index.html para a trilha da variante.
 Precisa de numpy e soundfile.
 """
 import html
 import json
 import random
+import re
+import sys
 from pathlib import Path
 
 import numpy as np
 import soundfile as sf
 
 AQUI = Path(__file__).parent
-DURACAO = 17.0          # segundos
+DURACAO = 16.8          # segundos
 SR = 48000
 
-# ----- Textos e tempos (é aqui que se troca a data) -------------------------
+# ----- Variantes: os instantes vêm das batidas medidas em cada trecho de música -----
+# corte1 e corte2 são as trocas de tela; os demais são o início de cada linha digitada.
+VARIANTES = {
+    # "Every 24th of August", 112 bpm, trecho a partir de 76,34 s da faixa.
+    "every-24th-of-august": {"corte1": 4.415, "corte2": 10.963, "data": 1.141, "oficial": 5.507,
+                             "resumo": 12.055, "assinatura": 13.703},
+    # "Oh Barcelona", 123 bpm, trecho a partir de 111,06 s da faixa.
+    "oh-barcelona": {"corte1": 5.019, "corte2": 10.963, "data": 1.048, "oficial": 5.994,
+                     "resumo": 11.962, "assinatura": 13.936},
+}
+NOME = sys.argv[1] if len(sys.argv) > 1 else "every-24th-of-august"
+V = VARIANTES[NOME]
+
+# ----- Textos (é aqui que se troca a data) ----------------------------------
 # Cada tela tem uma etiqueta, uma palavra cursiva e linhas digitadas: (texto, início, segundos por letra).
+# Início None quer dizer "logo depois da linha anterior".
 TELAS = [
-    {"id": "t1", "inicio": 0.0, "fim": 3.8,
+    {"id": "t1", "inicio": 0.0, "fim": V["corte1"],
      "etiqueta": "anota aí:", "cursiva": "Sábado",
-     "digitado": [("28 de novembro", 1.0, 0.09)]},
-    {"id": "t2", "inicio": 3.8, "fim": 9.2,
+     "digitado": [("28 de novembro", V["data"], 0.09)]},
+    {"id": "t2", "inicio": V["corte1"], "fim": V["corte2"],
      "etiqueta": "é dia de:", "cursiva": "Lançamento",
-     "digitado": [("oficial da marca", 4.8, 0.085), ("na loja da Madame Dress", 6.35, 0.072)]},
-    {"id": "t3", "inicio": 9.2, "fim": 12.3,
-     "etiqueta": "com", "cursiva": "Promoções",
-     "digitado": [("imperdíveis", 10.2, 0.085)]},
+     "digitado": [("oficial da marca", V["oficial"], 0.085), ("na loja da Madame Dress", None, 0.072)]},
 ]
-T_LOGO = 12.3
-RESUMO = {"texto": "sábado · 28.11", "inicio": 13.2, "fim": 14.2}
-ASSINATURA = {"texto": "você é o seu padrão!", "inicio": 14.7, "fim": 15.9}
+T_LOGO = V["corte2"]
+RESUMO = {"texto": "sábado · 28.11", "inicio": V["resumo"], "fim": round(V["resumo"] + 1.0, 3)}
+ASSINATURA = {"texto": "você é o seu padrão!", "inicio": V["assinatura"], "fim": round(V["assinatura"] + 1.2, 3)}
 PASSO = 0.09            # segundos por letra, em média
 TROCA = 0.35            # duração da passagem entre telas
 
@@ -71,6 +86,8 @@ for tela in TELAS:
     i = tela["id"]
     linhas = []
     for n_linha, (texto, t0, passo) in enumerate(tela["digitado"], start=1):
+        if t0 is None:
+            t0 = round(linhas[-1][2][-1] + 0.25, 3)
         ts = tempos(texto, t0, passo)
         for ch, t in zip(texto, ts):
             eventos.append((t, -13.0, ch == " "))
@@ -297,4 +314,11 @@ if pico > 0.9:
     faixa *= 0.9 / pico
 sf.write(AQUI / "assets" / "sfx" / "digitacao.wav", faixa, SR, subtype="PCM_16")
 
-print(json.dumps({"teclas": len(eventos), "resumo": [ts_resumo[0], ts_resumo[-1]], "assinatura": [ts_assin[0], ts_assin[-1]]}))
+# Aponta o index.html para a trilha desta variante.
+indice = AQUI / "index.html"
+texto_indice = indice.read_text(encoding="utf-8")
+novo, n = re.subn(r'src="assets/audio/[^"]+\.mp3"', f'src="assets/audio/{NOME}.mp3"', texto_indice)
+assert n == 1, n
+indice.write_text(novo, encoding="utf-8")
+
+print(json.dumps({"variante": NOME, "teclas": len(eventos), "resumo": [ts_resumo[0], ts_resumo[-1]], "assinatura": [ts_assin[0], ts_assin[-1]]}))
