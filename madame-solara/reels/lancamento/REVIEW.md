@@ -29,6 +29,8 @@ A trilha é o ponto que ainda não fechou. A cliente recusou, nesta ordem: "Maje
 
 A tentativa atual muda de direção: "You're like Caviar", um lounge com cara de resort, com batida mais leve que a de "Majestic". As trocas de tela e o início de cada linha digitada caem em batidas medidas no trecho usado.
 
+Depois disso a cliente pediu uma pesquisa de instrumentais de praia usadas nas redes. As indicadas ("Summer Samba", "Wave", "Sunset Lover") são gravações comerciais, que não podem ser embutidas no arquivo; só entram pelo Instagram. Para ela ouvir algo na mesma linha, foram enviados três testes com faixas licenciadas: "Poquito" (bossa de praia), "Pop 07" (bossa lo-fi) e "Pop 11" (eletrônica suave). Os vídeos de teste não estão no repositório, só as trilhas e as variantes em `montar.py`.
+
 Como alternativa, a versão só com teclado serve para a cliente escolher a música na biblioteca do Instagram, ouvindo, o que também é o único caminho para usar uma gravação de MPB de verdade.
 
 ## Como editar

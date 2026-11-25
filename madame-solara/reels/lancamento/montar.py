@@ -34,6 +34,15 @@ VARIANTES = {
     # "You're like Caviar", trecho a partir de 100,07 s da faixa; uma batida a cada 0,67 s.
     "youre-like-caviar": {"corte1": 4.555, "corte2": 9.988, "data": 1.257, "oficial": 5.646,
                           "resumo": 11.126, "assinatura": 12.751},
+    # "Poquito", trecho a partir de 72,86 s da faixa; uma batida a cada 0,604 s.
+    "poquito": {"corte1": 4.857, "corte2": 9.663, "data": 1.281, "oficial": 6.087,
+               "resumo": 10.87, "assinatura": 12.658},
+    # "Pop 07", trecho a partir de 93,32 s da faixa; uma batida a cada 0,673 s.
+    "pop-07": {"corte1": 4.067, "corte2": 9.408, "data": 0.723, "oficial": 5.391,
+               "resumo": 10.731, "assinatura": 12.078},
+    # "Pop 11", trecho a partir de 122,74 s da faixa; uma batida a cada 0,534 s.
+    "pop-11": {"corte1": 4.392, "corte2": 9.849, "data": 1.118, "oficial": 5.483,
+               "resumo": 10.94, "assinatura": 12.566},
 }
 NOME = sys.argv[1] if len(sys.argv) > 1 else "youre-like-caviar"
 V = VARIANTES[NOME]

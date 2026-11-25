@@ -10,6 +10,16 @@
 
 `audio/youre-like-caviar.mp3` é um trecho do original a partir de 100,07 s, só cortado e com o volume ajustado.
 
+## Trilhas em teste
+
+Três faixas do Mixkit, sob a mesma licença, usadas só em vídeos de teste enviados à cliente. Os arquivos estão em `audio/` e têm variante em `montar.py`.
+
+| Arquivo | Faixa | Autor | Origem | Trecho |
+| --- | --- | --- | --- | --- |
+| `audio/poquito.mp3` | "Poquito" | Michael Ramir C. | https://assets.mixkit.co/music/1074/1074.mp3 | a partir de 72,86 s |
+| `audio/pop-07.mp3` | "Pop 07" | Grigoriy Nuzhny | https://assets.mixkit.co/music/699/699.mp3 | a partir de 93,32 s |
+| `audio/pop-11.mp3` | "Pop 11" | Grigoriy Nuzhny | https://assets.mixkit.co/music/704/704.mp3 | a partir de 122,74 s |
+
 ## Efeitos sonoros
 
 Gerados com o Earshot 1.0.0 (https://github.com/Leonxlnx/earshot, licença MIT), que calcula cada som na hora. Segundo o projeto, todo som gerado pode ser usado livremente por quem o gerou.
