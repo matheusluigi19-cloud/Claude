@@ -1,6 +1,7 @@
 {"fps": 30, "events": [
- {"f": 0.6, "kind": "key", "id": "texto:primeira-tecla"},
- {"f": 63.6, "kind": "drop", "id": "texto:data"},
- {"f": 185.4, "kind": "hit", "id": "texto:logo"},
- {"f": 270.3, "kind": "key", "id": "texto:ultima-letra"}
+ {"f": 0.6, "kind": "key", "id": "t1:etiqueta"},
+ {"f": 63, "kind": "drop", "id": "t2:troca-de-tela"},
+ {"f": 147.9, "kind": "hit", "id": "fim:logo"},
+ {"f": 184.8, "kind": "key", "id": "fim:data-digitada"},
+ {"f": 269.7, "kind": "key", "id": "fim:assinatura"}
 ]}

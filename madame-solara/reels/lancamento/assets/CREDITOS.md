@@ -23,4 +23,4 @@ Gerados com o Earshot 1.0.0 (https://github.com/Leonxlnx/earshot, licença MIT),
 
 ## Fontes
 
-Italiana, IBM Plex Mono e Playfair Display, todas sob a SIL Open Font License 1.1. As duas últimas vieram do pacote Fontsource.
+Imperial Script, Montserrat e Playfair Display, todas sob a SIL Open Font License 1.1, baixadas do pacote Fontsource.

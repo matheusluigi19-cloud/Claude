@@ -48,7 +48,8 @@
   <body>
     <!-- Lançamento da Madame Solara, Reels 1080x1920, 30 fps, 10,8 s.
          Fundo: vídeo das peças embaladas, enviado pela cliente, já desfocado e escurecido por preparar-fundo.sh.
-         Por cima: a data digitada letra a letra, com som de teclado, e o logo no fim.
+         Por cima: títulos no estilo do vídeo modelo (etiqueta, palavra cursiva, linha digitada e brilhos),
+         com som de teclado, e o logo no fim.
          O texto e a faixa de teclado são gerados por montar.py. -->
     <div data-hf-id="hf-oon1" id="root" data-composition-id="main" data-start="0" data-duration="10.8" data-width="1080" data-height="1920">
       <div data-hf-id="hf-lpl4" id="fundo-caixa">
@@ -67,21 +68,21 @@
       <div data-hf-id="hf-f63y" id="texto" data-composition-id="texto" data-composition-src="compositions/texto.html" data-start="0" data-duration="10.8" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
 
       <!-- Trilha: "Majestic", de Diego Nava (Mixkit), a mesma das outras peças. O trecho começa
-           9,19 s dentro da faixa para o grave entrar aos 2,10 s, junto com a data. -->
+           9,19 s dentro da faixa para o grave entrar aos 2,10 s, na troca da primeira para a segunda tela. -->
       <audio data-hf-id="hf-pp2r" id="musica" class="clip" data-timeline-role="music" src="assets/audio/majestic.mp3" data-start="0" data-duration="10.8" data-track-index="3" data-volume="0.78" data-fade-in="0.2" data-fade-out="1.5"></audio>
       <!-- Teclado: uma tecla por letra, no mesmo instante em que ela aparece. -->
       <audio data-hf-id="hf-rrua" id="sfx-digitacao" class="clip" src="assets/sfx/digitacao.wav" data-start="0" data-duration="10.8" data-track-index="4" data-volume="1.25"></audio>
       <!-- Batida grave na entrada do logo. -->
-      <audio data-hf-id="hf-oacd" id="sfx-marca" class="clip" src="assets/sfx/marca.wav" data-start="5.82" data-duration="0.5" data-track-index="5" data-volume="0.6"></audio>
+      <audio data-hf-id="hf-oacd" id="sfx-marca" class="clip" src="assets/sfx/marca.wav" data-start="4.59" data-duration="0.5" data-track-index="5" data-volume="0.6"></audio>
     </div>
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
-      // O fundo dá um pequeno salto nas duas batidas principais: a data e o logo.
-      tl.fromTo("#fundo-caixa", { scale: 1.02 }, { scale: 1.07, duration: 0.14, ease: "power2.out" }, 2.1);
-      tl.to("#fundo-caixa", { scale: 1.02, duration: 0.7, ease: "power2.inOut" }, 2.24);
-      tl.to("#fundo-caixa", { scale: 1.07, duration: 0.14, ease: "power2.out" }, 6.16);
-      tl.to("#fundo-caixa", { scale: 1.02, duration: 0.7, ease: "power2.inOut" }, 6.3);
+      // O fundo muda de enquadramento nas trocas de tela, como cortes, e aproxima devagar entre elas.
+      tl.fromTo("#fundo-caixa", { scale: 1.02, xPercent: 0, yPercent: 0 }, { scale: 1.08, duration: 2.1, ease: "none" }, 0);
+      tl.fromTo("#fundo-caixa", { scale: 1.32, xPercent: -7, yPercent: 5 }, { scale: 1.24, duration: 2.83, ease: "power2.out", immediateRender: false }, 2.1);
+      tl.fromTo("#fundo-caixa", { scale: 1.02, xPercent: 0, yPercent: 0 }, { scale: 1.1, duration: 2.82, ease: "power2.out", immediateRender: false }, 4.93);
+      tl.fromTo("#fundo-caixa", { scale: 1.28, xPercent: 6, yPercent: -4 }, { scale: 1.2, duration: 3.05, ease: "power2.out", immediateRender: false }, 7.75);
       window.__timelines["main"] = tl;
     </script>
   </body>

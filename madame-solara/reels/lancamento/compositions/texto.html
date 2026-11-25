@@ -1,15 +1,15 @@
 <template>
   <style>
     @font-face {
-      font-family: "Italiana";
-      src: url("assets/fonts/Italiana-Regular.ttf") format("truetype");
+      font-family: "Imperial Script";
+      src: url("assets/fonts/imperial-script-latin-400-normal.woff2") format("woff2");
       font-weight: 400;
       font-style: normal;
     }
     @font-face {
-      font-family: "IBM Plex Mono";
-      src: url("assets/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");
-      font-weight: 400;
+      font-family: "Montserrat";
+      src: url("assets/fonts/montserrat-latin-700-normal.woff2") format("woff2");
+      font-weight: 700;
       font-style: normal;
     }
     @font-face {
@@ -23,91 +23,130 @@
       inset: 0;
       overflow: hidden;
     }
+    /* Título no estilo do modelo: etiqueta pequena, palavra cursiva grande, linha digitada e brilhos. */
+    .titulo {
+      position: absolute;
+      left: 0;
+      top: 540px;
+      width: 1080px;
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+    }
+    .caixa {
+      position: relative;
+      display: inline-block;
+    }
+    .cursiva-janela {
+      display: block;
+    }
+    .cursiva {
+      display: block;
+      padding: 0 24px;
+      font-family: "Imperial Script", cursive;
+      font-size: 218px;
+      line-height: 260px;
+      white-space: nowrap;
+      color: #fcfdf5;
+      text-shadow: 0 0 22px rgba(255, 255, 255, 0.5), 0 3px 16px rgba(10, 20, 30, 0.45);
+    }
+    .etiqueta {
+      position: absolute;
+      right: 6px;
+      top: 6px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 48px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      color: #f3dfa2;
+      text-shadow: 0 2px 12px rgba(10, 20, 30, 0.55);
+    }
+    .digitado,
+    .linha {
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+      font-style: italic;
+      white-space: nowrap;
+      color: #fcfdf5;
+      text-shadow: 0 2px 14px rgba(10, 20, 30, 0.55);
+    }
+    .digitado {
+      position: absolute;
+      right: 14px;
+      top: 232px;
+      font-size: 52px;
+      line-height: 64px;
+    }
+    .brilhos {
+      position: absolute;
+      left: calc(50% - 108px);
+      top: 316px;
+      overflow: visible;
+      fill: #fcfdf5;
+    }
+    /* Cada letra digitada ocupa seu lugar desde o início e só aparece quando a tecla bate. */
+    .k {
+      display: inline-block;
+      opacity: 0;
+    }
+    #t-logo {
+      position: absolute;
+      left: 310px;
+      top: 420px;
+      width: 460px;
+      height: 414px;
+    }
     .linha {
       position: absolute;
       left: 0;
       width: 1080px;
       text-align: center;
-      white-space: nowrap;
-      color: #fcfdf5;
-      text-shadow: 0 2px 20px rgba(10, 20, 30, 0.45);
-    }
-    /* Cada letra ocupa seu lugar desde o início e só aparece quando a tecla bate. */
-    .k,
-    .d {
-      display: inline-block;
-      opacity: 0;
-    }
-    .maquina {
-      font-family: "IBM Plex Mono", monospace;
-      font-weight: 400;
-      letter-spacing: 0.02em;
-    }
-    .italico {
-      font-family: "Playfair Display", serif;
-      font-weight: 500;
-      font-style: italic;
-    }
-    #t-chamada {
-      top: 438px;
-      font-size: 44px;
-      line-height: 60px;
-    }
-    #t-dia {
-      top: 506px;
-      font-size: 128px;
-      line-height: 150px;
-    }
-    #t-data {
-      top: 640px;
-      font-family: "Italiana", serif;
-      font-size: 300px;
-      line-height: 310px;
-      letter-spacing: -0.045em;
-    }
-    #t-sublinha {
-      position: absolute;
-      left: 400px;
-      top: 968px;
-      width: 280px;
-      height: 3px;
-      background: linear-gradient(90deg, #eccb6a, #f8e6ab 50%, #dcb24a);
-    }
-    #t-apoio {
-      top: 1006px;
-      font-size: 42px;
-      line-height: 58px;
-    }
-    #t-logo {
-      position: absolute;
-      left: 280px;
-      top: 392px;
-      width: 520px;
-      height: 468px;
     }
     #t-resumo {
-      top: 930px;
-      font-size: 46px;
-      line-height: 62px;
+      top: 872px;
+      font-size: 60px;
+      line-height: 76px;
+    }
+    #t-fim-brilhos {
+      left: 432px;
+      top: 968px;
     }
     #t-assinatura {
-      top: 1010px;
-      font-size: 60px;
-      line-height: 78px;
+      top: 1024px;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      font-size: 34px;
+      line-height: 46px;
+      letter-spacing: 0.04em;
+      color: #f3dfa2;
     }
   </style>
   <div id="root" data-composition-id="texto" data-width="1080" data-height="1920">
-    <!-- Primeira tela: a data, digitada. Três fontes de propósito: máquina, itálico e a Italiana da marca. -->
-    <div class="linha maquina" id="t-chamada"><span class="k" data-t="0.0">g</span><span class="k" data-t="0.052">u</span><span class="k" data-t="0.11">a</span><span class="k" data-t="0.185">r</span><span class="k" data-t="0.237">d</span><span class="k" data-t="0.318">a</span><span class="k" data-t="0.384">&nbsp;</span><span class="k" data-t="0.466">e</span><span class="k" data-t="0.534">s</span><span class="k" data-t="0.599">s</span><span class="k" data-t="0.656">a</span><span class="k" data-t="0.733">&nbsp;</span><span class="k" data-t="0.82">d</span><span class="k" data-t="0.877">a</span><span class="k" data-t="0.944">t</span><span class="k" data-t="1.001">a</span></div>
-    <div class="linha italico" id="t-dia"><span class="k" data-t="1.2">s</span><span class="k" data-t="1.269">á</span><span class="k" data-t="1.365">b</span><span class="k" data-t="1.463">a</span><span class="k" data-t="1.55">d</span><span class="k" data-t="1.645">o</span><span class="k" data-t="1.718">,</span></div>
-    <div class="linha" id="t-data"><span class="d" data-t="2.1">2</span><span class="d" data-t="2.24">8</span><span class="d" data-t="2.38">.</span><span class="d" data-t="2.52">1</span><span class="d" data-t="2.66">1</span></div>
-    <div id="t-sublinha"></div>
-    <div class="linha maquina" id="t-apoio"><span class="k" data-t="3.3" data-fim="5.69">l</span><span class="k" data-t="3.372" data-fim="5.67">a</span><span class="k" data-t="3.426" data-fim="5.65">n</span><span class="k" data-t="3.492" data-fim="5.63">ç</span><span class="k" data-t="3.546" data-fim="5.61">a</span><span class="k" data-t="3.611" data-fim="5.59">m</span><span class="k" data-t="3.682" data-fim="5.57">e</span><span class="k" data-t="3.729" data-fim="5.55">n</span><span class="k" data-t="3.784" data-fim="5.53">t</span><span class="k" data-t="3.842" data-fim="5.51">o</span><span class="k" data-t="3.904" data-fim="5.49">&nbsp;</span><span class="k" data-t="3.977" data-fim="5.47">o</span><span class="k" data-t="4.027" data-fim="5.45">f</span><span class="k" data-t="4.076" data-fim="5.43">i</span><span class="k" data-t="4.146" data-fim="5.41">c</span><span class="k" data-t="4.215" data-fim="5.39">i</span><span class="k" data-t="4.264" data-fim="5.37">a</span><span class="k" data-t="4.326" data-fim="5.35">l</span></div>
+    <div class="titulo" id="t1">
+      <div class="caixa">
+        <div class="etiqueta" id="t1-etiqueta">anota aí:</div>
+        <div class="cursiva-janela" id="t1-janela"><span class="cursiva" id="t1-cursiva">Sábado</span></div>
+        <div class="digitado" id="t1-digitado"><span class="k" data-t="0.62">2</span><span class="k" data-t="0.672">8</span><span class="k" data-t="0.73">&nbsp;</span><span class="k" data-t="0.842">d</span><span class="k" data-t="0.894">e</span><span class="k" data-t="0.975">&nbsp;</span><span class="k" data-t="1.075">n</span><span class="k" data-t="1.129">o</span><span class="k" data-t="1.197">v</span><span class="k" data-t="1.262">e</span><span class="k" data-t="1.319">m</span><span class="k" data-t="1.397">b</span><span class="k" data-t="1.454">r</span><span class="k" data-t="1.511">o</span></div>
+        <svg class="brilhos" id="t1-brilhos" viewBox="0 0 216 28" width="216" height="28"><circle class="b" cx="8" cy="14" r="2.6" /><g class="b"><circle cx="28" cy="8" r="2.2" /><circle cx="28" cy="20" r="2.2" /></g><circle class="b" cx="48" cy="14" r="2.6" /><path class="b" transform="translate(74 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="102" cy="14" r="2.6" /><g class="b"><circle cx="122" cy="8" r="2.2" /><circle cx="122" cy="20" r="2.2" /></g><circle class="b" cx="142" cy="14" r="2.6" /><path class="b" transform="translate(168 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="196" cy="14" r="2.6" /></svg>
+      </div>
+    </div>
+    <div class="titulo" id="t2">
+      <div class="caixa">
+        <div class="etiqueta" id="t2-etiqueta">é dia de:</div>
+        <div class="cursiva-janela" id="t2-janela"><span class="cursiva" id="t2-cursiva">Lançamento</span></div>
+        <div class="digitado" id="t2-digitado"><span class="k" data-t="2.95">o</span><span class="k" data-t="3.007">f</span><span class="k" data-t="3.059">i</span><span class="k" data-t="3.111">c</span><span class="k" data-t="3.183">i</span><span class="k" data-t="3.256">a</span><span class="k" data-t="3.322">l</span><span class="k" data-t="3.393">&nbsp;</span><span class="k" data-t="3.475">d</span><span class="k" data-t="3.552">a</span><span class="k" data-t="3.631">&nbsp;</span><span class="k" data-t="3.721">m</span><span class="k" data-t="3.793">a</span><span class="k" data-t="3.853">r</span><span class="k" data-t="3.925">c</span><span class="k" data-t="4.002">a</span></div>
+        <svg class="brilhos" id="t2-brilhos" viewBox="0 0 216 28" width="216" height="28"><circle class="b" cx="8" cy="14" r="2.6" /><g class="b"><circle cx="28" cy="8" r="2.2" /><circle cx="28" cy="20" r="2.2" /></g><circle class="b" cx="48" cy="14" r="2.6" /><path class="b" transform="translate(74 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="102" cy="14" r="2.6" /><g class="b"><circle cx="122" cy="8" r="2.2" /><circle cx="122" cy="20" r="2.2" /></g><circle class="b" cx="142" cy="14" r="2.6" /><path class="b" transform="translate(168 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="196" cy="14" r="2.6" /></svg>
+      </div>
+    </div>
 
-    <!-- Segunda tela: o logo, o resumo da data e a assinatura da marca. -->
+    <!-- Tela final: o logo, a data digitada e a assinatura da marca. -->
     <img id="t-logo" src="assets/logo-vertical-ceu.svg" alt="Madame Solara, moda praia e resort" />
-    <div class="linha maquina" id="t-resumo"><span class="k" data-t="7.0">s</span><span class="k" data-t="7.057">á</span><span class="k" data-t="7.121">b</span><span class="k" data-t="7.183">a</span><span class="k" data-t="7.255">d</span><span class="k" data-t="7.326">o</span><span class="k" data-t="7.384">&nbsp;</span><span class="k" data-t="7.454">·</span><span class="k" data-t="7.519">&nbsp;</span><span class="k" data-t="7.618">2</span><span class="k" data-t="7.666">8</span><span class="k" data-t="7.728">.</span><span class="k" data-t="7.798">1</span><span class="k" data-t="7.852">1</span></div>
-    <div class="linha italico" id="t-assinatura"><span class="k" data-t="8.1">V</span><span class="k" data-t="8.151">o</span><span class="k" data-t="8.202">c</span><span class="k" data-t="8.248">ê</span><span class="k" data-t="8.295">&nbsp;</span><span class="k" data-t="8.366">é</span><span class="k" data-t="8.398">&nbsp;</span><span class="k" data-t="8.459">o</span><span class="k" data-t="8.498">&nbsp;</span><span class="k" data-t="8.559">s</span><span class="k" data-t="8.6">e</span><span class="k" data-t="8.638">u</span><span class="k" data-t="8.682">&nbsp;</span><span class="k" data-t="8.741">p</span><span class="k" data-t="8.774">a</span><span class="k" data-t="8.807">d</span><span class="k" data-t="8.853">r</span><span class="k" data-t="8.899">ã</span><span class="k" data-t="8.943">o</span><span class="k" data-t="8.99">!</span></div>
+    <div class="linha" id="t-resumo"><span class="k" data-t="5.42">s</span><span class="k" data-t="5.469">á</span><span class="k" data-t="5.521">b</span><span class="k" data-t="5.577">a</span><span class="k" data-t="5.62">d</span><span class="k" data-t="5.665">o</span><span class="k" data-t="5.708">&nbsp;</span><span class="k" data-t="5.802">·</span><span class="k" data-t="5.864">&nbsp;</span><span class="k" data-t="5.929">2</span><span class="k" data-t="5.984">8</span><span class="k" data-t="6.048">.</span><span class="k" data-t="6.102">1</span><span class="k" data-t="6.16">1</span></div>
+    <svg class="brilhos" id="t-fim-brilhos" viewBox="0 0 216 28" width="216" height="28"><circle class="b" cx="8" cy="14" r="2.6" /><g class="b"><circle cx="28" cy="8" r="2.2" /><circle cx="28" cy="20" r="2.2" /></g><circle class="b" cx="48" cy="14" r="2.6" /><path class="b" transform="translate(74 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="102" cy="14" r="2.6" /><g class="b"><circle cx="122" cy="8" r="2.2" /><circle cx="122" cy="20" r="2.2" /></g><circle class="b" cx="142" cy="14" r="2.6" /><path class="b" transform="translate(168 14)" d="M0,-10 C0.9,-3 3,-0.9 10,0 C3,0.9 0.9,3 0,10 C-0.9,3 -3,0.9 -10,0 C-3,-0.9 -0.9,-3 0,-10Z" /><circle class="b" cx="196" cy="14" r="2.6" /></svg>
+    <div class="linha" id="t-assinatura"><span class="k" data-t="7.75">v</span><span class="k" data-t="7.818">o</span><span class="k" data-t="7.887">c</span><span class="k" data-t="7.942">ê</span><span class="k" data-t="7.987">&nbsp;</span><span class="k" data-t="8.081">é</span><span class="k" data-t="8.144">&nbsp;</span><span class="k" data-t="8.214">o</span><span class="k" data-t="8.273">&nbsp;</span><span class="k" data-t="8.373">s</span><span class="k" data-t="8.425">e</span><span class="k" data-t="8.483">u</span><span class="k" data-t="8.551">&nbsp;</span><span class="k" data-t="8.654">p</span><span class="k" data-t="8.715">a</span><span class="k" data-t="8.777">d</span><span class="k" data-t="8.84">r</span><span class="k" data-t="8.884">ã</span><span class="k" data-t="8.937">o</span><span class="k" data-t="8.99">!</span></div>
   </div>
   <script>
     (function () {
@@ -117,43 +156,40 @@
 
       // Digitação: cada letra aparece no seu instante e leva o cursor até a próxima chegar.
       function digitar(id) {
-        const letras = Array.from(document.querySelectorAll("#" + id + " .k"));
-        letras.forEach(function (el, i) {
+        const ls = Array.from(document.querySelectorAll("#" + id + " .k"));
+        ls.forEach(function (el, i) {
           const t = Number(el.dataset.t);
-          const proximo = i + 1 < letras.length ? Number(letras[i + 1].dataset.t) : t + 0.5;
+          const proximo = i + 1 < ls.length ? Number(ls[i + 1].dataset.t) : t + 0.5;
           tl.set(el, { opacity: 1, boxShadow: CURSOR }, t);
           tl.set(el, { boxShadow: SEM_CURSOR }, proximo);
         });
       }
-      ["t-chamada", "t-dia", "t-apoio", "t-resumo", "t-assinatura"].forEach(digitar);
 
-      // A data entra um caractere por toque, com um pequeno salto.
-      document.querySelectorAll("#t-data .d").forEach(function (el) {
-        tl.fromTo(
-          el,
-          { opacity: 0, scale: 1.3, transformOrigin: "50% 60%" },
-          { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(1.8)" },
-          Number(el.dataset.t),
-        );
-      });
-      tl.fromTo("#t-sublinha", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power3.out" }, 2.86);
+      // Tela "Sábado": entra em 0.0 s e sai no corte de 2.1 s.
+      tl.set("#t1", { opacity: 1 }, 0.0);
+      tl.fromTo("#t1-etiqueta", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2)" }, 0.0);
+      tl.fromTo("#t1-janela", { clipPath: "inset(-30% 100% -30% -12%)" }, { clipPath: "inset(-30% -12% -30% -12%)", duration: 0.55, ease: "power2.out" }, 0.04);
+      digitar("t1-digitado");
+      tl.fromTo("#t1-brilhos .b", { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)", stagger: 0.035 }, 1.611);
+      tl.set("#t1", { opacity: 0 }, 2.1);
+      // Tela "Lançamento": entra em 2.1 s e sai no corte de 4.93 s.
+      tl.set("#t2", { opacity: 1 }, 2.1);
+      tl.fromTo("#t2-etiqueta", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.22, ease: "back.out(2)" }, 2.1);
+      tl.fromTo("#t2-janela", { clipPath: "inset(-30% 100% -30% -12%)" }, { clipPath: "inset(-30% -12% -30% -12%)", duration: 0.55, ease: "power2.out" }, 2.14);
+      digitar("t2-digitado");
+      tl.fromTo("#t2-brilhos .b", { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)", stagger: 0.035 }, 4.102);
+      tl.set("#t2", { opacity: 0 }, 4.93);
 
-      // Apagar: a linha de apoio some letra a letra, depois as outras, uma por tecla.
-      document.querySelectorAll("#t-apoio .k").forEach(function (el) {
-        tl.set(el, { opacity: 0 }, Number(el.dataset.fim));
-      });
-      tl.set("#t-sublinha", { opacity: 0 }, 5.76);
-      tl.set("#t-data", { opacity: 0 }, 5.76);
-      tl.set("#t-dia", { opacity: 0 }, 5.83);
-      tl.set("#t-chamada", { opacity: 0 }, 5.9);
-
-      // O logo entra na batida.
+      // Tela final: o logo entra na batida, depois a data e a assinatura são digitadas.
       tl.fromTo(
         "#t-logo",
-        { opacity: 0, scale: 1.14, filter: "blur(16px)" },
-        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.7, ease: "expo.out" },
-        6.16,
+        { opacity: 0, scale: 1.16, filter: "blur(16px)" },
+        { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "expo.out" },
+        4.93,
       );
+      digitar("t-resumo");
+      tl.fromTo("#t-fim-brilhos .b", { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.2, ease: "back.out(2)", stagger: 0.035 }, 6.28);
+      digitar("t-assinatura");
 
       window.__timelines["texto"] = tl;
     })();
