@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <!-- Um slide do carrossel, 1080x1350 (4:5). Parâmetros na URL:
-     foto=fotos/foto-N.jpg  y=0..100 (posição vertical do recorte)  modo=preco|logo  estilo=d (selo de preço) -->
+     foto=fotos/foto-N.jpg  y=0..100 (posição vertical do recorte)  modo=preco|logo  estilo=d (selo de preço)  faixa=topo,base (sem corte nas laterais)  fundo=imagem para as laterais -->
 <style>
   @font-face { font-family: "Italiana"; src: url("assets/fonts/Italiana-Regular.ttf") format("truetype"); }
   @font-face { font-family: "Montserrat"; src: url("assets/fonts/montserrat-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
@@ -12,6 +12,13 @@
   html, body { width: 1080px; height: 1350px; overflow: hidden; background: #c9c7c4; }
   #quadro { position: relative; width: 1080px; height: 1350px; overflow: hidden; }
   #foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  /* faixa=topo,base (pixels da foto original): mostra essa faixa na altura toda, sem cortar nas laterais;
+     as sobras dos lados são preenchidas com a própria foto desfocada, e a borda da foto é suavizada. */
+  #fundo { position: absolute; inset: -60px; width: calc(100% + 120px); height: calc(100% + 120px);
+    object-fit: cover; filter: blur(38px); display: none; }
+  .inteira #fundo { display: block; }
+  .inteira #foto { object-fit: fill;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 36px, #000 calc(100% - 36px), transparent 100%); }
   /* Logo dentro de um selo creme, para ler bem sobre o cinza da mesa e sobre o tecido. */
   #selo-logo { position: absolute; left: 54px; bottom: 54px; width: 196px; height: 196px; border-radius: 50%;
     background: var(--creme); box-shadow: 0 8px 26px rgba(20, 40, 55, 0.22); display: none;
@@ -34,6 +41,7 @@
 </head>
 <body>
 <div id="quadro">
+  <img id="fundo" alt="">
   <img id="foto" alt="">
   <div id="sombra"></div>
   <div id="preco"><div class="chamada">peças a partir de</div><div class="valor"><small>R$</small>53,00</div></div>
@@ -43,10 +51,22 @@
   const q = new URLSearchParams(location.search);
   const foto = document.getElementById("foto");
   foto.src = q.get("foto");
+  if (q.get("faixa")) {
+    const [topo, base] = q.get("faixa").split(",").map(Number);
+    document.getElementById("fundo").src = q.get("fundo") || q.get("foto");
+    if (q.get("fundo")) document.getElementById("fundo").style.filter = "none";
+    document.getElementById("quadro").classList.add("inteira");
+    foto.addEventListener("load", () => {
+      const k = 1350 / (base - topo);
+      const w = foto.naturalWidth * k;
+      Object.assign(foto.style, { inset: "auto", width: w + "px", height: foto.naturalHeight * k + "px",
+        left: (1080 - w) / 2 + "px", top: -topo * k + "px" });
+    });
+  }
   foto.style.objectPosition = "50% " + (q.get("y") || "50") + "%";
   const quadro = document.getElementById("quadro");
   if (q.get("modo") === "preco") {
-    quadro.className = q.get("estilo") || "d";
+    quadro.classList.add(q.get("estilo") || "d");
     document.getElementById("preco").style.display = "block";
   } else {
     document.getElementById("sombra").remove();
