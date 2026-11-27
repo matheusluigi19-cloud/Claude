@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<!-- Um slide do carrossel, 1080x1350 (4:5). Parâmetros na URL:
+     foto=fotos/foto-N.jpg  y=0..100 (posição vertical do recorte)  modo=preco|logo  estilo=d (selo de preço) -->
+<style>
+  @font-face { font-family: "Italiana"; src: url("assets/fonts/Italiana-Regular.ttf") format("truetype"); }
+  @font-face { font-family: "Montserrat"; src: url("assets/fonts/montserrat-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+  :root { --azul: #4f97b8; --azul-escuro: #1f3f52; --creme: #fbf6ea; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; background: #c9c7c4; }
+  #quadro { position: relative; width: 1080px; height: 1350px; overflow: hidden; }
+  #foto { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  /* Logo dentro de um selo creme, para ler bem sobre o cinza da mesa e sobre o tecido. */
+  #selo-logo { position: absolute; left: 54px; bottom: 54px; width: 196px; height: 196px; border-radius: 50%;
+    background: var(--creme); box-shadow: 0 8px 26px rgba(20, 40, 55, 0.22); display: none;
+    align-items: center; justify-content: center; }
+  #selo-logo::before { content: ""; position: absolute; inset: 8px; border-radius: 50%; border: 1.5px solid rgba(79, 151, 184, 0.55); }
+  #logo { width: 134px; margin-top: 4px; }
+  #preco { position: absolute; left: 0; right: 0; text-align: center; display: none; }
+  #preco .chamada { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 34px; letter-spacing: 0.22em; text-transform: uppercase; }
+  #preco .valor { font-family: "Italiana", serif; font-size: 150px; line-height: 1; margin-top: 10px; }
+  #preco .valor small { font-size: 0.5em; margin-right: 0.12em; vertical-align: 0.62em; }
+  /* d: selo redondo azul da marca, como etiqueta de preço, no canto de baixo à direita */
+  .d #sombra { display: none; }
+  .d #preco { left: auto; right: 54px; bottom: 58px; width: 312px; height: 312px; border-radius: 50%;
+    background: var(--azul); color: var(--creme); display: flex !important; flex-direction: column;
+    align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(20, 40, 55, 0.28); }
+  .d #preco::before { content: ""; position: absolute; inset: 11px; border-radius: 50%; border: 1.5px solid rgba(251, 246, 234, 0.75); }
+  .d #preco .chamada { font-size: 21px; letter-spacing: 0.2em; line-height: 30px; width: 200px; }
+  .d #preco .valor { font-size: 92px; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div id="quadro">
+  <img id="foto" alt="">
+  <div id="sombra"></div>
+  <div id="preco"><div class="chamada">peças a partir de</div><div class="valor"><small>R$</small>53,00</div></div>
+  <div id="selo-logo"><img id="logo" src="assets/logo-vertical-colorido.svg" alt="Madame Solara"></div>
+</div>
+<script>
+  const q = new URLSearchParams(location.search);
+  const foto = document.getElementById("foto");
+  foto.src = q.get("foto");
+  foto.style.objectPosition = "50% " + (q.get("y") || "50") + "%";
+  const quadro = document.getElementById("quadro");
+  if (q.get("modo") === "preco") {
+    quadro.className = q.get("estilo") || "d";
+    document.getElementById("preco").style.display = "block";
+  } else {
+    document.getElementById("sombra").remove();
+    document.getElementById("selo-logo").style.display = "flex";
+  }
+</script>
+</body>
+</html>
