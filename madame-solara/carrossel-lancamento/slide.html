@@ -36,7 +36,9 @@
     align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(20, 40, 55, 0.28); }
   .d #preco::before { content: ""; position: absolute; inset: 11px; border-radius: 50%; border: 1.5px solid rgba(251, 246, 234, 0.75); }
   .d #preco .chamada { font-size: 21px; letter-spacing: 0.2em; line-height: 30px; width: 200px; }
-  .d #preco .valor { font-size: 92px; margin-top: 4px; }
+  /* O valor na mesma Montserrat da chamada, para ler bem em tela pequena. */
+  .d #preco .valor { font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 62px; letter-spacing: 0.01em; margin-top: 12px; }
+  .d #preco .valor small { font-size: 0.55em; vertical-align: 0.5em; margin-right: 0.16em; }
 </style>
 </head>
 <body>
