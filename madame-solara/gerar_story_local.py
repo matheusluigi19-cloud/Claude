@@ -47,7 +47,7 @@ def story():
     # logo
     lw = 250
     lh = lw * 116 / 129.5
-    y0 = 300
+    y0 = 260
     s.append(f'<use href="#logo" x="{(W-lw)/2:.1f}" y="{y0}" width="{lw}" height="{lh:.1f}"/>')
 
     # título
@@ -80,7 +80,7 @@ def story():
         y += 40
 
     # assinatura
-    s.append(f'<text x="{W/2}" y="{H-300}" text-anchor="middle" font-family="Italiana" font-size="50" '
+    s.append(f'<text x="{W/2}" y="{H-205}" text-anchor="middle" font-family="Italiana" font-size="50" '
              f'letter-spacing="4" fill="url(#ouro)">VOCÊ É O SEU PADRÃO!</text>')
     s.append("</svg>")
     return "\n".join(s), y

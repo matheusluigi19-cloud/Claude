@@ -313,26 +313,26 @@
 <use href="#sol" x="465.0" y="1826.0" width="150" height="75" opacity="0.9"/>
 <use href="#sol" x="697.5" y="1826.0" width="150" height="75" opacity="0.9"/>
 <use href="#sol" x="930.0" y="1826.0" width="150" height="75" opacity="0.9"/>
-<use href="#logo" x="415.0" y="300" width="250" height="223.9"/>
-<text x="540.0" y="664" text-anchor="middle" font-family="Italiana" font-size="96" letter-spacing="9" fill="url(#ouro)">ONDE ESTAMOS</text>
-<text x="540.0" y="718" text-anchor="middle" font-family="Outfit" font-size="24" letter-spacing="9" fill="#5598B3">LOCALIZAÇÃO E HORÁRIOS</text>
-<path d="M540.0,758.9382239382239 Q541.62,766.3182239382239 549.0,767.9382239382239 Q541.62,769.5582239382239 540.0,776.9382239382239 Q538.38,769.5582239382239 531.0,767.9382239382239 Q538.38,766.3182239382239 540.0,758.9382239382239 Z" fill="#8A6420"/>
-<line x1="390.0" y1="767.9382239382239" x2="514.0" y2="767.9382239382239" stroke="#8A6420" stroke-width="1" opacity="0.6"/>
-<line x1="566.0" y1="767.9382239382239" x2="690.0" y2="767.9382239382239" stroke="#8A6420" stroke-width="1" opacity="0.6"/>
-<text x="150" y="864" font-family="Outfit" font-size="21" letter-spacing="7" fill="#8A6420">ENDEREÇO</text>
-<line x1="150" y1="882" x2="930" y2="882" stroke="#8A6420" stroke-width="0.8" opacity="0.35"/>
-<path d="M160,909.9382239382239 Q161.44,916.4982239382239 168,917.9382239382239 Q161.44,919.378223938224 160,925.9382239382239 Q158.56,919.378223938224 152,917.9382239382239 Q158.56,916.4982239382239 160,909.9382239382239 Z" fill="#5598B3"/>
-<text x="188" y="928" font-family="Outfit" font-size="32" fill="#5E3416">Dentro da loja Madame Dress</text>
-<path d="M160,963.9382239382239 Q161.44,970.4982239382239 168,971.9382239382239 Q161.44,973.378223938224 160,979.9382239382239 Q158.56,973.378223938224 152,971.9382239382239 Q158.56,970.4982239382239 160,963.9382239382239 Z" fill="#5598B3"/>
-<text x="188" y="982" font-family="Outfit" font-size="32" fill="#5E3416">Estrada do Coqueiro Grande</text>
-<text x="188" y="1026" font-family="Outfit" font-size="32" fill="#5E3416">Fazenda Grande II, Salvador - BA</text>
-<path d="M160,1061.938223938224 Q161.44,1068.4982239382239 168,1069.938223938224 Q161.44,1071.378223938224 160,1077.938223938224 Q158.56,1071.378223938224 152,1069.938223938224 Q158.56,1068.4982239382239 160,1061.938223938224 Z" fill="#5598B3"/>
-<text x="188" y="1080" font-family="Outfit" font-size="32" fill="#5E3416">CEP 41342-315</text>
-<text x="150" y="1174" font-family="Outfit" font-size="21" letter-spacing="7" fill="#8A6420">HORÁRIO DE FUNCIONAMENTO</text>
-<line x1="150" y1="1192" x2="930" y2="1192" stroke="#8A6420" stroke-width="0.8" opacity="0.35"/>
-<path d="M160,1219.938223938224 Q161.44,1226.4982239382239 168,1227.938223938224 Q161.44,1229.378223938224 160,1235.938223938224 Q158.56,1229.378223938224 152,1227.938223938224 Q158.56,1226.4982239382239 160,1219.938223938224 Z" fill="#5598B3"/>
-<text x="188" y="1238" font-family="Outfit" font-size="32" fill="#5E3416">Segunda a sábado, das 9h às 18h</text>
-<path d="M160,1273.938223938224 Q161.44,1280.4982239382239 168,1281.938223938224 Q161.44,1283.378223938224 160,1289.938223938224 Q158.56,1283.378223938224 152,1281.938223938224 Q158.56,1280.4982239382239 160,1273.938223938224 Z" fill="#5598B3"/>
-<text x="188" y="1292" font-family="Outfit" font-size="32" fill="#5E3416">Domingo, das 9h às 13h</text>
-<text x="540.0" y="1620" text-anchor="middle" font-family="Italiana" font-size="50" letter-spacing="4" fill="url(#ouro)">VOCÊ É O SEU PADRÃO!</text>
+<use href="#logo" x="415.0" y="260" width="250" height="223.9"/>
+<text x="540.0" y="624" text-anchor="middle" font-family="Italiana" font-size="96" letter-spacing="9" fill="url(#ouro)">ONDE ESTAMOS</text>
+<text x="540.0" y="678" text-anchor="middle" font-family="Outfit" font-size="24" letter-spacing="9" fill="#5598B3">LOCALIZAÇÃO E HORÁRIOS</text>
+<path d="M540.0,718.9382239382239 Q541.62,726.3182239382239 549.0,727.9382239382239 Q541.62,729.5582239382239 540.0,736.9382239382239 Q538.38,729.5582239382239 531.0,727.9382239382239 Q538.38,726.3182239382239 540.0,718.9382239382239 Z" fill="#8A6420"/>
+<line x1="390.0" y1="727.9382239382239" x2="514.0" y2="727.9382239382239" stroke="#8A6420" stroke-width="1" opacity="0.6"/>
+<line x1="566.0" y1="727.9382239382239" x2="690.0" y2="727.9382239382239" stroke="#8A6420" stroke-width="1" opacity="0.6"/>
+<text x="150" y="824" font-family="Outfit" font-size="21" letter-spacing="7" fill="#8A6420">ENDEREÇO</text>
+<line x1="150" y1="842" x2="930" y2="842" stroke="#8A6420" stroke-width="0.8" opacity="0.35"/>
+<path d="M160,869.9382239382239 Q161.44,876.4982239382239 168,877.9382239382239 Q161.44,879.378223938224 160,885.9382239382239 Q158.56,879.378223938224 152,877.9382239382239 Q158.56,876.4982239382239 160,869.9382239382239 Z" fill="#5598B3"/>
+<text x="188" y="888" font-family="Outfit" font-size="32" fill="#5E3416">Dentro da loja Madame Dress</text>
+<path d="M160,923.9382239382239 Q161.44,930.4982239382239 168,931.9382239382239 Q161.44,933.378223938224 160,939.9382239382239 Q158.56,933.378223938224 152,931.9382239382239 Q158.56,930.4982239382239 160,923.9382239382239 Z" fill="#5598B3"/>
+<text x="188" y="942" font-family="Outfit" font-size="32" fill="#5E3416">Estrada do Coqueiro Grande</text>
+<text x="188" y="986" font-family="Outfit" font-size="32" fill="#5E3416">Fazenda Grande II, Salvador - BA</text>
+<path d="M160,1021.9382239382239 Q161.44,1028.4982239382239 168,1029.938223938224 Q161.44,1031.378223938224 160,1037.938223938224 Q158.56,1031.378223938224 152,1029.938223938224 Q158.56,1028.4982239382239 160,1021.9382239382239 Z" fill="#5598B3"/>
+<text x="188" y="1040" font-family="Outfit" font-size="32" fill="#5E3416">CEP 41342-315</text>
+<text x="150" y="1134" font-family="Outfit" font-size="21" letter-spacing="7" fill="#8A6420">HORÁRIO DE FUNCIONAMENTO</text>
+<line x1="150" y1="1152" x2="930" y2="1152" stroke="#8A6420" stroke-width="0.8" opacity="0.35"/>
+<path d="M160,1179.938223938224 Q161.44,1186.4982239382239 168,1187.938223938224 Q161.44,1189.378223938224 160,1195.938223938224 Q158.56,1189.378223938224 152,1187.938223938224 Q158.56,1186.4982239382239 160,1179.938223938224 Z" fill="#5598B3"/>
+<text x="188" y="1198" font-family="Outfit" font-size="32" fill="#5E3416">Segunda a sábado, das 9h às 18h</text>
+<path d="M160,1233.938223938224 Q161.44,1240.4982239382239 168,1241.938223938224 Q161.44,1243.378223938224 160,1249.938223938224 Q158.56,1243.378223938224 152,1241.938223938224 Q158.56,1240.4982239382239 160,1233.938223938224 Z" fill="#5598B3"/>
+<text x="188" y="1252" font-family="Outfit" font-size="32" fill="#5E3416">Domingo, das 9h às 13h</text>
+<text x="540.0" y="1715" text-anchor="middle" font-family="Italiana" font-size="50" letter-spacing="4" fill="url(#ouro)">VOCÊ É O SEU PADRÃO!</text>
 </svg>
