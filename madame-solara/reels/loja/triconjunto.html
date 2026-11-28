@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<!-- Camada transparente para o vídeo do triconjunto (IMG_5114), 1080x1920.
+     ?cor=azul|dourado|branco  cor da frase;  &fundo=imagem  só para conferir sobre um quadro do vídeo -->
+<style>
+  @font-face { font-family: "Imperial Script"; src: url("assets/fonts/imperial-script-latin-400-normal.woff2") format("woff2"); }
+  @font-face { font-family: "Italiana"; src: url("assets/fonts/Italiana-Regular.ttf") format("truetype"); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; background: transparent; overflow: hidden; }
+  #fundo { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
+  /* Frase: "Triconjunto" em letra cursiva e a linha de baixo em Italiana, logo acima do logo. */
+  #frase { position: absolute; left: 0; right: 0; top: 1120px; text-align: center; }
+  .cursiva { font-family: "Imperial Script", cursive; font-size: 150px; line-height: 150px; }
+  /* A Italiana é fina; um contorno da mesma cor engrossa o traço para ler sobre o tecido. */
+  .linha { font-family: "Italiana", serif; font-size: 45px; letter-spacing: 0.07em; margin-top: 4px; -webkit-text-stroke: 1.2px currentColor; }
+  .branco  { color: #fffdf7; }
+  .dourado { color: #f1d58f; }
+  .azul    { color: #8cc8e3; }
+  #frase div { text-shadow: 0 1px 3px rgba(10, 20, 30, 0.85), 0 0 16px rgba(10, 20, 30, 0.6), 0 0 34px rgba(10, 20, 30, 0.35); }
+  /* Logo solto (nome branco e sol dourado), pequeno, embaixo e centralizado, como nos outros vídeos da loja. */
+  #logo { position: absolute; left: 50%; top: 1400px; width: 190px; margin-left: -95px;
+    filter: drop-shadow(0 1px 2px rgba(10, 20, 30, 0.75)) drop-shadow(0 0 12px rgba(10, 20, 30, 0.55)); }
+</style>
+</head>
+<body>
+  <img id="fundo" alt="">
+  <div id="frase"><div class="cursiva">Triconjunto</div><div class="linha">DISPONÍVEL NO MARROM E OFF WHITE</div></div>
+  <img id="logo" src="assets/logo-vertical-ceu.svg" alt="Madame Solara">
+<script>
+  const q = new URLSearchParams(location.search);
+  document.getElementById("frase").className = q.get("cor") || "branco";
+  if (q.get("fundo")) { const f = document.getElementById("fundo"); f.src = q.get("fundo"); f.style.display = "block"; }
+</script>
+</body>
+</html>

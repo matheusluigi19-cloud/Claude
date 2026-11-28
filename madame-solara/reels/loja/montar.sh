@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Põe o logo por cima de um vídeo da loja e grava em 1080x1920, 30 fps,
-# mantendo o som original.  Uso: ./montar.sh entrada.mov saida.mp4
-# A camada vem de exportar-camadas.js (assets/camada-logo.png). A frase foi testada e saiu.
+# mantendo o som original.  Uso: ./montar.sh entrada.mov saida.mp4 [camada.png]
+# A camada padrão vem de exportar-camadas.js (assets/camada-logo.png); a do triconjunto, de
+# exportar-triconjunto.js (assets/camada-triconjunto-<cor>.png).
 set -euo pipefail
 ffmpeg -v error -y -i "$1" \
-  -framerate 30 -loop 1 -i assets/camada-logo.png \
+  -framerate 30 -loop 1 -i "${3:-assets/camada-logo.png}" \
   -filter_complex "\
 [0:v]scale=1080:1920:flags=lanczos,setsar=1,fps=30[v];\
 [1:v]format=rgba[l];\

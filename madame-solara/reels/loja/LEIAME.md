@@ -14,3 +14,13 @@ cliente pediu embaixo; pode ficar perto da legenda quando ela for longa.
 
 Para refazer: `node exportar-camadas.js` (se mudar o texto em `sobreposicao.html`) e depois
 `./montar.sh original.mov renders/saida.mp4`.
+
+## Triconjunto (IMG_5114)
+
+O mesmo logo, mais a frase "Triconjunto disponível no marrom e off white": "Triconjunto" em
+Imperial Script e a linha de baixo em Italiana (com contorno da mesma cor, para engrossar o
+traço), logo acima do logo. Três versões de cor da frase, para a cliente escolher:
+`renders/madame-solara-triconjunto-azul.mp4`, `-dourado.mp4` e `-branco.mp4`.
+
+Para refazer: `node exportar-triconjunto.js <cor> assets/camada-triconjunto-<cor>.png` e
+`./montar.sh original.mov renders/saida.mp4 assets/camada-triconjunto-<cor>.png`.
