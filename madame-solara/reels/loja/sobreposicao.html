@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<!-- Camadas transparentes por cima dos vídeos da loja, 1080x1920.
+     ?camada=logo  só o selo com o logo, no alto
+     ?camada=frase só a frase, acima da área que o Reels cobre com a legenda -->
+<style>
+  @font-face { font-family: "Montserrat"; src: url("assets/fonts/montserrat-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+  :root { --creme: #fbf6ea; --azul: #4f97b8; --azul-texto: #2c6a86; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; background: transparent; overflow: hidden; }
+  .camada { display: none; }
+  #selo-logo { position: absolute; left: 50%; top: 290px; width: 220px; height: 220px; margin-left: -110px; border-radius: 50%;
+    background: var(--creme); box-shadow: 0 10px 30px rgba(20, 40, 55, 0.3); align-items: center; justify-content: center; }
+  #selo-logo::before { content: ""; position: absolute; inset: 9px; border-radius: 50%; border: 1.5px solid rgba(79, 151, 184, 0.55); }
+  #selo-logo img { width: 150px; margin-top: 4px; }
+  #frase { position: absolute; left: 0; right: 0; top: 1030px; text-align: center; }
+  #frase span { display: inline-block; background: var(--creme); color: var(--azul-texto); border-radius: 22px;
+    padding: 22px 40px 24px; font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 46px; line-height: 62px;
+    letter-spacing: 0.01em; box-shadow: 0 10px 30px rgba(20, 40, 55, 0.28); }
+</style>
+</head>
+<body>
+  <div class="camada" id="selo-logo"><img src="assets/logo-vertical-colorido.svg" alt="Madame Solara"></div>
+  <div class="camada" id="frase"><span>venha conferir as nossas peças<br>na Madame Dress</span></div>
+<script>
+  const c = new URLSearchParams(location.search).get("camada");
+  const el = document.getElementById(c === "frase" ? "frase" : "selo-logo");
+  el.style.display = c === "frase" ? "block" : "flex";
+</script>
+</body>
+</html>
